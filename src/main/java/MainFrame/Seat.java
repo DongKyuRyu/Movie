@@ -8,19 +8,22 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
+import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JComboBox;
+
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Label Screen;
 	private Panel SeatPanel;
-	private Button Seat[][];
+	private Button Seat[][], Befor, Next;
 	private String SeatNumber[][];
-	private GridLayout Seatnum;
+	private JComboBox cb;
 
 	public Seat() {
 
@@ -33,31 +36,73 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.setResizable(false);
 		f.setLocation((scr.width - 900) / 2, (scr.height - 700) / 2);
 		f.addWindowListener(this);
-
+		
+		String[] num = {"0명", "1명", "2명", "3명", "4명", "5명"};
+		cb = new JComboBox(num);
+		
 		Screen = new Label("SCREEN", Label.CENTER);
 		Screen.setBackground(Color.gray);
 		Screen.setBounds(100, 50, 700, 25);
-		
+
 		Seat = new Button[5][20];
-		for (char ch = 'A'; ch <= 'E'; ch++) {
-			for (int j = 1; j <= 20; j++) {
-				Seatnum = new GridLayout(5, 20, 10, 10);
-				Seat[ch][j] = new Button(SeatNumber[ch][j]);
-				Seat[ch][j].setBackground(Color.gray);
-				Seat[ch][j].setFont(new Font("맑은 고딕", 0, 10));
-				Seat[ch][j].setForeground(Color.white);
-				Seat[ch][j].addActionListener(this);
+		SeatPanel = new Panel();
+		SeatPanel.setSize(800, 200);
+		SeatPanel.setLocation(50, 150);
+		SeatPanel.setLayout(new GridLayout(5, 20, 15, 15));
+		SeatNumber = new String[5][20];
+
+		for (int i = 0; i < 5; i++) {
+			for (int j = 0; j < 20; j++) {
+				char seatRow = (char) (i + 65);
+				String seatNumber = String.format("%c%d", seatRow, j+1);
 				
-				SeatPanel.add(Seat[ch][j]);
+				SeatNumber[i][j] = seatNumber;
+				Seat[i][j] = new Button(SeatNumber[i][j]);
+				Seat[i][j].setBackground(Color.gray);
+				Seat[i][j].setFont(new Font("맑은 고딕", Font.PLAIN, 10));
+				Seat[i][j].setBackground(Color.white);
+
+				SeatPanel.add(Seat[i][j]);
+				int finalI = i;
+				int finalJ = j;
+				Seat[i][j].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Seat[finalI][finalJ].setEnabled(false);
+						if (Seat[finalI][finalJ].equals(Seat[finalI][finalJ]) || Seat[finalI][finalJ].equals(Seat[finalI][finalJ])) {
+							f.add(Next);
+						}
+					}
+				});
 			}
 		}
+		
+		Befor = new Button("이 전");
+		Befor.setBounds(325, 625, 100, 30);
+		Befor.setBackground(new Color(188, 205, 227));
+		Befor.addActionListener(this);
+		
+		Next = new Button("다 음");
+		Next.setBounds(475, 625, 100, 30);
+		Next.setBackground(new Color(188, 205, 227));
+		Next.addActionListener(this);
 
+		f.add(cb);
+		f.add(Befor);
+		f.add(SeatPanel);
 		f.add(Screen);
 		f.setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e) {
-
+		if (e.getActionCommand().equals("이 전")) {
+			f.setVisible(false);
+			NumberOfPeople numberofpeople = new NumberOfPeople();
+		}
+		
+		if (e.getActionCommand().equals("다 음")) {
+			f.setVisible(false);
+			Pay pay = new Pay();
+		}
 	}
 
 	public void windowClosing(WindowEvent e) {

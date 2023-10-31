@@ -104,7 +104,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 		}
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			Seat seat = new Seat();
+			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 	}
 	

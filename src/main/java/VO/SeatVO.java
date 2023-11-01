@@ -3,12 +3,11 @@ package VO;
 import java.util.Date;
 
 public class SeatVO {
-	private String theathername; // 영화관에 대한 이름.
-	private String roomNumber;// 관에 대한 정보
 	private String seatNumber;// 좌석번호
-	private int time; // 회차수
+	private String reservedDate;
+	private String roomNumber;// 관에 대한 정보
+	private String time; // 회차수
 	private String reserved; // 예약 되어있는지 //날짜가 없는디?
-	private String day; //날짜 
 
 	public SeatVO() {
 		super();
@@ -17,26 +16,33 @@ public class SeatVO {
 	@Override
 	public String toString() {
 		String text =
-				theathername +" " + roomNumber + " "+ seatNumber + " " + time + " " + reserved + " " +day;
+				seatNumber +" " + reservedDate + " " + roomNumber + " " + time + " " + reserved;
 		return text;
 	}
 	
-	public SeatVO(String theathername, String roomNumber, String seatNumber, int time, String reserved, String day) {
+	public SeatVO(String seatNumber, String reservedDate, String roomNumber, String time, String reserved) {
 		super();
-		this.theathername = theathername;
-		this.roomNumber = roomNumber;
 		this.seatNumber = seatNumber;
+		this.reservedDate = reservedDate;
+		this.roomNumber = roomNumber;
 		this.time = time;
 		this.reserved = reserved;
-		this.day = day;
+	}
+	
+	public String getSeatNumber() {
+		return seatNumber;
 	}
 
-	public String getTheathername() {
-		return theathername;
+	public void setSeatNumber(String seatNumber) {
+		this.seatNumber = seatNumber;
 	}
 
-	public void setTheathername(String theathername) {
-		this.theathername = theathername;
+	public String getReservedDate() {
+		return reservedDate;
+	}
+
+	public void setReservedDate(String reservedDate) {
+		this.reservedDate = reservedDate;
 	}
 
 	public String getRoomNumber() {
@@ -47,19 +53,11 @@ public class SeatVO {
 		this.roomNumber = roomNumber;
 	}
 
-	public String getSeatNumber() {
-		return seatNumber;
-	}
-
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
-	}
-
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -69,13 +67,5 @@ public class SeatVO {
 
 	public void setReserved(String reserved) {
 		this.reserved = reserved;
-	}
-
-	public String getDay() {
-		return day;
-	}
-
-	public void setDay(String day) {
-		this.day = day;
 	}
 }

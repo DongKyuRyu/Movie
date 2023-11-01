@@ -112,7 +112,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			Pay pay = new Pay();
+			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 		
 		if (e.getActionCommand().equals("좌석 다시 선택")) {
@@ -133,6 +133,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Seat seat = new Seat(0, 0);
+		Seat seat = new Seat(1, 1);
 	}
 }

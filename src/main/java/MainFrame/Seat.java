@@ -8,12 +8,12 @@ import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
 import java.awt.Panel;
-import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Stack;
 
 import javax.swing.JComboBox;
 
@@ -21,11 +21,15 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Label Screen;
 	private Panel SeatPanel;
-	private Button Seat[][], Befor, Next;
+	private Button Seat[][], Befor, Next, Cancel;
 	private String SeatNumber[][];
 	private JComboBox cb;
+	private int adultCount, teenagerCount, totalSelected = 0;
+	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 
-	public Seat() {
+	public Seat(int adultCount, int teenagerCount) {
+		this.adultCount = adultCount;
+		this.teenagerCount = teenagerCount;
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -50,6 +54,11 @@ public class Seat extends WindowAdapter implements ActionListener {
 		SeatPanel.setLocation(50, 150);
 		SeatPanel.setLayout(new GridLayout(5, 20, 15, 15));
 		SeatNumber = new String[5][20];
+		
+		Cancel = new Button("좌석 다시 선택");
+		Cancel.setBounds(400,  585,  100,  30);
+		Cancel.setBackground(new Color(188, 205, 227));
+		Cancel.addActionListener(this);
 
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 20; j++) {
@@ -67,9 +76,15 @@ public class Seat extends WindowAdapter implements ActionListener {
 				int finalJ = j;
 				Seat[i][j].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Seat[finalI][finalJ].setEnabled(false);
-						if (Seat[finalI][finalJ].equals(Seat[finalI][finalJ]) || Seat[finalI][finalJ].equals(Seat[finalI][finalJ])) {
-							f.add(Next);
+						if (totalSelected < adultCount + teenagerCount) {
+							Seat[finalI][finalJ].setEnabled(false);
+							totalSelected++;
+							
+							selectSeats.push(Seat[finalI][finalJ]);
+							
+							if (totalSelected == adultCount + teenagerCount) {
+								f.add(Next);
+							}
 						}
 					}
 				});
@@ -86,6 +101,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
 
+		f.add(Cancel);
 		f.add(cb);
 		f.add(Befor);
 		f.add(SeatPanel);
@@ -103,6 +119,18 @@ public class Seat extends WindowAdapter implements ActionListener {
 			f.setVisible(false);
 			Pay pay = new Pay();
 		}
+		
+		if (e.getActionCommand().equals("좌석 다시 선택")) {
+			if (totalSelected > 0) {
+					totalSelected--;
+					
+					Button lastSelectedSeat = selectSeats.pop();
+					lastSelectedSeat.setEnabled(true);
+				if (totalSelected < adultCount + teenagerCount) {
+					f.remove(Next);
+				}
+			}
+		}
 	}
 
 	public void windowClosing(WindowEvent e) {
@@ -110,6 +138,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Seat seat = new Seat();
+		Seat seat = new Seat(0, 0);
 	}
 }

@@ -30,7 +30,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
 
-		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize(); 
 
 		f = new Frame("좌석 선택");
 		f.setSize(900, 700);

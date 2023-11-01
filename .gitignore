@@ -1,5 +1,11 @@
 # Compiled class file
 *.class
+.classpath
+.project
+.gitignore
+.settings/
+CloseUtil.java
+ConnUtil.java
 
 # Log file
 *.log

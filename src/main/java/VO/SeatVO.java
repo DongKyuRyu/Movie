@@ -78,7 +78,4 @@ public class SeatVO {
 	public void setDay(String day) {
 		this.day = day;
 	}
-
-	
-
 }

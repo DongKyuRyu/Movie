@@ -36,21 +36,19 @@ public class SeatDAO {
 
 	//예매 하기
 	public void setSeatRerserved(SeatVO seat) {
-		String theathername = seat.getTheathername();
-		String roomNumber = seat.getRoomNumber();
 		String seatNumber = seat.getSeatNumber();
-		int time = seat.getTime();
-		String day = seat.getDay();
-		String sql = "insert into seat values(?,?,?,?,?,?)";
+		String reservedDate = seat.getReservedDate();
+		String roomNumber = seat.getRoomNumber();
+		String time = seat.getTime();
+		String sql = "insert into seat values(?,?,?,?,?)";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, theathername);
-			pstmt.setString(2, roomNumber);
-			pstmt.setString(3, seatNumber);
-			pstmt.setInt(4, time);
-			pstmt.setString(5, day);
-			pstmt.setString(6, "y");
+			pstmt.setString(1, seatNumber);
+			pstmt.setString(2, reservedDate);
+			pstmt.setString(3, roomNumber);
+			pstmt.setString(4, time);
+			pstmt.setString(5, "y");
 			pstmt.executeUpdate();
 			//System.out.println("좌석 update");
 		} catch (SQLException e) {
@@ -62,21 +60,18 @@ public class SeatDAO {
 	
 	//예매 취소 -> delete - 그냥 삭제 해버린다.
 	public void setSeatCancel(TicketVO ticket) {
-		String theathername = ticket.getTheatherName();
-		String roomNumber = ticket.getRoomNumber();
 		String seatNumber = ticket.getSeatNumber();
-		int time = ticket.getTime();
-		String day = ticket.getDay();
-		
-		String sql = "delete from seat where theathername = ? and roomNumber = ? and time = ? and day = ? and seatNumber = ?";
+		String reservedDate = ticket.getReservedDate();
+		String roomNumber = ticket.getRoomNumber();
+		String time = ticket.getTime();		
+		String sql = "delete from seat where seatnumber = ? and reserveddate = ? and roomnumber = ? and time = ? ";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, theathername);
-			pstmt.setString(2, roomNumber);
-			pstmt.setInt(3, time);
-			pstmt.setString(4, day);
-			pstmt.setString(5, seatNumber);
+			pstmt.setString(1, seatNumber);
+			pstmt.setString(2, reservedDate);
+			pstmt.setString(3, roomNumber);
+			pstmt.setString(4, time);
 			pstmt.executeUpdate();
 			System.out.println("좌석 예약 취소");
 		} catch (SQLException e) {
@@ -87,16 +82,15 @@ public class SeatDAO {
 	}
 
 	//예약된 좌석의 번호만 받아오기 select
-	public ArrayList<String> getSeatList(String theathername, String roomNumber, int time, String day) {
-		String sql = "select * from seat where theathername = ? and roomNumber = ? and time = ? and day = ? and reserved = 'y'";
+	public ArrayList<String> getSeatList(String ReservedDate, String roomNumber, String time) {
+		String sql = "select * from seat where reserveddate = ? and roomnumber = ? and time = ? and reserved = 'y'";
 		ArrayList<String> list = new ArrayList<>();
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, theathername);
+			pstmt.setString(1, ReservedDate);
 			pstmt.setString(2, roomNumber);
-			pstmt.setInt(3, time);
-			pstmt.setString(4, day);
+			pstmt.setString(3, time);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				String seatNumber = rs.getString("seatnumber");

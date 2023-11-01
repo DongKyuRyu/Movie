@@ -47,19 +47,18 @@ public class TicketDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String customerName = rs.getString("customerName");
+				String name = rs.getString("name");
 				String seatNumber = rs.getString("seatNumber");
-				String theatherName = rs.getString("theatherName");
 				String roomNumber = rs.getString("roomNumber");
 				String movieName = rs.getString("movieName");
-				String day = rs.getString("day");
-				int time = rs.getInt("time");
-				String reserveDate = rs.getString("reserveDate");
+				String dDay = rs.getString("dDay");
+				String time = rs.getString("time");
+				String reservedDate = rs.getString("reservedDate");
 				int cost = rs.getInt("cost");
 				int person = rs.getInt("person");
 				TicketVO ticketVO = new TicketVO(
-						customerName,customerId,seatNumber,theatherName,roomNumber,
-						movieName,day, time, reserveDate, cost, person	
+						name,customerId,seatNumber,roomNumber,movieName,
+						dDay,time, reservedDate, cost, person	
 						);
 				list.add(ticketVO);
 			}
@@ -74,9 +73,9 @@ public class TicketDAO {
 	
 	//예매 취소 -> delete - 그냥 삭제 해버린다.
 		public void setSeatCancel(TicketVO ticket) {
-			String theathername = ticket.getTheatherName();
-			String roomNumber = ticket.getRoomNumber();
-			String seatNumber = ticket.getSeatNumber();
+			String seatNumber = ticket.getTheatherName();
+			String reservedDate = ticket.getRoomNumber();
+			String roomNumber = ticket.getSeatNumber();
 			int time = ticket.getTime();
 			String day = ticket.getDay();
 			

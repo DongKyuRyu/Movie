@@ -3,63 +3,59 @@ package VO;
 import java.sql.Timestamp;
 
 public class TicketVO {
-	private String customerName; // 고객 이름 -ticketingView 0
-	private String customerId; // 고객 아이디 -ticketingView 0
-	private String seatNumber; // 좌석 이름 -seatView //A1,A2 .. 이런식으로 들어감.
-	private String theatherName; // 극장 이름 -ticketingView 0
-	private String roomNumber; // 관 번호 -ticketingView 0
-	private String movieName; // 영화 이름 -ticketingView 0
-	private String day; // 영화 예매 날짜. 년 월 일 -- > 예약한 날짜만 나옴. -ticketingView 0
-	private int time; // 영화 회차 -ticketingView 0
-	private String reserveDate; // 예매한 날짜 및 시간 -seatView 0
-
-	// 추가
-	private int cost; // 티켓 가격 -ticketingView 0
-	private int person; // 인원 수 -ticketingView 0
+	private String name; // 고객 이름 -ticketing
+	private String id; // 고객 아이디 -ticketing
+	private String seatNumber; // 좌석 이름 -seat //A1,A2 .. 이런식으로 들어감.
+	private String roomNumber; // 관 번호 -seat
+	private String movieName; // 영화 이름 -ticketing
+	private String dDay; // 영화 시작 날짜 -ticketing
+	private String time; // 영화 회차 - seat
+	private String reservedDate; // 영화 예매 날짜. 년 월 일 -- > 예약한 날짜만 나옴. - seat
+	private int cost; // 티켓 가격 -ticketing
+	private int person; // 인원 수 -ticketing
 
 	public TicketVO() {
 		super();
 	}
 
-	public TicketVO(String customerName, String customerId, String seatNumber, String theatherName, String roomNumber,
-			String movieName, String day, int time, String reserveDate, int cost, int person) {
+	public TicketVO(String name, String id, String seatNumber, String roomNumber, String movieName,
+			String dDay, String time, String reservedDate, int cost, int person) {
 		super();
-		this.customerName = customerName;
-		this.customerId = customerId;
+		this.name = name;
+		this.id = id;
 		this.seatNumber = seatNumber;
-		this.theatherName = theatherName;
 		this.roomNumber = roomNumber;
 		this.movieName = movieName;
-		this.day = day;
+		this.dDay = dDay;
 		this.time = time;
-		this.reserveDate = reserveDate;
+		this.reservedDate = reservedDate;
 		this.cost = cost;
 		this.person = person;
 	}
 	@Override
 	public String toString() {
 		String text =
-				customerName+" " + customerId + " "+ seatNumber + " " + theatherName + " " +roomNumber+ " " +movieName
-				+ " " + day
-				+ " " +time
-				+ " " + reserveDate
-				+ " " +cost +" " + person;
+				name +" " + id + " "+ seatNumber + " " + roomNumber + " " + movieName
+				+ " " + dDay
+				+ " " + time
+				+ " " + reservedDate
+				+ " " + cost +" " + person;
 		return text;
 	}
-	public String getCustomerName() {
-		return customerName;
+	public String getName() {
+		return name;
 	}
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCustomerId() {
-		return customerId;
+	public String getId() {
+		return id;
 	}
 
-	public void setCustomerId(String customerId) {
-		this.customerId = customerId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getSeatNumber() {
@@ -68,14 +64,6 @@ public class TicketVO {
 
 	public void setSeatNumber(String seatNumber) {
 		this.seatNumber = seatNumber;
-	}
-
-	public String getTheatherName() {
-		return theatherName;
-	}
-
-	public void setTheatherName(String theatherName) {
-		this.theatherName = theatherName;
 	}
 
 	public String getRoomNumber() {
@@ -93,29 +81,29 @@ public class TicketVO {
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
-
-	public String getDay() {
-		return day;
+	
+	public String getDday() {
+		return dDay;
 	}
 
-	public void setDay(String day) {
-		this.day = day;
+	public void setDday(String dDay) {
+		this.dDay = dDay;
 	}
 
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(int time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
-	public String getReserveDate() {
-		return reserveDate;
+	public String getReservedDate() {
+		return reservedDate;
 	}
 
-	public void setReserveDate(String reserveDate) {
-		this.reserveDate = reserveDate;
+	public void setReservedDate(String reserveDate) {
+		this.reservedDate = reserveDate;
 	}
 
 	public int getCost() {

@@ -22,7 +22,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener, Ite
 	private Button Seat[][], Next, Befor;
 	private String SeatNumber[];
 	private Button[] seletedButton;
-	private Label adult, Teenager;
+	private Label adult, Teenager, price, adultpeople, teenagerpeople, totalpeople;
 
 	public NumberOfPeople() {
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
@@ -53,18 +53,33 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener, Ite
 		Befor.setBackground(new Color(188, 205, 227));
 		Befor.addActionListener(this);
 
-		Seat = new Button[2][8];
+		Seat = new Button[2][9];
 		SeatPanel = new Panel();
 		SeatPanel.setSize(300, 70);
 		SeatPanel.setLocation(200, 200);
 		SeatPanel.setLayout(new GridLayout(2, 8, 15, 15));
-		SeatNumber = new String[8];
+		SeatNumber = new String[9];
 		seletedButton = new Button[2];
-
+		
+		price = new Label("성인 : 9,000   /   청소년 : 7,000");
+		price.setBounds(130, 280, 300, 17);
+		price.setFont(new Font("맑은 고딕", Font.BOLD, 15));
+		price.setForeground(Color.red);
+		
+		adultpeople = new Label("성인 : 0명");
+		adultpeople.setBounds(130, 300, 55, 17);
+		
+		teenagerpeople = new Label("청소년 : 0명");
+		teenagerpeople.setBounds(195, 300, 70, 17);
+		
+		totalpeople = new Label("총 : 0명");
+		totalpeople.setBounds(275, 300, 70, 17);
+		
+		
 		for (int i = 0; i < 2; i++) {
 			seletedButton[i] = null;
-			for (int j = 0; j < 8; j++) {
-				String seatNumber = String.format("%d", j + 1);
+			for (int j = 0; j < 9; j++) {
+				String seatNumber = String.format("%d", j);
 
 				SeatNumber[j] = seatNumber;
 				Seat[i][j] = new Button(SeatNumber[j]);
@@ -72,26 +87,48 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener, Ite
 				Seat[i][j].setFont(new Font("맑은 고딕", Font.PLAIN, 10));
 				Seat[i][j].setBackground(Color.white);
 				Seat[i][j].addActionListener(this);
+				Seat[i][0].setEnabled(false);
 
 				SeatPanel.add(Seat[i][j]);
 				int finalI = i;
 				int finalJ = j;
+				
+				String total = Integer.toString(finalJ);
 
 				Seat[i][j].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (seletedButton[finalI] != null) {
 							seletedButton[finalI].setEnabled(true);
 						}
+						Seat[finalI][0].setEnabled(true);
 						Seat[finalI][finalJ].enable(false);
 						seletedButton[finalI] = Seat[finalI][finalJ];
 						if (Seat[finalI][finalJ].equals(Seat[0][finalJ]) || Seat[finalI][finalJ].equals(Seat[1][finalJ])) {
 							f.add(Next);
 						}
+						
+						if (Seat[finalI][finalJ].equals(Seat[0][finalJ])) {
+							adultpeople.setText("성인 : " + total + "명");
+						}
+						
+						if (Seat[finalI][finalJ].equals(Seat[1][finalJ])) {
+							teenagerpeople.setText("청소년 : " + total + "명");
+						}
+						
+						// totalpeople Label에 성인과 청소년 합을 출력
+				        int adultCount = Integer.parseInt(adultpeople.getText().replaceAll("[^0-9]", ""));
+				        int teenagerCount = Integer.parseInt(teenagerpeople.getText().replaceAll("[^0-9]", ""));
+				        int totalPeopleCount = adultCount + teenagerCount;
+				        totalpeople.setText("총 : " + totalPeopleCount + "명");
 					}
 				});
 			}
 		}
 
+		f.add(totalpeople);
+		f.add(teenagerpeople);
+		f.add(adultpeople);
+		f.add(price);
 		f.add(Befor);
 		f.add(Teenager);
 		f.add(adult);
@@ -107,7 +144,9 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener, Ite
 		
 		if(e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			Seat seat = new Seat();
+			int adultCount = Integer.parseInt(adultpeople.getText().replaceAll("[^0-9]", ""));
+		    int teenagerCount = Integer.parseInt(teenagerpeople.getText().replaceAll("[^0-9]", ""));
+			Seat seat = new Seat(adultCount, teenagerCount);
 		}
 	}
 

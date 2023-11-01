@@ -135,7 +135,7 @@ public class Ticket extends WindowAdapter implements ActionListener, ItemListene
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("다음")) {
 			fa.setVisible(false);
-			Seat seat = new Seat();
+			Seat seat = new Seat(0,0);
 		}
 	}
 

@@ -19,7 +19,7 @@ import javax.swing.JComboBox;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
-	private Label Screen;
+	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
 	private String SeatNumber[][];
@@ -30,7 +30,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
 
-		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize(); 
+		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame("좌석 선택");
 		f.setSize(900, 700);

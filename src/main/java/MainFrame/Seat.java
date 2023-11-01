@@ -23,7 +23,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
 	private String SeatNumber[][];
-	private JComboBox cb;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 
@@ -40,9 +39,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.setResizable(false);
 		f.setLocation((scr.width - 900) / 2, (scr.height - 700) / 2);
 		f.addWindowListener(this);
-		
-		String[] num = {"0명", "1명", "2명", "3명", "4명", "5명"};
-		cb = new JComboBox(num);
 		
 		Screen = new Label("SCREEN", Label.CENTER);
 		Screen.setBackground(Color.gray);
@@ -102,7 +98,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.addActionListener(this);
 
 		f.add(Cancel);
-		f.add(cb);
 		f.add(Befor);
 		f.add(SeatPanel);
 		f.add(Screen);

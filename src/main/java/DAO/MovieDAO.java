@@ -44,6 +44,8 @@ public class MovieDAO {
 			while (rs.next()) {
 				MovieVO movie = new MovieVO();
 				movie.setMovieName(rs.getString("moviename"));
+				movie.setStartDate(rs.getString("startdate"));
+				movie.setEndDate(rs.getString("enddate"));
 				movie.setAgeLimit(rs.getString("agelimit"));
 				movie.setRunningTime(rs.getInt("runningTime"));
 				movie.setImgSrc(rs.getString("imgSrc"));
@@ -67,6 +69,8 @@ public class MovieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				movie.setMovieName(rs.getString("moviename"));
+				movie.setStartDate(rs.getString("startdate"));
+				movie.setEndDate(rs.getString("enddate"));
 				movie.setAgeLimit(rs.getString("agelimit"));
 				movie.setRunningTime(rs.getInt("time"));
 				movie.setImgSrc(rs.getString("imgSrc"));

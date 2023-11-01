@@ -4,20 +4,24 @@ import java.awt.Image;
 
 public class MovieVO {
 	private String movieName;
+	private String startDate;
+	private String endDate;
 	private String ageLimit;
-	private int RunningTime;
+	private int runningTime;
 	private String imgSrc;
 	
 	public MovieVO() {}
 
-	public MovieVO(String movieName, String ageLimit, int RunningTime, String imgSrc) {
+	public MovieVO(String movieName, String startDate, String endDate, String ageLimit, int runningTime, String imgSrc) {
 		super();
 		this.movieName = movieName;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.ageLimit = ageLimit;
-		this.RunningTime = RunningTime;
+		this.runningTime = runningTime;
 		this.imgSrc = imgSrc;
 	}
-
+	
 	public String getMovieName() {
 		return movieName;
 	}
@@ -26,6 +30,23 @@ public class MovieVO {
 		this.movieName = movieName;
 	}
 
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+	
+	
 	public String getAgeLimit() {
 		return ageLimit;
 	}
@@ -35,11 +56,11 @@ public class MovieVO {
 	}
 
 	public int getRunningTime() {
-		return RunningTime;
+		return runningTime;
 	}
 
-	public void setRunningTime(int RunningTime) {
-		this.RunningTime = RunningTime;
+	public void setRunningTime(int runningTime) {
+		this.runningTime = runningTime;
 	}
 
 	public String getImgSrc() {

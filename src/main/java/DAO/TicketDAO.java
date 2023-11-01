@@ -73,21 +73,19 @@ public class TicketDAO {
 	
 	//예매 취소 -> delete - 그냥 삭제 해버린다.
 		public void setSeatCancel(TicketVO ticket) {
-			String seatNumber = ticket.getTheatherName();
-			String reservedDate = ticket.getRoomNumber();
-			String roomNumber = ticket.getSeatNumber();
-			int time = ticket.getTime();
-			String day = ticket.getDay();
+			String seatNumber = ticket.getSeatNumber();
+			String reservedDate = ticket.getReservedDate();
+			String roomNumber = ticket.getRoomNumber();
+			String Time = ticket.getTime();
 			
-			String sql = "delete from seat where theathername = ? and roomNumber = ? and time = ? and day = ? and seatNumber = ?";
+			String sql = "delete from seat where seatNumber = ? and reservedDate = ? and roomNumber = ? and Time = ? ";
 			try {
 				connect();
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, theathername);
-				pstmt.setString(2, roomNumber);
-				pstmt.setInt(3, time);
-				pstmt.setString(4, day);
-				pstmt.setString(5, seatNumber);
+				pstmt.setString(1, seatNumber);
+				pstmt.setString(2, reservedDate);
+				pstmt.setString(3, roomNumber);
+				pstmt.setString(4, Time);
 				pstmt.executeUpdate();
 				System.out.println("좌석 예약 취소");
 			} catch (SQLException e) {
@@ -99,27 +97,24 @@ public class TicketDAO {
 		
 	// 티켓 삭제  delete (예매취소)
 	public void delete(TicketVO ticket) {
-		String customerId = ticket.getCustomerId();// 고객 아이디 -ticketingView 0
+		String id = ticket.getId();// 고객 아이디 -ticketingView 0
 		String seatNumber = ticket.getSeatNumber(); // 좌석 이름 -seatView 0
-		String theatherName = ticket.getTheatherName(); // 극장 이름 -ticketingView 0
-		String roomNumber = ticket.getRoomNumber(); // 관 번호 -ticketingView 0
-		String movieName = ticket.getMovieName(); // 영화 이름 -ticketingView 0
-		String day = ticket.getDay(); // 영화 예매 날짜. 년 월 일 -- > 예약한 날짜만 나옴. -ticketingView 0
-		
-		int time = ticket.getTime(); // 영화 회차 -ticketingView 0
+		String roomNumber = ticket.getRoomNumber(); // 극장 이름 -ticketingView 0
+		String movieName = ticket.getMovieName(); // 관 번호 -ticketingView 0
+		String reservedDate = ticket.getReservedDate(); // 영화 이름 -ticketingView 0
+		String time = ticket.getTime(); // 영화 회차 -ticketingView 0
 		String sql = "delete from ticket "
-				+ "where customerId = ? and seatNumber = ? and theatherName = ? and roomNumber = ? and movieName = ? "
-				+ "and day = ? and time =?";
+				+ "where id = ? and seatNumber = ? and roomNumber = ? and movieName = ? and reservedDate = ? "
+				+ "and time = ? ";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, customerId);
+			pstmt.setString(1, id);
 			pstmt.setString(2, seatNumber);
-			pstmt.setString(3, theatherName);
-			pstmt.setString(4, roomNumber);
-			pstmt.setString(5, movieName);
-			pstmt.setString(6, day);
-			pstmt.setInt(7, time);
+			pstmt.setString(3, roomNumber);
+			pstmt.setString(4, movieName);
+			pstmt.setString(5, reservedDate);
+			pstmt.setString(6, time);
 			pstmt.executeUpdate();
 			System.out.println("티켓 삭제 완료");
 		} catch (SQLException e) {
@@ -132,38 +127,36 @@ public class TicketDAO {
 	
 	// 티켓 등록  insert
 	public void insert(TicketVO ticket) {
-		String customerName = ticket.getCustomerName(); // 고객 이름 -ticketingView 0
-		String customerId = ticket.getCustomerId();// 고객 아이디 -ticketingView 0
+		String name = ticket.getName(); // 고객 이름 -ticketingView 0
+		String id = ticket.getId();// 고객 아이디 -ticketingView 0
 		String seatNumber = ticket.getSeatNumber(); // 좌석 이름 -seatView 0
-		String theatherName = ticket.getTheatherName(); // 극장 이름 -ticketingView 0
 		String roomNumber = ticket.getRoomNumber(); // 관 번호 -ticketingView 0
 		String movieName = ticket.getMovieName(); // 영화 이름 -ticketingView 0
-		String day = ticket.getDay(); // 영화 예매 날짜. 년 월 일 -- > 예약한 날짜만 나옴. -ticketingView 0
-		int time = ticket.getTime(); // 영화 회차 -ticketingView 0
+		String dDay = ticket.getDday();
+		String time = ticket.getTime(); // 영화 회차 -ticketingView 0
 		int cost = ticket.getCost(); // 티켓 가격 -ticketingView 0
 		int person = ticket.getPerson(); // 인원 수 -ticketingView 0
 
 		// 예약한 시간 저장하기
 		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
 		Calendar c = Calendar.getInstance();
-		String reserveDate = f.format(c.getTime()); // 현재날짜를 전달.
-		ticket.setReserveDate(reserveDate);
+		String reservedDate = f.format(c.getTime()); // 현재날짜를 전달.
+		ticket.setReservedDate(reservedDate);
 
-		String sql = "insert into ticket values (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into ticket values (?,?,?,?,?,?,?,?,?,?)";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, customerName);
-			pstmt.setString(2, customerId);
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);
 			pstmt.setString(3, seatNumber);
-			pstmt.setString(4, theatherName);
-			pstmt.setString(5, roomNumber);
-			pstmt.setString(6, movieName);
-			pstmt.setString(7, day);
-			pstmt.setInt(8, time);
-			pstmt.setString(9, reserveDate);
-			pstmt.setInt(10, cost);
-			pstmt.setInt(11, person);
+			pstmt.setString(4, roomNumber);
+			pstmt.setString(5, movieName);
+			pstmt.setString(6, dDay);
+			pstmt.setString(7, time);
+			pstmt.setString(8, reservedDate);
+			pstmt.setInt(9, cost);
+			pstmt.setInt(10, person);
 			System.out.println(ticket.toString());
 			pstmt.executeUpdate();
 			System.out.println("티켓 등록 완료");

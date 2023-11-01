@@ -29,3 +29,10 @@ ConnUtil.java
 hs_err_pid*
 replay_pid*
 /build/
+
+.classpath
+.project
+.gitignore
+.settings/
+CloseUtil.java
+ConnUtil.java

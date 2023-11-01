@@ -30,6 +30,7 @@ hs_err_pid*
 replay_pid*
 /build/
 
+<<<<<<< HEAD
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,java,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,java,eclipse
@@ -160,6 +161,10 @@ $RECYCLE.BIN/
 # JDT-specific (Eclipse Java Development Tools)      
 .classpath
 
+=======
+.classpath
+.project
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 .gitignore
 .settings/
 CloseUtil.java

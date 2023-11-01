@@ -21,7 +21,7 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 		Font TitleFont = new Font("고딕", Font.BOLD, 60);
 		
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
-		
+		 
 		f = new Frame("영화예매");
 		f.setResizable(false);
 		f.setSize(500, 700);

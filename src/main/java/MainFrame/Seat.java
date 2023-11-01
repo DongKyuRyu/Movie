@@ -15,7 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
 
-import javax.swing.JComboBox;
+import DAO.SeatDAO;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
@@ -25,6 +25,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private String SeatNumber[][];
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
+	
+	private SeatDAO seatDao = new SeatDAO.getInstance();
 
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;

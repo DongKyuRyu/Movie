@@ -26,37 +26,49 @@ public class Pay extends WindowAdapter implements ActionListener{
 		
 		faPay = new Frame();
 		faPay.setLocation((scr.width-800)/2,(scr.height-530)/2);
-		pa1 = new Panel();
-		pa2 = new Panel();
-		pa3 = new Panel();
-		pa4 = new Panel();
-		movie = new Label("         예   매   정   보          ");
-		cash = new Label("          결   제   하   기          ");
+		faPay.setSize(800, 530);
+		faPay.setBackground(new Color(188, 205, 194));
+		faPay.addWindowListener(this);
+		
 		pay = new Button(" 결 제 하 기 ");
 		pay.addActionListener(this);
+		pay.setBackground(new Color(188, 205, 194));
+		
+		pa1 = new Panel();
+		
+		
+		pa2 = new Panel();
+		
+		
+		pa3 = new Panel();
+		
+		
+		pa4 = new Panel();
+		
+		
+		movie = new Label("         예   매   정   보          ");
+		movie.setFont(new Font("돋움", 2, 15));
+		
+		cash = new Label("          결   제   하   기          ");
+		cash.setFont(new Font("돋움", 2, 15));
+		
 		coupon = new Choice();
 		
 		theater = new Button("01 상영관");
-		seatseat = new Button("02 인원 / 좌석");
-		paypay = new Button("03 결제");
-		success = new Button("04 결제 완료");
-		
 		theater.setBackground(Color.lightGray);
-		seatseat.setBackground(Color.lightGray);
-		paypay.setBackground(new Color(188, 205, 194));
-		success.setBackground(Color.lightGray);
 		
-		movie.setFont(new Font("돋움", 2, 15));
-		cash.setFont(new Font("돋움", 2, 15));
+		seatseat = new Button("02 인원 / 좌석");
+		seatseat.setBackground(Color.lightGray);
+		
+		paypay = new Button("03 결제");
+		paypay.setBackground(new Color(188, 205, 194));
+		
+		success = new Button("04 결제 완료");
+		success.setBackground(Color.lightGray);
 		
 		coupon.add("신규 고객 15% 할인 쿠폰");
 		coupon.add("기존 고객 5% 할인 쿠폰");
 		coupon.add("컴백 고객 10% 할인 쿠폰");
-		
-		faPay.add(pa1, "North");
-		faPay.add(pa2, "West");
-		faPay.add(pa3, "East");
-		faPay.add(pa4, "South");
 		
 		pa1.add(theater);
 		pa1.add(seatseat);
@@ -68,11 +80,10 @@ public class Pay extends WindowAdapter implements ActionListener{
 		pa3.add(coupon);
 		pa4.add(pay);
 		
-		faPay.setSize(800, 530);
-		faPay.setBackground(new Color(188, 205, 194));
-		pay.setBackground(new Color(188, 205, 194));
-		
-		faPay.addWindowListener(this);
+		faPay.add(pa1, "North");
+		faPay.add(pa2, "West");
+		faPay.add(pa3, "East");
+		faPay.add(pa4, "South");
 		faPay.setVisible(true);
 	}
 	

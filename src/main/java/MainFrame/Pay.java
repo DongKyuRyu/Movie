@@ -36,8 +36,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 	public Pay(int adultCount, int teenagerCount) {
-		// totalPrice 총 금액
+		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
+
 		int totalPrice1 = Integer.parseInt(totalPrice);
 		this.totalPrice = totalPrice1;
 		String totalsum = decimalFormat.format(totalPrice1);

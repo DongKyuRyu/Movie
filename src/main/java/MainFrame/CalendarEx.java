@@ -118,7 +118,7 @@ public class CalendarEx extends Frame {
 	}
 
 	public static void main(String[] args) {
-		CalendarEx mainWin = new CalendarEx("Scheduler");
+		CalendarEx mainWin = new CalendarEx("cheduler");
 
 	}// main
 

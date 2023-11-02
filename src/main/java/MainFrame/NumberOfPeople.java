@@ -16,7 +16,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class NumberOfPeople extends WindowAdapter implements ActionListener, ItemListener {
+public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	private Frame f;
 	private Panel SeatPanel;
 	private Button Seat[][], Next, Befor;
@@ -153,12 +153,13 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener, Ite
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
 	}
+	
+	public static String totalpice(int adultCount, int teenagerCount) {
+	    int totalpice = adultCount * 9000 + teenagerCount * 7000;
+	    return Integer.toString(totalpice);
+	}
 
 	public static void main(String[] args) {
 		NumberOfPeople num = new NumberOfPeople();
-	}
-
-	public void itemStateChanged(ItemEvent e) {
-
 	}
 }

@@ -86,14 +86,15 @@ public class CalendarEx extends Frame {
 			
 			if (sDay.get(Calendar.MONTH) != month) {
 				btnArr[i].setBackground(Color.lightGray);
+				btnArr[i].setEnabled(false);
 			} else {
 				btnArr[i].setBackground(Color.white);
-			}
-		}
-		for (int i = 0; i < btnArr.length; i++) {
-		Calendar now = Calendar.getInstance();
-			if (i < now.get(Calendar.DAY_OF_MONTH) -1) {
-				btnArr[i].setEnabled(false);
+				btnArr[i].setEnabled(true);
+				
+				Calendar now = Calendar.getInstance();
+				if(sDay.get(Calendar.MONTH) == now.get(Calendar.MONTH) && day < now.get(Calendar.DAY_OF_MONTH)) {
+					btnArr[i].setEnabled(false);
+				}
 			}
 		}
 		this.month = Integer.toString(month + 1);

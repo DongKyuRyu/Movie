@@ -25,20 +25,36 @@ import java.text.DecimalFormat;
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
-	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice;
+	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice;
 	private Choice coupon;
 	private Panel movieinfo, payinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
-	private int cardmaxLength = 4, phonemaxLength = 3, teenagerCount, adultCount;
+	private int cardmaxLength = 4, phonemaxLength = 3;
+	private double totalPrice;
+	
+	DecimalFormat decimalFormat = new DecimalFormat("###,###");
+
 	public Pay(int adultCount, int teenagerCount) {
 		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
 
 		int totalPrice1 = Integer.parseInt(totalPrice);
-		DecimalFormat decimalFormat = new DecimalFormat("###,###");
+		this.totalPrice = totalPrice1;
 		String totalsum = decimalFormat.format(totalPrice1);
-		
+
+		// 할인 금액 (신규 고객 15% 할인 쿠폰)
+		double Newdiscount = (double) totalPrice1 * 0.15;
+		String NewDisCountPrice = decimalFormat.format(Newdiscount);
+
+		// 할인 금액 (기존 고객 5% 할인 쿠폰)
+		double discount = (double) totalPrice1 * 0.05;
+		String DisCountPrice = decimalFormat.format(discount);
+
+		// 할인 금액 (컴백 고객 10% 할인 쿠폰)
+		double ComBackdiscount = (double) totalPrice1 * 0.15;
+		String ComBackDisCountPrice = decimalFormat.format(ComBackdiscount);
+
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		faPay = new Frame();
@@ -85,6 +101,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		coupon.add("신규 고객 15% 할인 쿠폰");
 		coupon.add("기존 고객 5% 할인 쿠폰");
 		coupon.add("컴백 고객 10% 할인 쿠폰");
+		coupon.addItemListener(this);
 
 		payplan = new Label("● 결제 수단", Label.CENTER);
 		payplan.setFont(new Font("돋움", Font.BOLD, 13));
@@ -137,12 +154,25 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		phonText3 = new TextField();
 		phonText3.setBounds(150, 70, 50, 20);
 		phonText3.addTextListener(this);
-		
+
 		totalprice = new Label();
-		totalprice.setBounds(30,  220,  200,  22);
+		totalprice.setBounds(50, 220, 200, 22);
 		totalprice.setFont(new Font("돋움", Font.BOLD, 20));
 		totalprice.setText("총금액 : " + totalsum + "원");
 
+		disCountprice = new Label();
+		disCountprice.setBounds(30, 250, 200, 22);
+		disCountprice.setFont(new Font("돋움", Font.BOLD, 20));
+		disCountprice.setText("할인금액 : " + 0 + "원");
+		
+		realPrice = new Label();
+		realPrice.setBounds(30, 280, 200, 22);
+		realPrice.setFont(new Font("돋움", Font.BOLD, 20));
+		realPrice.setText("최종금액 : " + 0 + "원");
+		realPrice.setForeground(Color.red);
+
+		payinfo.add(realPrice);
+		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
 		payinfo.add(paycard);
 		payinfo.add(payphone);
@@ -158,10 +188,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		faPay.setVisible(true);
 	}
 
-	public void windowClosing(WindowEvent e) {
-		System.exit(0);
-	}
-
 	public static void main(String[] args) {
 		Pay pa = new Pay(5, 2);
 	}
@@ -174,6 +200,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	}
 
 	public void itemStateChanged(ItemEvent e) {
+		DecimalFormat decimalFormat = new DecimalFormat("###,###");
 		if (e.getItem().equals("카드")) {
 			payinfo.remove(phonenum);
 			payinfo.remove(phonText1);
@@ -196,6 +223,49 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			payinfo.add(phonText1);
 			payinfo.add(phonText2);
 			payinfo.add(phonText3);
+		}
+
+		if (e.getItem().equals("해당사항 없음")) {
+//			String totalsum = decimalFormat.format(totalPrice1);
+			double discount = (double) totalPrice * 0;
+			String DisCountPrice = decimalFormat.format(discount);
+			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
+			
+			double realnewPrice = totalPrice - discount;
+			String RealDisCountPrice = decimalFormat.format(realnewPrice);
+			realPrice.setText("최종금액 : " + RealDisCountPrice + "원");
+		}
+
+		if (e.getItem().equals("신규 고객 15% 할인 쿠폰")) {
+			double Newdiscount = (double) totalPrice * 0.15;
+			String NewDisCountPrice = decimalFormat.format(Newdiscount);
+			disCountprice.setText("할인금액 : -" + NewDisCountPrice + "원");
+			
+			double realnewPrice = totalPrice - Newdiscount;
+			String NewRealDisCountPrice = decimalFormat.format(realnewPrice);
+			realPrice.setText("최종금액 : " + NewRealDisCountPrice + "원");
+		}
+
+		if (e.getItem().equals("기존 고객 5% 할인 쿠폰")) {
+			double discount = (double) totalPrice * 0.05;
+			String DisCountPrice = decimalFormat.format(discount);
+			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
+			realPrice.setText("최종금액 : " + (totalPrice - discount) + "원");
+			
+			double realexistingPrice = totalPrice - discount;
+			String ExistingRealDisCountPrice = decimalFormat.format(realexistingPrice);
+			realPrice.setText("최종금액 : " + ExistingRealDisCountPrice + "원");
+		}
+
+		if (e.getItem().equals("컴백 고객 10% 할인 쿠폰")) {
+			double Combackdiscount = (double) totalPrice * 0.1;
+			String CombackDisCountPrice = decimalFormat.format(Combackdiscount);
+			disCountprice.setText("할인금액 : -" + CombackDisCountPrice + "원");
+			realPrice.setText("최종금액 : " + (totalPrice - Combackdiscount) + "원");
+			
+			double realCombakcPrice = totalPrice - Combackdiscount;
+			String CombakcRealDisCountPrice = decimalFormat.format(realCombakcPrice);
+			realPrice.setText("최종금액 : " + CombakcRealDisCountPrice + "원");
 		}
 	}
 
@@ -228,5 +298,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 				phonText3.requestFocus(); // cardText2가 4글자가 되면 cardText3로 포커스 이동
 			}
 		}
+	}
+
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
 	}
 }

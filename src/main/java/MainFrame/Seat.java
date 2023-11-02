@@ -35,12 +35,12 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private TicketVO ticket;
 	private MovieVO movie;
 	private SeatVO seat;
-	
+
 	// DAO
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
-	
+
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;

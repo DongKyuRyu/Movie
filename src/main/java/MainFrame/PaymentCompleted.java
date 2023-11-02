@@ -174,6 +174,7 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("확인")) {
 			f.setVisible(false);
+			MainFrame main = new MainFrame();
 		}
 	}
 }

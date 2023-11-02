@@ -110,12 +110,35 @@ public class CalendarEx extends Frame {
                     String movieName = movieList.getMovieName();
                     System.out.println(movieName);
 
+<<<<<<< HEAD
                     System.out.println(today);
                     btnArr[i].setEnabled(false);
                     setVisible(false);
                     MovieTime movie = new MovieTime();
                 }
             }
+=======
+		for (int i = 0; i < btnArr.length; i++, sDay.add(Calendar.DATE, 1)) {
+			int day = sDay.get(Calendar.DATE);
+			btnArr[i].setLabel(day + "");
+			
+			if (sDay.get(Calendar.MONTH) != month) {
+				btnArr[i].setBackground(Color.lightGray);
+				btnArr[i].setEnabled(false);
+			} else {
+				btnArr[i].setBackground(Color.white);
+				btnArr[i].setEnabled(true);
+				
+				Calendar now = Calendar.getInstance();
+				if(sDay.get(Calendar.MONTH) == now.get(Calendar.MONTH) && day < now.get(Calendar.DAY_OF_MONTH)) {
+					btnArr[i].setEnabled(false);
+				}
+			}
+		}
+		this.month = Integer.toString(month + 1);
+		this.year = Integer.toString(year);
+	}
+>>>>>>> branch 'Junsu' of https://github.com/DongKyuRyu/Movie.git
 
             if (src == btnPrevMon) {
                 curMon.add(Calendar.MONTH, -1); // Calendar.MONDAY가 아닌 Calendar.MONTH로 수정

@@ -27,6 +27,10 @@ public class CalendarEx extends Frame {
 
 	Calendar curMon = Calendar.getInstance();
 	private Calendar now;
+	private String year;
+	private String month;
+	private String day;
+	private String today;
 
 	CalendarEx(String title) {
 		super(title);
@@ -92,6 +96,8 @@ public class CalendarEx extends Frame {
 				btnArr[i].setEnabled(false);
 			}
 		}
+		this.month = Integer.toString(month + 1);
+		this.year = Integer.toString(year);
 	}
 
 	class BtnEventHandler implements ActionListener {
@@ -100,6 +106,8 @@ public class CalendarEx extends Frame {
 
 			for (int i = 0; i < btnArr.length; i++) {
 				if (src == btnArr[i]) {
+					day = btnArr[i].getLabel();
+
 					btnArr[i].setEnabled(false);
 					setVisible(false);
 					MovieTime movie = new MovieTime();
@@ -114,6 +122,11 @@ public class CalendarEx extends Frame {
 			setDays(curMon);
 			repaint();
 		}
+	}
+	
+	public String returnCalendar() {
+		today = year + "-" + month + "-" + day;
+		return today;
 	}
 
 	public static void main(String[] args) {

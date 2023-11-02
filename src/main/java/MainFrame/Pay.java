@@ -22,6 +22,7 @@ public class Pay extends WindowAdapter implements ActionListener{
 	private Panel pa1, pa2, pa3, pa4;
 	
 	public Pay() {
+		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 		
 		faPay = new Frame();

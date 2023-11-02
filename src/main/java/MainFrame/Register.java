@@ -221,10 +221,12 @@ public class Register extends WindowAdapter implements ActionListener {
 				pwd = true;
 			} else {
 				PwdTrueAndFalse.setText("비밀번호가 일치하지않습니다.");
+				pwd = false;
 			}
 
 			if (Name.getText().equals("") || Email.getText().equals("")) {
 				NameTrueAndFalse.setText("Name 과 Email을 입력해주세요.");
+				name = false;
 			} else {
 				NameTrueAndFalse.setText("");
 				name = true;

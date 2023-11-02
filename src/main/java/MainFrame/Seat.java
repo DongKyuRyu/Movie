@@ -118,6 +118,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.add(Screen);
 		f.setVisible(true);
 	}
+	
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {

@@ -16,122 +16,125 @@ import java.awt.event.WindowEvent;
 import java.util.Calendar;
 
 public class CalendarEx extends Frame {
-	Panel pDate = new Panel();
-	Panel pUp = new Panel();
+    private Panel pDate = new Panel();
+    private Panel pUp = new Panel();
+    private Button btnPrevMon = new Button("◀");
+    private Button btnNextMon = new Button("▶");
+    private Label lblYearMon = new Label();
+    private Button[] btnArr = new Button[42];
+    private Calendar curMon = Calendar.getInstance();
+    private String year;
+    private String month;
+    private String day;
+    private String today;
+    private MovieList movieList;
 
-	Button btnPrevMon = new Button("◀");
-	Button btnNextMon = new Button("▶");
-	Label lblYearMon = new Label();
+    public CalendarEx(String title, MovieList movieList) {
+        super(title);
+        this.movieList = movieList; // MovieList 인스턴스를 전달받음
+        Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
 
-	Button[] btnArr = new Button[42];
+        pUp.setBackground(Color.yellow);
+        pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
+        pUp.add(btnPrevMon);
+        pUp.add(lblYearMon);
+        pUp.add(btnNextMon);
 
-	Calendar curMon = Calendar.getInstance();
-	private Calendar now;
-	private String year;
-	private String month;
-	private String day;
-	private String today;
+        pDate.setLayout(new GridLayout(6, 7));
 
-	CalendarEx(String title) {
-		super(title);
+        for (int i = 0; i < btnArr.length; i++) {
+            btnArr[i] = new Button("");
+            pDate.add(btnArr[i]);
+            btnArr[i].addActionListener(new BtnEventHandler());
+        }
 
-		Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
+        btnPrevMon.addActionListener(new BtnEventHandler());
+        btnNextMon.addActionListener(new BtnEventHandler());
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+                we.getWindow().setVisible(false);
+                we.getWindow().dispose();
+                System.exit(0);
+            }
+        });
 
-		pUp.setBackground(Color.yellow);
-		pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
-		pUp.add(btnPrevMon);
-		pUp.add(lblYearMon);
-		pUp.add(btnNextMon);
+        add(pUp, "North");
+        add(pDate, "Center");
+        setBounds(200, 200, 500, 300);
+        setDays(curMon);
+        setVisible(true);
+        setLocation((scr1.width - 500) / 2, (scr1.height - 300) / 2);
+    }
 
-		pDate.setLayout(new GridLayout(6, 7));
+    void setDays(Calendar date) {
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
 
-		for (int i = 0; i < btnArr.length; i++) {
-			btnArr[i] = new Button("");
-			pDate.add(btnArr[i]);
-			btnArr[i].addActionListener(new BtnEventHandler());
-		}
+        lblYearMon.setText(year + "년" + (month + 1) + "월");
 
-		btnPrevMon.addActionListener(new BtnEventHandler());
-		btnNextMon.addActionListener(new BtnEventHandler());
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				we.getWindow().setVisible(false);
-				we.getWindow().dispose();
-				System.exit(0);
-			}
-		});
+        Calendar sDay = Calendar.getInstance(); // 시작일
 
-		add(pUp, "North");
-		add(pDate, "Center");
-		setBounds(200, 200, 500, 300);
-		setDays(curMon);
-		setVisible(true);
-		setLocation((scr1.width - 500) / 2, (scr1.height - 300) / 2);
-	}// MyScheduler
+        sDay.set(year, month, 1);
+        sDay.add(Calendar.DATE, -sDay.get(Calendar.DAY_OF_WEEK) + 1);
 
-	void setDays(Calendar date) {
-		int year = date.get(Calendar.YEAR);
-		int month = date.get(Calendar.MONTH);
+        for (int i = 0; i < btnArr.length; i++, sDay.add(Calendar.DATE, 1)) {
+            int day = sDay.get(Calendar.DATE);
+            btnArr[i].setLabel(day + "");
+            
+            if (sDay.get(Calendar.MONTH) != month) {
+                btnArr[i].setBackground(Color.lightGray);
+            } else {
+                btnArr[i].setBackground(Color.white);
+            }
+        }
+        for (int i = 0; i < btnArr.length; i++) {
+            Calendar now = Calendar.getInstance();
+            if (i < now.get(Calendar.DAY_OF_MONTH) - 1) {
+                btnArr[i].setEnabled(false);
+            }
+        }
+        this.month = Integer.toString(month + 1);
+        this.year = Integer.toString(year);
+    }
 
-		lblYearMon.setText(year + "년" + (month + 1) + "월");
+    class BtnEventHandler implements ActionListener {
+        public void actionPerformed(ActionEvent ae) {
+            Button src = (Button) ae.getSource();
 
-		Calendar sDay = Calendar.getInstance(); // 시작일
+            for (int i = 0; i < btnArr.length; i++) {
+                if (src == btnArr[i]) {
+                    day = btnArr[i].getLabel();
+                    today = year + "-" + month + "-" + day;
 
-		sDay.set(year, month, 1);
-		sDay.add(Calendar.DATE, -sDay.get(Calendar.DAY_OF_WEEK) + 1);
+                    // MovieList 클래스의 getMovieName 메서드를 사용하여 movieName 가져오기
+                    String movieName = movieList.getMovieName();
+                    System.out.println(movieName);
 
-		for (int i = 0; i < btnArr.length; i++, sDay.add(Calendar.DATE, 1)) {
-			int day = sDay.get(Calendar.DATE);
-			btnArr[i].setLabel(day + "");
-			
-			if (sDay.get(Calendar.MONTH) != month) {
-				btnArr[i].setBackground(Color.lightGray);
-			} else {
-				btnArr[i].setBackground(Color.white);
-			}
-		}
-		for (int i = 0; i < btnArr.length; i++) {
-		Calendar now = Calendar.getInstance();
-			if (i < now.get(Calendar.DAY_OF_MONTH) -1) {
-				btnArr[i].setEnabled(false);
-			}
-		}
-		this.month = Integer.toString(month + 1);
-		this.year = Integer.toString(year);
-	}
+                    System.out.println(today);
+                    btnArr[i].setEnabled(false);
+                    setVisible(false);
+                    MovieTime movie = new MovieTime();
+                }
+            }
 
-	class BtnEventHandler implements ActionListener {
-		public void actionPerformed(ActionEvent ae) {
-			Button src = (Button) ae.getSource();
+            if (src == btnPrevMon) {
+                curMon.add(Calendar.MONTH, -1); // Calendar.MONDAY가 아닌 Calendar.MONTH로 수정
+            } else if (src == btnNextMon) {
+                curMon.add(Calendar.MONTH, 1);
+            }
+            setDays(curMon);
+            repaint();
+        }
+    }
+    
+    public String returnCalendar() {
+        return today;
+    }
 
-			for (int i = 0; i < btnArr.length; i++) {
-				if (src == btnArr[i]) {
-					day = btnArr[i].getLabel();
-
-					btnArr[i].setEnabled(false);
-					setVisible(false);
-					MovieTime movie = new MovieTime();
-				}
-			}
-
-			if (src == btnPrevMon) {
-				curMon.add(Calendar.MONDAY, -1);
-			} else if (src == btnNextMon) {
-				curMon.add(Calendar.MONTH, 1);
-			}
-			setDays(curMon);
-			repaint();
-		}
-	}
-	
-	public String returnCalendar() {
-		today = year + "-" + month + "-" + day;
-		return today;
-	}
-
-	public static void main(String[] args) {
-		CalendarEx mainWin = new CalendarEx("Scheduler");
-
-	}// main
-
+    public static void main(String[] args) {
+        // MovieList 인스턴스 생성
+        MovieList movieList = new MovieList();
+        // CalendarEx 인스턴스 생성 및 MovieList 인스턴스 전달
+        CalendarEx mainWin = new CalendarEx("Scheduler", movieList);
+    }
 }

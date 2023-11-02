@@ -17,12 +17,21 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+//import DAO.MovieDAO;
+//import VO.MovieVO;
+
 public class MovieList extends WindowAdapter implements ActionListener, ItemListener{
 	private Frame f;
 	private Checkbox selectMovie1, selectMovie2, selectMovie3;
 	private Panel Movienamelist;
 	private Label Title, movielist;
 	private Button Next, Befor;
+	private String movieName = "";
+	
+//	private MovieVO movie;
+//	
+//	private MovieDAO movieDao = MovieDAO.getInstance();
+//	MovieVO customer = new MovieVO();
 
 	public MovieList() {
 		Font TitleFont = new Font("고딕", Font.BOLD, 60);
@@ -97,15 +106,28 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 			MainFrame mainframe = new MainFrame();
 		}
 		if (e.getActionCommand().equals("다 음")) {
+//			movieDao.connect();
+//			movie = movieDao.getMovie(movieName);
+
 			f.setVisible(false);
 			CalendarEx calendarex = new CalendarEx("다 음");
 		}
 	}
 	
 	public void itemStateChanged(ItemEvent e) {
+		if(e.getItem().equals("30일"))
+			this.movieName = "30일";
+		else if(e.getItem().equals("천박사"))
+			this.movieName = "천박사";
+		else if(e.getItem().equals("용감한 시민"))
+			this.movieName = "용감한 시민";
 		if (e.getItem().equals("30일") || e.getItem().equals("천박사") || e.getItem().equals("용감한 시민")) {
 			f.add(Next);
 		}
+	}
+	
+	public String returnMovie() {
+		return movieName;
 	}
 	
 	public static void main(String[] args) {

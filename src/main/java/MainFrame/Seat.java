@@ -15,7 +15,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
 
+import DAO.MovieDAO;
 import DAO.SeatDAO;
+import DAO.TicketDAO;
+import VO.MovieVO;
+import VO.SeatVO;
+import VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
@@ -26,8 +31,16 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	
-	private SeatDAO seatDao = new SeatDAO.getInstance();
-
+	// VO
+	private TicketVO ticket;
+	private MovieVO movie;
+	private SeatVO seat;
+	
+	// DAO
+	private MovieDAO movieDao = MovieDAO.getInstance();
+	private SeatDAO seatDao = SeatDAO.getInstance();
+	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
+	
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
@@ -114,6 +127,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
+			seatDao.connect();
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 		

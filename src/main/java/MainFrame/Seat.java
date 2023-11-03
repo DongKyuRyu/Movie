@@ -28,8 +28,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
 	private String SeatNumber[][];
-	private int adultCount, teenagerCount, totalSelected = 0;
+	private int adultCount, teenagerCount, totalSelected = 0, finalI, finalJ, year, month, day;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
+	private char Seatchr;
 	
 	// VO
 	private TicketVO ticket;
@@ -85,7 +86,10 @@ public class Seat extends WindowAdapter implements ActionListener {
 				SeatPanel.add(Seat[i][j]);
 				int finalI = i;
 				int finalJ = j;
+				this.Seatchr = seatRow;
 				Seat[i][j].addActionListener(new ActionListener() {
+					private String realSeatIJ;
+
 					public void actionPerformed(ActionEvent e) {
 						if (totalSelected < adultCount + teenagerCount) {
 							Seat[finalI][finalJ].setEnabled(false);
@@ -93,8 +97,14 @@ public class Seat extends WindowAdapter implements ActionListener {
 							
 							selectSeats.push(Seat[finalI][finalJ]);
 							
+							String seatj = Integer.toString(finalJ);
+							
+							String SeatIJ = seatRow + seatj;
+							
+							System.out.println(SeatIJ);
+							
 							if (totalSelected == adultCount + teenagerCount) {
-								f.add(Next);
+								Next.setEnabled(true);
 							}
 						}
 					}
@@ -111,12 +121,20 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.setBounds(475, 625, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
+		Next.setEnabled(false);
 
+		f.add(Next);
 		f.add(Cancel);
 		f.add(Befor);
 		f.add(SeatPanel);
 		f.add(Screen);
 		f.setVisible(true);
+	}
+	
+	public String SeatIJ () {
+		String FinalJ = Integer.toString(finalJ);
+		String SeatIJ = Seatchr + FinalJ;
+		return SeatIJ;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -128,7 +146,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
-			Pay pay = new Pay(adultCount, teenagerCount);
+			Pay pay = new Pay(adultCount, teenagerCount, year, month, day);
 		}
 		
 		if (e.getActionCommand().equals("좌석 다시 선택")) {

@@ -27,13 +27,12 @@ public class CalendarEx extends Frame {
 
 	Calendar curMon = Calendar.getInstance();
 	private Calendar now;
-	private String year;
-	private String month;
-	private String day;
-	private String today;
+	private static String year;
+	private static String month;
+	private static String day;
+	private static String today;
 
-	CalendarEx(String title) {
-		super(title);
+	CalendarEx() {
 
 		Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -108,10 +107,12 @@ public class CalendarEx extends Frame {
 			for (int i = 0; i < btnArr.length; i++) {
 				if (src == btnArr[i]) {
 					day = btnArr[i].getLabel();
-
 					btnArr[i].setEnabled(false);
 					setVisible(false);
 					MovieTime movie = new MovieTime();
+
+					// 예약한 날짜를 설정
+					Dater(Integer.parseInt(CalendarEx.year), Integer.parseInt(CalendarEx.month), Integer.parseInt(day));
 				}
 			}
 
@@ -125,14 +126,15 @@ public class CalendarEx extends Frame {
 		}
 	}
 	
-	public String returnCalendar() {
-		today = year + "-" + month + "-" + day;
-		return today;
+	public static void Dater(int year, int month, int day) {
+	    // 연, 월, 일을 문자열로 설정
+	    CalendarEx.year = Integer.toString(year);
+	    CalendarEx.month = Integer.toString(month);
+	    CalendarEx.day = Integer.toString(day);
 	}
 
 	public static void main(String[] args) {
-		CalendarEx mainWin = new CalendarEx("cheduler");
-
+		CalendarEx mainWin = new CalendarEx();
 	}// main
 
 }

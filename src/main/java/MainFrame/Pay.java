@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
@@ -20,18 +21,26 @@ import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.text.DecimalFormat;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
 	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice;
 	private Choice coupon;
-	private Panel movieinfo, payinfo;
+	private Panel payinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
 	private double totalPrice;
+	private URL searchURL;
+	private ImageIcon imageicon;
+	private JButton movieinfo;
+	private String movieName;
 	
 	private String today;
 	
@@ -41,6 +50,10 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 //		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
 //	}
 
+	public String getMovieName() {
+		return movieName;
+	}
+	
 	public Pay(int adultCount, int teenagerCount) {
 //		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
@@ -85,11 +98,21 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		cash.setFont(new Font("돋움", Font.BOLD, 25));
 		cash.setBounds(410, 50, 370, 50);
 		cash.setBackground(Color.gray);
-
-		movieinfo = new Panel();
+		
+		searchURL = getClass().getResource("/img/30.jpg");
+		imageicon = new ImageIcon(searchURL);
+		Image image = imageicon.getImage();
+		Image scaledImage = image.getScaledInstance(370, 370, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		movieinfo= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
 		movieinfo.setBounds(20, 110, 370, 345);
-		movieinfo.setBackground(Color.lightGray);
+		movieinfo.setBackground(Color.pink);
+		movieinfo.setBorderPainted(false);
+		movieinfo.setFocusPainted(false);
+		movieinfo.setContentAreaFilled(false);
 
+		
+		
 		payinfo = new Panel();
 		payinfo.setLayout(null);
 		payinfo.setBounds(410, 110, 370, 345);

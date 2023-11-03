@@ -69,7 +69,7 @@ public class CalendarEx extends Frame {
 
         lblYearMon.setText(year + "년" + (month + 1) + "월");
 
-        Calendar sDay = Calendar.getInstance();
+        Calendar sDay = Calendar.getInstance(); // 시작일
 
         sDay.set(year, month, 1);
         sDay.add(Calendar.DATE, -sDay.get(Calendar.DAY_OF_WEEK) + 1);
@@ -77,14 +77,13 @@ public class CalendarEx extends Frame {
         for (int i = 0; i < btnArr.length; i++, sDay.add(Calendar.DATE, 1)) {
             int day = sDay.get(Calendar.DATE);
             btnArr[i].setLabel(day + "");
-
             if (sDay.get(Calendar.MONTH) != month) {
                 btnArr[i].setBackground(Color.lightGray);
             } else {
                 btnArr[i].setBackground(Color.white);
             }
         }
-
+      
         for (int i = 0; i < btnArr.length; i++) {
             Calendar now = Calendar.getInstance();
             if (i < now.get(Calendar.DAY_OF_MONTH) - 1) {
@@ -128,6 +127,32 @@ public class CalendarEx extends Frame {
 
     public static void main(String[] args) {
         MovieList movieList = new MovieList();
+        CalendarEx mainWin = new CalendarEx("Scheduler", movieList);
+    }
+}
+
+                    // MovieList 클래스의 getMovieName 메서드를 사용하여 movieName 가져오기
+                    String movieName = movieList.getMovieName();
+                    System.out.println(movieName);
+
+            if (src == btnPrevMon) {
+                curMon.add(Calendar.MONTH, -1); // Calendar.MONDAY가 아닌 Calendar.MONTH로 수정
+            } else if (src == btnNextMon) {
+                curMon.add(Calendar.MONTH, 1);
+            }
+            setDays(curMon);
+            repaint();
+        }
+    }
+    
+    public String returnCalendar() {
+        return today;
+    }
+
+    public static void main(String[] args) {
+        // MovieList 인스턴스 생성
+        MovieList movieList = new MovieList();
+        // CalendarEx 인스턴스 생성 및 MovieList 인스턴스 전달
         CalendarEx mainWin = new CalendarEx("Scheduler", movieList);
     }
 }

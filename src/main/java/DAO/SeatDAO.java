@@ -34,7 +34,7 @@ public class SeatDAO {
 		}
 	}
 
-	//예매 하기
+	// 예매 하기
 	public void setSeatRerserved(SeatVO seat) {
 		String seatNumber = seat.getSeatNumber();
 		String reservedDate = seat.getReservedDate();
@@ -50,20 +50,20 @@ public class SeatDAO {
 			pstmt.setString(4, time);
 			pstmt.setString(5, "y");
 			pstmt.executeUpdate();
-			//System.out.println("좌석 update");
+			// System.out.println("좌석 update");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			CloseUtil.close(pstmt, con);
 		}
 	}
-	
-	//예매 취소 -> delete - 그냥 삭제 해버린다.
+
+	// 예매 취소 -> delete - 그냥 삭제 해버린다.
 	public void setSeatCancel(TicketVO ticket) {
 		String seatNumber = ticket.getSeatNumber();
 		String reservedDate = ticket.getReservedDate();
 		String roomNumber = ticket.getRoomNumber();
-		String time = ticket.getTime();		
+		String time = ticket.getTime();
 		String sql = "delete from seat where seatnumber = ? and reserveddate = ? and roomnumber = ? and time = ? ";
 		try {
 			connect();
@@ -81,7 +81,7 @@ public class SeatDAO {
 		}
 	}
 
-	//예약된 좌석의 번호만 받아오기 select
+	// 예약된 좌석의 번호만 받아오기 select
 	public ArrayList<String> getSeatList(String ReservedDate, String roomNumber, String time) {
 		String sql = "select * from seat where reserveddate = ? and roomnumber = ? and time = ? and reserved = 'y'";
 		ArrayList<String> list = new ArrayList<>();
@@ -96,7 +96,7 @@ public class SeatDAO {
 				String seatNumber = rs.getString("seatnumber");
 				list.add(seatNumber);
 			}
-			//System.out.println("예약된 좌석 select");
+			// System.out.println("예약된 좌석 select");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

@@ -31,6 +31,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	
+	private String SeatIJ, SeatJ;
+	private char SeatRow;
+
 	// VO
 	private TicketVO ticket;
 	private MovieVO movie;
@@ -40,6 +43,14 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
+	
+	
+	//좌석 불러오기
+	public void SeatsIJ(char SeatRow, String SeatJ, String SeatIJ) {
+		this.SeatRow = SeatRow;
+		this.SeatJ = SeatJ;
+		this.SeatIJ = SeatIJ;
+	}
 
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
@@ -54,7 +65,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.setResizable(false);
 		f.setLocation((scr.width - 900) / 2, (scr.height - 700) / 2);
 		f.addWindowListener(this);
-		
+
 		Screen = new Label("SCREEN", Label.CENTER);
 		Screen.setBackground(Color.gray);
 		Screen.setBounds(100, 50, 700, 25);
@@ -65,17 +76,17 @@ public class Seat extends WindowAdapter implements ActionListener {
 		SeatPanel.setLocation(50, 150);
 		SeatPanel.setLayout(new GridLayout(5, 20, 15, 15));
 		SeatNumber = new String[5][20];
-		
+
 		Cancel = new Button("좌석 다시 선택");
-		Cancel.setBounds(400,  585,  100,  30);
+		Cancel.setBounds(400, 585, 100, 30);
 		Cancel.setBackground(new Color(188, 205, 227));
 		Cancel.addActionListener(this);
 
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 20; j++) {
 				char seatRow = (char) (i + 65);
-				String seatNumber = String.format("%c%d", seatRow, j+1);
-				
+				String seatNumber = String.format("%c%d", seatRow, j + 1);
+
 				SeatNumber[i][j] = seatNumber;
 				Seat[i][j] = new Button(SeatNumber[i][j]);
 				Seat[i][j].setBackground(Color.gray);
@@ -85,14 +96,17 @@ public class Seat extends WindowAdapter implements ActionListener {
 				SeatPanel.add(Seat[i][j]);
 				int finalI = i;
 				int finalJ = j;
+				SeatRow = seatRow;
 				Seat[i][j].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if (totalSelected < adultCount + teenagerCount) {
 							Seat[finalI][finalJ].setEnabled(false);
 							totalSelected++;
-							
+
 							selectSeats.push(Seat[finalI][finalJ]);
 							
+							SeatJ = Integer.toString(finalJ);
+
 							if (totalSelected == adultCount + teenagerCount) {
 								f.add(Next);
 							}
@@ -101,12 +115,12 @@ public class Seat extends WindowAdapter implements ActionListener {
 				});
 			}
 		}
-		
+
 		Befor = new Button("이 전");
 		Befor.setBounds(325, 625, 100, 30);
 		Befor.setBackground(new Color(188, 205, 227));
 		Befor.addActionListener(this);
-		
+
 		Next = new Button("다 음");
 		Next.setBounds(475, 625, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
@@ -119,25 +133,30 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.setVisible(true);
 	}
 	
+	public String Seatsij() {
+		SeatIJ = SeatRow + SeatJ;
+		System.out.println(SeatIJ);
+		return SeatIJ;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
 			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
-		
+
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
-		
+
 		if (e.getActionCommand().equals("좌석 다시 선택")) {
 			if (totalSelected > 0) {
-					totalSelected--;
-					
-					Button lastSelectedSeat = selectSeats.pop();
-					lastSelectedSeat.setEnabled(true);
+				totalSelected--;
+
+				Button lastSelectedSeat = selectSeats.pop();
+				lastSelectedSeat.setEnabled(true);
 				if (totalSelected < adultCount + teenagerCount) {
 					f.remove(Next);
 				}

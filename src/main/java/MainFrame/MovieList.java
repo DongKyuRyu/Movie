@@ -23,14 +23,6 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 	private Panel Movienamelist;
 	private Label Title, movielist;
 	private Button Next, Befor;
-<<<<<<< HEAD
-	private String movieName = "";  
-	
-//	private MovieVO movie;
-//	
-//	private MovieDAO movieDao = MovieDAO.getInstance();
-//	MovieVO customer = new MovieVO();
-=======
 	private String movieName;
 
 	public void setMovieName(String movieName) {
@@ -40,7 +32,6 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 	public String getMovieName() {
 		return movieName;
 	}
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
 	public MovieList() {
 		Font TitleFont = new Font("고딕", Font.BOLD, 60);
@@ -116,7 +107,7 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 		}
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			CalendarEx calendarEx = new CalendarEx("다 음", this);
+			CalendarEx calendarEx = new CalendarEx("다 음");
 		}
 	}
 

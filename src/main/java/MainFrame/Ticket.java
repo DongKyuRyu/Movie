@@ -18,8 +18,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import VO.CustomerVO;
-import VO.MovieVO;
+import src.main.java.VO.CustomerVO;
+import src.main.java.VO.MovieVO;
 
 public class Ticket extends WindowAdapter implements ActionListener, ItemListener {
 	private Frame fa;

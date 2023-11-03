@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import DAO.CustomerDAO;
-import VO.CustomerVO;
+import src.main.java.DAO.CustomerDAO;
+import src.main.java.VO.CustomerVO;
 
 public class IdSearch extends WindowAdapter implements ActionListener {
 	private Frame f, IDCopyCheck;

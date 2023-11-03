@@ -30,22 +30,20 @@ import javax.swing.JButton;
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
-	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice;
+	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay;
 	private Choice coupon;
 	private Panel payinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
+	private int Year, Month, Day, year, month, day;
+	private String realYear, realMonth, realDay, today;
 	private double totalPrice;
-<<<<<<< HEAD
-	  
-=======
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieinfo;
 	private String movieName;
 	
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 	public void setposter(String movieName) {
 		this.movieName = movieName;
@@ -56,9 +54,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	}
 	
 	public Pay(int adultCount, int teenagerCount) {
-		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
-
+		
 		int totalPrice1 = Integer.parseInt(totalPrice);
 		this.totalPrice = totalPrice1;
 		String totalsum = decimalFormat.format(totalPrice1);
@@ -200,7 +197,14 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		realPrice.setFont(new Font("돋움", Font.BOLD, 20));
 		realPrice.setText("최종금액 : " + 0 + "원");
 		realPrice.setForeground(Color.red);
+		
+		ToDay = new Label();
+		ToDay.setBounds(10, 50, 300, 50);
+		ToDay.setBackground(Color.gray);
+		ToDay.setText(realYear + "-" + realMonth + "-" + realDay);
 
+		movieinfo.add(ToDay);
+		
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -217,9 +221,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		faPay.add(movie);
 		faPay.setVisible(true);
 	}
-
+	
 	public static void main(String[] args) {
-		Pay pa = new Pay(5, 2);
+		Pay test = new Pay(5,2, 2023, 11, 02);
 	}
 
 	public void actionPerformed(ActionEvent e) {

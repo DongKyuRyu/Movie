@@ -18,7 +18,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import DAO.MovieDAO;
+import src.main.java.DAO.MovieDAO;
 
 public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	private Frame f;

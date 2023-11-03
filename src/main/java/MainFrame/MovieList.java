@@ -26,7 +26,7 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 	private Panel Movienamelist;
 	private Label Title, movielist;
 	private Button Next, Befor;
-	private String movieName = "";
+	private String movieName = "";  
 	
 //	private MovieVO movie;
 //	

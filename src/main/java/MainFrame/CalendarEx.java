@@ -25,7 +25,7 @@ public class CalendarEx extends Frame {
 
 	Button[] btnArr = new Button[42];
 
-	Calendar curMon = Calendar.getInstance();
+	Calendar curMon = Calendar.getInstance();  
 	private Calendar now;
 	private String year;
 	private String month;

@@ -24,7 +24,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	private Button[] seletedButton;
 	private Label adult, Teenager, price, adultpeople, teenagerpeople, totalpeople;
 
-	public NumberOfPeople() {
+	public NumberOfPeople() {  
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame("인원 선택");

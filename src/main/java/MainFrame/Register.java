@@ -30,7 +30,7 @@ public class Register extends WindowAdapter implements ActionListener {
 	private String password = "";
 	private String newName = "";
 	private String newEmail = "";
-
+  
 	public Register() {
 		Font RegisterFont = new Font("고딕", Font.BOLD, 50);
 		Font RegisterIdPwdFont = new Font("고딕", Font.BOLD, 25);

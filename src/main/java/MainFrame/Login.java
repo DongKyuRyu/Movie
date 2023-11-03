@@ -26,7 +26,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private String pid = "";
 	private String password = "";
 	
-	private Ticket ticket;
+	private Ticket ticket;  
 	
 	
 

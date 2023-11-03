@@ -35,7 +35,7 @@ public class Ticket extends WindowAdapter implements ActionListener, ItemListene
 	public Ticket() {
 		Font LabelFont = new Font("고딕", Font.BOLD, 50);
 		Font movieNameFont = new Font("고딕", Font.BOLD, 30);
-
+  
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		fa = new Frame("Ticketing");

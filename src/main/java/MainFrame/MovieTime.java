@@ -22,7 +22,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	private Checkbox selectMovie1, selectMovie2, selectMovie3;
 	private Panel MovieTimelist;
 	private Label Title, movieTime;
-	private Button Next, Befor;
+	private Button Next, Befor;  
 	
 	public MovieTime() {
 	Font TitleFont = new Font("고딕", Font.BOLD, 60);

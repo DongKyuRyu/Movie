@@ -32,7 +32,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
 	private double totalPrice;
-	
+	  
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 	public Pay(int adultCount, int teenagerCount) {

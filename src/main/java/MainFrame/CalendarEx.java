@@ -29,10 +29,19 @@ public class CalendarEx extends Frame {
 	private String today;
 	private MovieList movieList;
 
-	public CalendarEx(String title, MovieList movieList) {
-		super(title);
-		this.movieList = movieList; // MovieList 인스턴스를 전달받음
-		Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
+    public void setChoiceDay(String today) {
+        this.today = today;
+    }
+
+    public String getChoiceDay() {
+        return today;
+    }
+
+    public CalendarEx(String title, MovieList movieList) {
+        super(title);
+        this.movieList = movieList;
+        
+        Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
 
 		pUp.setBackground(Color.yellow);
 		pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -101,7 +110,6 @@ public class CalendarEx extends Frame {
 	class BtnEventHandler implements ActionListener {
 		public void actionPerformed(ActionEvent ae) {
 			Button src = (Button) ae.getSource();
-
 			for (int i = 0; i < btnArr.length; i++) {
 				if (src == btnArr[i]) {
 					day = btnArr[i].getLabel();
@@ -114,7 +122,7 @@ public class CalendarEx extends Frame {
 					
 					btnArr[i].setEnabled(false);
 					setVisible(false);
-					MovieTime movie = new MovieTime();
+					MovieTime movie = new MovieTime(CalendarEx.this);
 				}
 			}
 

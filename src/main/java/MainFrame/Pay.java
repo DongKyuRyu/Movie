@@ -42,17 +42,20 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private JButton movieinfo;
 	private String movieName;
 	
+	private String today;
+	
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
-	public void setposter(String movieName) {
-		this.movieName = movieName;
-	}
+	
+//	public Pay(String year, String month, String day) {
+//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
+//	}
 
 	public String getMovieName() {
 		return movieName;
 	}
 	
 	public Pay(int adultCount, int teenagerCount) {
-		String calendar = new CalendarEx("Scheduler").returnCalendar();
+//		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
 
 		int totalPrice1 = Integer.parseInt(totalPrice);

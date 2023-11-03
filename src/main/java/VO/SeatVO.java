@@ -15,11 +15,10 @@ public class SeatVO {
 
 	@Override
 	public String toString() {
-		String text =
-				seatNumber +" " + reservedDate + " " + roomNumber + " " + time + " " + reserved;
+		String text = seatNumber + " " + reservedDate + " " + roomNumber + " " + time + " " + reserved;
 		return text;
 	}
-	
+
 	public SeatVO(String seatNumber, String reservedDate, String roomNumber, String time, String reserved) {
 		super();
 		this.seatNumber = seatNumber;
@@ -28,7 +27,7 @@ public class SeatVO {
 		this.time = time;
 		this.reserved = reserved;
 	}
-	
+
 	public String getSeatNumber() {
 		return seatNumber;
 	}

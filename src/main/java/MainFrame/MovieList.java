@@ -110,7 +110,7 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 //			movie = movieDao.getMovie(movieName);
 
 			f.setVisible(false);
-			CalendarEx calendarex = new CalendarEx("다 음");
+			CalendarEx calendarex = new CalendarEx();
 		}
 	}
 	

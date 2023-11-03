@@ -33,10 +33,16 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private int cardmaxLength = 4, phonemaxLength = 3;
 	private double totalPrice;
 	
+	private String today;
+	
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
+	
+//	public Pay(String year, String month, String day) {
+//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
+//	}
 
 	public Pay(int adultCount, int teenagerCount) {
-		String calendar = new CalendarEx("Scheduler").returnCalendar();
+//		String calendar = new CalendarEx("Scheduler").returnCalendar();
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
 
 		int totalPrice1 = Integer.parseInt(totalPrice);

@@ -32,8 +32,7 @@ public class CalendarEx extends Frame {
 	private String day;
 	private String today;
 
-	CalendarEx(String title) {
-		super(title);
+	public CalendarEx() {
 
 		Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -125,13 +124,13 @@ public class CalendarEx extends Frame {
 		}
 	}
 	
-	public String returnCalendar() {
+	public String returnCalendar(String year, String month, String day) {
 		today = year + "-" + month + "-" + day;
 		return today;
 	}
 
 	public static void main(String[] args) {
-		CalendarEx mainWin = new CalendarEx("Scheduler");
+		CalendarEx mainWin = new CalendarEx();
 
 	}// main
 

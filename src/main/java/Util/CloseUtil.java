@@ -9,7 +9,7 @@ public class CloseUtil {
    public static Connection getConnection() {
       try {
          Class.forName("oracle.jdbc.driver.OracleDriver");
-         return DriverManager.getConnection("jdbc:oracle:thin:@192.168.56.1/xe", "c##greenhouse", "greenhouse"); // 동규: 192.168.56.1:1521 // 그 외: localhost
+         return DriverManager.getConnection("jdbc:oracle:thin:@localhost/xe", "c##greenhouse", "greenhouse"); // 동규: 192.168.56.1:1521 // 그 외: localhost
       } catch (Exception e) {
          e.printStackTrace();
       }

@@ -100,7 +100,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-			CalendarEx calendarex = new CalendarEx("이 전");
+			CalendarEx calendarex = new CalendarEx("이 전", this);
 		}
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);

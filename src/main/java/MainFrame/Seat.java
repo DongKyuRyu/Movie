@@ -122,6 +122,7 @@ public class Seat extends WindowAdapter implements ActionListener {
    }
    
 
+<<<<<<< HEAD
    public void actionPerformed(ActionEvent e) {
       if (e.getActionCommand().equals("이 전")) {
          f.setVisible(false);
@@ -146,6 +147,15 @@ public class Seat extends WindowAdapter implements ActionListener {
          }
       }
    }
+=======
+		f.add(Cancel);
+		f.add(Befor);
+		f.add(SeatPanel);
+		f.add(Screen);
+		f.setVisible(true);
+	}
+	
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
    public void windowClosing(WindowEvent e) {
       System.exit(0);

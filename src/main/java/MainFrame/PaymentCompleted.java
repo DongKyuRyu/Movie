@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Toolkit;
@@ -12,14 +13,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
+import DAO.MovieDAO;
 
 public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Button b1, b2, b3, b4;
-	private Panel mainposter, movieposter;
+	private Panel mainposter;
 	private Label MovieName, Date, MovieRoom, Seat, Discount, Pay, TotalPay, MovieName2, Date2, MovieRoom2, Seat2, Discount2, Pay2, TotalPay2;
 	private Button clear;
-
+	private URL searchURL;
+	private ImageIcon imageicon;
+	private JButton  movieposter;
+	
+	private MovieDAO movieDao = MovieDAO.getInstance();
+	
 	public PaymentCompleted() {
 		Font Movieposter = new Font("고딕", Font.BOLD, 20);
 		Font Movieposter1 = new Font("고딕", Font.BOLD, 17);
@@ -56,12 +68,25 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		mainposter.setBounds(200, 80, 400,650);
 		mainposter.setBackground(Color.lightGray);
 		
+		
 		// 영화 포스터 자리
-		movieposter = new Panel();
+		movieDao.connect();
+		String movieName = movieDao.SearchMovieposter("30일");
+//		System.out.println("movieName");
+		searchURL = getClass().getResource(movieName);
+		imageicon = new ImageIcon(searchURL);
+		movieposter = new JButton(imageicon);
+		Image image = imageicon.getImage();
+		Image scaledImage = image.getScaledInstance(350, 350, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		movieposter= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
 		movieposter.setBounds(250, 105, 300,350);
 		movieposter.setBackground(Color.PINK);
+		movieposter.setBorderPainted(false);
+		movieposter.setFocusPainted(false);
+		movieposter.setContentAreaFilled(false);
 		
-		MovieName2 = new Label("영화 제목");
+		MovieName2 = new Label("30일");
 		MovieName2.setBounds(335, 470, 105,25);
 		MovieName2.setBackground(Color.DARK_GRAY);
 		MovieName2.setFont(Movieposter);
@@ -161,7 +186,14 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		f.add(b4);
 		f.setVisible(true);
 	}
-
+//	public MovieDAO SearchMovieposter(String name) {
+//		movieDao.connect();
+//		MovieVO mo = movieDao.SearchMovieposter(name);
+//		if(mo.equals(mo)) {
+//			return poster;
+//		}
+//	}
+	
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
 	}
@@ -170,6 +202,8 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		PaymentCompleted pay = new PaymentCompleted();
 	}
 
+	
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("확인")) {

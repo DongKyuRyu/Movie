@@ -1,18 +1,23 @@
 package DAO;
 
+import java.net.URL;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 import Util.CloseUtil;
 import Util.ConnUtil;
+import VO.CustomerVO;
 import VO.MovieVO;
 
 public class MovieDAO {
 	private static MovieDAO instance = new MovieDAO();
-
+	
 	private MovieDAO() {
 	}
 
@@ -81,6 +86,30 @@ public class MovieDAO {
 		} finally {
 			CloseUtil.close(pstmt, con);
 		}
+		return null;
+	}
+
+	public String SearchMovieposter(String name) {
+		String sql = "SELECT imgsrc FROM MOVIE WHERE MovieName = ? ";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+
+			String poster;
+			if (rs.next()) {
+				poster = rs.getString("imgSrc");
+				return poster;
+				
+			}
+		} catch (Exception e) { //try 블록에서 발생한 예외를 처리하기 위한 부분, 
+			//Exception은 모든 예외의 최상위 클래스이기 때문에 모든 종류의 예외를 처리가능
+			
+			e.printStackTrace();
+		} finally {//try 블록 수행 중 예외가 발생하든 안 하든 무조건 실행되는 블록
+			CloseUtil.close(pstmt, con);
+			//CloseUtil 클래스의 close 메서드를 호출하여 데이터베이스 관련 자원을 해제
+		}//이렇게 메서드를 통해 자원을 해제하는 이유는 코드 중복을 방지하고 가독성을 높이기 위함
 		return null;
 	}
 }

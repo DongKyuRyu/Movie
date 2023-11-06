@@ -27,10 +27,11 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
-	private String SeatNumber[][];
+	private String SeatNumber[][], SeatsNumber, TestSeatsNumber;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
-	
+	private NumberOfPeople numberofpeople;
+
 	private String SeatIJ, SeatJ;
 	private char SeatRow;
 
@@ -43,18 +44,19 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
-	
-	
-	//좌석 불러오기
-	public void SeatsIJ(char SeatRow, String SeatJ, String SeatIJ) {
-		this.SeatRow = SeatRow;
-		this.SeatJ = SeatJ;
-		this.SeatIJ = SeatIJ;
+
+	public void setSeatsNumber(String SeatsNumber) {
+		this.SeatsNumber = SeatsNumber;
 	}
 
-	public Seat(int adultCount, int teenagerCount) {
+	public String getSeatsNumber() {
+		return SeatsNumber;
+	}
+
+	public Seat(int adultCount, int teenagerCount, NumberOfPeople numberofpeople) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
+		this.numberofpeople = numberofpeople;
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -104,10 +106,23 @@ public class Seat extends WindowAdapter implements ActionListener {
 							totalSelected++;
 
 							selectSeats.push(Seat[finalI][finalJ]);
+
+							if (totalSelected == 1) {
+								TestSeatsNumber = seatNumber;	
+							} else {
+								TestSeatsNumber += ", " + seatNumber;
+							}
 							
-							SeatJ = Integer.toString(finalJ);
+							setSeatsNumber(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
+								System.out.println(TestSeatsNumber);
+								System.out.println(numberofpeople.getHumanCount());
+								
+								
+								
+								
+								
 								f.add(Next);
 							}
 						}
@@ -131,12 +146,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 		f.add(SeatPanel);
 		f.add(Screen);
 		f.setVisible(true);
-	}
-	
-	public String Seatsij() {
-		SeatIJ = SeatRow + SeatJ;
-		System.out.println(SeatIJ);
-		return SeatIJ;
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -169,6 +178,5 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		Seat seat = new Seat(1, 1);
 	}
 }

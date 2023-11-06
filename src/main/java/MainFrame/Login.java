@@ -25,10 +25,6 @@ public class Login extends WindowAdapter implements ActionListener {
 	private CustomerVO customer = new CustomerVO();
 	private String pid = "";
 	private String password = "";
-	
-	private Ticket ticket;
-	
-	
 
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);

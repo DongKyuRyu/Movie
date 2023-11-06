@@ -32,14 +32,14 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private Button pay;
 	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice;
 	private Choice coupon;
-	private Panel payinfo;
+	private Panel payinfo, movieinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
 	private double totalPrice;
 	private URL searchURL;
 	private ImageIcon imageicon;
-	private JButton movieinfo;
+	private JButton movieporster;
 	private String movieName;
 	
 	private String today;
@@ -102,16 +102,19 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		searchURL = getClass().getResource("/img/30.jpg");
 		imageicon = new ImageIcon(searchURL);
 		Image image = imageicon.getImage();
-		Image scaledImage = image.getScaledInstance(370, 370, Image.SCALE_SMOOTH);
+		Image scaledImage = image.getScaledInstance(150, 200, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-		movieinfo= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
-		movieinfo.setBounds(20, 110, 370, 345);
-		movieinfo.setBackground(Color.pink);
-		movieinfo.setBorderPainted(false);
-		movieinfo.setFocusPainted(false);
-		movieinfo.setContentAreaFilled(false);
+		movieporster= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
+		movieporster.setBounds(10, 10, 150, 200);
+		movieporster.setBackground(Color.red);
+		movieporster.setBorderPainted(false);
+		movieporster.setFocusPainted(false);
+		movieporster.setContentAreaFilled(false);
 
-		
+		movieinfo = new Panel();
+		movieinfo.setBounds(20, 110, 370, 345);
+		movieinfo.setLayout(null);
+		movieinfo.setBackground(Color.pink);
 		
 		payinfo = new Panel();
 		payinfo.setLayout(null);
@@ -208,10 +211,12 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		payinfo.add(payplan);
 		payinfo.add(coupon);
 		payinfo.add(disCount);
+		
+		movieinfo.add(movieporster);
 
+		faPay.add(movieinfo);
 		faPay.add(payinfo);
 		faPay.add(cash);
-		faPay.add(movieinfo);
 		faPay.add(pay);
 		faPay.add(movie);
 		faPay.setVisible(true);

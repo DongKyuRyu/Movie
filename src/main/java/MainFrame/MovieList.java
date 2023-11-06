@@ -1,4 +1,4 @@
-package MainFrame;
+package src.main.java.MainFrame;
 
 import java.awt.*;
 import java.awt.event.*;

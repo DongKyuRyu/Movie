@@ -162,7 +162,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 		    
 		    System.out.println(HumanCount);
 		    
-			Seat seat = new Seat(adultCount, teenagerCount);
+		    Seat seat = new Seat(adultCount, teenagerCount, this);
 			
 		}
 	}

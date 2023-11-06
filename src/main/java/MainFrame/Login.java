@@ -16,8 +16,8 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import src.main.java.DAO.CustomerDAO;
-import src.main.java.VO.CustomerVO;
+import DAO.CustomerDAO;
+import VO.CustomerVO;
 
 public class Login extends WindowAdapter implements ActionListener {
 	private Frame f;

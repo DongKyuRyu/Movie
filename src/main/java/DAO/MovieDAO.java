@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import src.main.java.Util.CloseUtil;
-import src.main.java.Util.ConnUtil;
-import src.main.java.VO.MovieVO;
+import Util.CloseUtil;
+import Util.ConnUtil;
+import VO.MovieVO;
 
 public class MovieDAO {
 	private static MovieDAO instance = new MovieDAO();

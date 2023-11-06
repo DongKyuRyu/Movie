@@ -13,14 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Stack;
 
-import oracle.jdbc.driver.ShardingKeyInfo.Stack;
-import src.main.java.DAO.MovieDAO;
-import src.main.java.DAO.SeatDAO;
-import src.main.java.DAO.TicketDAO;
-import src.main.java.VO.MovieVO;
-import src.main.java.VO.SeatVO;
-import src.main.java.VO.TicketVO;
+import DAO.MovieDAO;
+import DAO.SeatDAO;
+import DAO.TicketDAO;
+import VO.MovieVO;
+import VO.SeatVO;
+import VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
@@ -119,12 +119,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 							if (totalSelected == adultCount + teenagerCount) {
 								System.out.println(TestSeatsNumber);
 								System.out.println(numberofpeople.getHumanCount());
-								
-								
-								
-								
-								
-								f.add(Next);
+								Next.setEnabled(true);
 							}
 						}
 					}
@@ -160,7 +155,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
-			Pay pay = new Pay(adultCount, teenagerCount, year, month, day);
+			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 
 		if (e.getActionCommand().equals("좌석 다시 선택")) {
@@ -170,7 +165,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 				Button lastSelectedSeat = selectSeats.pop();
 				lastSelectedSeat.setEnabled(true);
 				if (totalSelected < adultCount + teenagerCount) {
-					f.remove(Next);
+					Next.setEnabled(false);
 				}
 			}
 		}

@@ -57,6 +57,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 		Next.setBounds(375, 450, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
+		Next.setEnabled(false);
 		
 		Befor = new Button("이 전");
 		Befor.setBounds(225, 450, 100, 30);
@@ -114,7 +115,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 						Seat[finalI][finalJ].enable(false);
 						seletedButton[finalI] = Seat[finalI][finalJ];
 						if (Seat[finalI][finalJ].equals(Seat[0][finalJ]) || Seat[finalI][finalJ].equals(Seat[1][finalJ])) {
-							f.add(Next);
+							Next.setEnabled(true);
 						}
 						
 						if (Seat[finalI][finalJ].equals(Seat[0][finalJ])) {
@@ -136,6 +137,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 			}
 		}
 
+		f.add(Next);
 		f.add(totalpeople);
 		f.add(teenagerpeople);
 		f.add(adultpeople);

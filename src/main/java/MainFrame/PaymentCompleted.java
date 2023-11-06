@@ -71,20 +71,20 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		
 		
 		// 영화 포스터 자리
-		movieDao.connect();
-		String movieName = movieDao.SearchMovieposter("30");
-		searchURL = getClass().getResource(movieName);
-		imageicon = new ImageIcon(searchURL);
-		movieposter = new JButton(imageicon);
-		Image image = imageicon.getImage();
-		Image scaledImage = image.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
-		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-		movieposter= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
+//		movieDao.connect();
+//		String movieName = movieDao.SearchMovieposter("30");
+//		searchURL = getClass().getResource(movieName);
+//		imageicon = new ImageIcon(searchURL);
+//		movieposter = new JButton(imageicon);
+//		Image image = imageicon.getImage();
+//		Image scaledImage = image.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
+//		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		movieposter= new JButton();//크기 바꿀때 imageicon-->scaledIcon 으로 변경
 		movieposter.setBounds(50, 50, 300,350);
 		movieposter.setBackground(Color.PINK);
 		movieposter.setBorderPainted(false);
 		movieposter.setFocusPainted(false);
-		movieposter.setContentAreaFilled(false);
+//		movieposter.setContentAreaFilled(false);
 		
 		MovieName = new Label("영화 제목 :");
 		MovieName.setBounds(50, 420, 105,25);

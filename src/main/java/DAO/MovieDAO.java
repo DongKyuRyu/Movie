@@ -1,19 +1,14 @@
 package DAO;
 
-import java.net.URL;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
-
-import Util.CloseUtil;
-import Util.ConnUtil;
-import VO.CustomerVO;
-import VO.MovieVO;
+import src.main.java.Util.CloseUtil;
+import src.main.java.Util.ConnUtil;
+import src.main.java.VO.MovieVO;
 
 public class MovieDAO {
 	private static MovieDAO instance = new MovieDAO();

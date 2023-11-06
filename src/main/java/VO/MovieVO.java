@@ -1,7 +1,5 @@
 package VO;
 
-import java.awt.Image;
-
 public class MovieVO {
 	private String movieName;
 	private String startDate;

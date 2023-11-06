@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Util.CloseUtil;
-import Util.ConnUtil;
-import VO.SeatVO;
-import VO.TicketVO;
+import src.main.java.Util.CloseUtil;
+import src.main.java.Util.ConnUtil;
+import src.main.java.VO.SeatVO;
+import src.main.java.VO.TicketVO;
 
 public class SeatDAO {
 	private static SeatDAO instance = new SeatDAO();

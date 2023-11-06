@@ -129,8 +129,4 @@ public class CalendarEx extends Frame {
         MovieList movieList = new MovieList();
         CalendarEx mainWin = new CalendarEx("Scheduler", movieList);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'YunGyeom' of https://github.com/DongKyuRyu/Movie.git

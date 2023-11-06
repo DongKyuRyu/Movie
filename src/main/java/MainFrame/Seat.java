@@ -15,12 +15,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Stack;
 
-import DAO.MovieDAO;
-import DAO.SeatDAO;
-import DAO.TicketDAO;
-import VO.MovieVO;
-import VO.SeatVO;
-import VO.TicketVO;
+import src.main.java.DAO.MovieDAO;
+import src.main.java.DAO.SeatDAO;
+import src.main.java.DAO.TicketDAO;
+import src.main.java.VO.MovieVO;
+import src.main.java.VO.SeatVO;
+import src.main.java.VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
@@ -100,6 +100,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 				int finalJ = j;
 				SeatRow = seatRow;
 				Seat[i][j].addActionListener(new ActionListener() {
+					private String realSeatIJ;
+
 					public void actionPerformed(ActionEvent e) {
 						if (totalSelected < adultCount + teenagerCount) {
 							Seat[finalI][finalJ].setEnabled(false);
@@ -112,7 +114,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 							} else {
 								TestSeatsNumber += ", " + seatNumber;
 							}
-							
 							setSeatsNumber(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
@@ -140,7 +141,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.setBounds(475, 625, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
+		Next.setEnabled(false);
 
+		f.add(Next);
 		f.add(Cancel);
 		f.add(Befor);
 		f.add(SeatPanel);
@@ -157,7 +160,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
-			Pay pay = new Pay(adultCount, teenagerCount);
+			Pay pay = new Pay(adultCount, teenagerCount, year, month, day);
 		}
 
 		if (e.getActionCommand().equals("좌석 다시 선택")) {

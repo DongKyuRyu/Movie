@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import DAO.CustomerDAO;
-import VO.CustomerVO;
+import src.main.java.DAO.CustomerDAO;
+import src.main.java.VO.CustomerVO;
 
 public class IdSearch extends WindowAdapter implements ActionListener {
 	private Frame f, IDCopyCheck;
@@ -27,7 +27,7 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	CustomerVO customer = new CustomerVO();
 	private String name = "";
-	private String email = "";
+	private String email = "";    
 
 	public IdSearch() {
 		Font IdSearchFont = new Font("고딕", Font.BOLD, 50);

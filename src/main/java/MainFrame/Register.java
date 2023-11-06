@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import DAO.CustomerDAO;
-import VO.CustomerVO;
+import src.main.java.DAO.CustomerDAO;
+import src.main.java.VO.CustomerVO;
 
 public class Register extends WindowAdapter implements ActionListener {
 	private Frame Register, clearf;
@@ -30,7 +30,7 @@ public class Register extends WindowAdapter implements ActionListener {
 	private String password = "";
 	private String newName = "";
 	private String newEmail = "";
-
+  
 	public Register() {
 		Font RegisterFont = new Font("고딕", Font.BOLD, 50);
 		Font RegisterIdPwdFont = new Font("고딕", Font.BOLD, 25);

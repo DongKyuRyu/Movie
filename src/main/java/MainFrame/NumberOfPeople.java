@@ -34,6 +34,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 
 	public NumberOfPeople(MovieTime movieTime) {
 		this.movieTime = movieTime;
+    
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame("인원 선택");

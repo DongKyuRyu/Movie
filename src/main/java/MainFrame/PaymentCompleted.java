@@ -18,7 +18,7 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-import DAO.MovieDAO;
+import src.main.java.DAO.MovieDAO;
 
 public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	private Frame f;
@@ -36,7 +36,7 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		Font Movieposter = new Font("고딕", Font.BOLD, 20);
 		Font Movieposter1 = new Font("고딕", Font.BOLD, 17);
 		Font TotalPayFont = new Font("고딕", Font.BOLD, 27);
-		
+		  
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame();

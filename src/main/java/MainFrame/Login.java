@@ -13,20 +13,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import DAO.CustomerDAO;
-import VO.CustomerVO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+import src.main.java.DAO.CustomerDAO;
+import src.main.java.VO.CustomerVO;
 
 public class Login extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Button login, Register, PwdSearch, IdSearch;
 	TextField id, pwd;
 	Label Lab_1;
+	private JLabel img1;
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	private CustomerVO customer = new CustomerVO();
 	private String pid = "";
 	private String password = "";
 
 	public Login() {
+		ImageIcon img1 = new ImageIcon("../img/Logo1.png");
+		JLabel Logo1 = new JLabel(img1);
+		Logo1.setBounds(0, 0, 900, 700);
+		
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
 		Font IdPwdFont = new Font("고딕", Font.BOLD, 40);
@@ -108,6 +116,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setFont(trueandfalseFont);
 		pwd.setEchoChar('*');
 
+		f.add(Logo1);
 		f.add(Login);
 		f.add(lid);
 		f.add(id);

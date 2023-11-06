@@ -18,8 +18,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import VO.CustomerVO;
-import VO.MovieVO;
+import src.main.java.VO.CustomerVO;
+import src.main.java.VO.MovieVO;
 
 public class Ticket extends WindowAdapter implements ActionListener, ItemListener {
 	private Frame fa;
@@ -35,7 +35,7 @@ public class Ticket extends WindowAdapter implements ActionListener, ItemListene
 	public Ticket() {
 		Font LabelFont = new Font("고딕", Font.BOLD, 50);
 		Font movieNameFont = new Font("고딕", Font.BOLD, 30);
-
+  
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		fa = new Frame("Ticketing");

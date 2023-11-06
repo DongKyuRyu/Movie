@@ -13,8 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Stack;
 
+import oracle.jdbc.driver.ShardingKeyInfo.Stack;
 import src.main.java.DAO.MovieDAO;
 import src.main.java.DAO.SeatDAO;
 import src.main.java.DAO.TicketDAO;

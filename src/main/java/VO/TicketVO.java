@@ -1,7 +1,5 @@
 package VO;
 
-import java.sql.Timestamp;
-
 public class TicketVO {
 	private String name; // 고객 이름 -ticketing
 	private String id; // 고객 아이디 -ticketing

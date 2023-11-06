@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import Util.CloseUtil;
-import Util.ConnUtil;
-import VO.CustomerVO;
+import src.main.java.Util.CloseUtil;
+import src.main.java.Util.ConnUtil;
+import src.main.java.VO.CustomerVO;
 
 //singleton 으로 구현
 public class CustomerDAO {

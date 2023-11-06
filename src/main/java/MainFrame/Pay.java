@@ -27,6 +27,8 @@ import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import DAO.MovieDAO;
+
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
    private Frame faPay;
    private Button pay;
@@ -42,6 +44,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
    private JButton movieinfo;
    private String movieName;
    
+   private MovieDAO movieDao = MovieDAO.getInstance();
+   
    DecimalFormat decimalFormat = new DecimalFormat("###,###");
    public void setposter(String movieName) {
       this.movieName = movieName;
@@ -52,7 +56,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
    }
    
    public Pay(int adultCount, int teenagerCount) {
-      String calendar = new CalendarEx("Scheduler").returnCalendar();
+//      String calendar = new CalendarEx("Scheduler").returnCalendar();
       String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
 
       int totalPrice1 = Integer.parseInt(totalPrice);
@@ -96,7 +100,10 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
       cash.setBounds(410, 50, 370, 50);
       cash.setBackground(Color.gray);
       
-      searchURL = getClass().getResource("/img/30.jpg");
+      
+//      searchURL = getClass().getResource("/img/30.jpg");
+      movieDao.connect();
+      searchURL = getClass().getResource(movieDao.SearchMovieposter(getMovieName()));
       imageicon = new ImageIcon(searchURL);
       Image image = imageicon.getImage();
       Image scaledImage = image.getScaledInstance(370, 370, Image.SCALE_SMOOTH);

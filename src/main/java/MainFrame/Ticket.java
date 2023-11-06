@@ -18,8 +18,8 @@ import java.awt.event.ItemListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import src.main.java.VO.CustomerVO;
-import src.main.java.VO.MovieVO;
+import VO.CustomerVO;
+import VO.MovieVO;
 
 public class Ticket extends WindowAdapter implements ActionListener, ItemListener {
 	private Frame fa;
@@ -135,7 +135,7 @@ public class Ticket extends WindowAdapter implements ActionListener, ItemListene
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("다음")) {
 			fa.setVisible(false);
-			Seat seat = new Seat(0,0);
+//			Seat seat = new Seat(0,0);
 		}
 	}
 

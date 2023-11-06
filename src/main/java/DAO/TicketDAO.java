@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import src.main.java.Util.CloseUtil;
-import src.main.java.Util.ConnUtil;
-import src.main.java.VO.TicketVO;
+import Util.CloseUtil;
+import Util.ConnUtil;
+import VO.TicketVO;
 
 public class TicketDAO {
 	private static TicketDAO instance = new TicketDAO();

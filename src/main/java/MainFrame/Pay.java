@@ -44,8 +44,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private JButton movieporster;
 	private String movieName;
 	
-	private String today;
-	
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 	
 //	public Pay(String year, String month, String day) {
@@ -206,13 +204,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		realPrice.setText("최종금액 : " + 0 + "원");
 		realPrice.setForeground(Color.red);
 		
-		ToDay = new Label();
-		ToDay.setBounds(10, 50, 300, 50);
-		ToDay.setBackground(Color.gray);
-		ToDay.setText(realYear + "-" + realMonth + "-" + realDay);
-
-		movieinfo.add(ToDay);
-		
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -233,7 +224,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	}
 	
 	public static void main(String[] args) {
-		Pay test = new Pay(5,2, 2023, 11, 02);
+		Pay test = new Pay(5,2);
 	}
 
 	public void actionPerformed(ActionEvent e) {

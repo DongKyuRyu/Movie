@@ -9,8 +9,13 @@ public class MovieData {
 	private String MovieDate;
 	private int MoviePeople;
 	private String MovieSeat;
-	private String MoviePay;
+	private String MovieSeat2;
+	
+	private String MoviePay; //원가
+	private String Moviediscount; //할인
+	private String discountprice; //최종
 
+<<<<<<< HEAD
 	public MovieData() {
 	}
 	
@@ -19,12 +24,18 @@ public class MovieData {
 	}
 	
 	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat,  String MoviePay) {
+=======
+	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String MovieSeat2, String MoviePay, String Moviediscount, String diiscountprice) {
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;
 		this.MovieDate = MovieDate;
 		this.MoviePeople = MoviePeople;
 		this.MovieSeat = MovieSeat;
+		this.MovieSeat = MovieSeat2;
 		this.MoviePay = MoviePay;
+		this.Moviediscount = Moviediscount;
+		this.discountprice =diiscountprice;
 	}
 
 	public String getMovieList() {
@@ -67,6 +78,16 @@ public class MovieData {
 		MovieSeat = movieSeat;
 	}
 	
+<<<<<<< HEAD
+=======
+	public String getMovieSeat2() {
+		return MovieSeat;
+	}
+
+	public void setMovieSeat2(String movieSeat2) {
+		MovieSeat2 = movieSeat2;
+	}
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
 	public String getMoviePay() {
 		return MoviePay;
@@ -76,4 +97,26 @@ public class MovieData {
 		MoviePay = moviePay;
 	}
 	
+	public MovieData() {
+	}
+	
+	public static MovieData getInstance() {
+		return instance;
+	}
+	
+	public String getMoviediscount() {
+		return Moviediscount;
+	}
+
+	public void setMoviediscount(String moviediscount) {
+		Moviediscount = moviediscount;
+	}
+
+	public String getDiscountprice() {
+		return discountprice;
+	}
+
+	public void setDiscountprice(String discountprice) {
+		this.discountprice = discountprice;
+	}
 }

@@ -27,7 +27,7 @@ public class CalendarEx extends Frame {
 	private String month;
 	private String day;
 	private String today;
-	
+  
 	private MovieData moviedata = MovieData.getInstance();
 
 //    public void setChoiceDay(String today) {
@@ -42,7 +42,6 @@ public class CalendarEx extends Frame {
         super(title);
         
         Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
-
 		pUp.setBackground(Color.yellow);
 		pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pUp.add(btnPrevMon);
@@ -120,7 +119,7 @@ public class CalendarEx extends Frame {
 					String movieName = moviedata.getMovieList();
 					System.out.println(movieName);
 					System.out.println(today);
-					
+
 					btnArr[i].setEnabled(false);
 					setVisible(false);
 					MovieTime movie = new MovieTime();

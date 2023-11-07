@@ -16,9 +16,14 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Button b1, b2, b3, b4, logout;
 	Label Title;
+<<<<<<< HEAD
 
 	private MovieData moviedata = MovieData.getInstance();
 
+=======
+private MovieData moviedata = MovieData.getInstance();
+	
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 	public MainFrame() {
 		Font TitleFont = new Font("고딕", Font.BOLD, 60);
 
@@ -45,7 +50,11 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		b3.setBounds(50, 400, 175, 150);
 		b3.setBackground(new Color(188, 205, 227));
 		b3.addActionListener(this);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 		b4 = new Button("내 정보");
 		b4.setBounds(275, 400, 175, 150);
 		b4.setBackground(new Color(188, 205, 227));
@@ -83,6 +92,7 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 			f.setVisible(false);
 			MovieList movielist = new MovieList();
 		}
+<<<<<<< HEAD
 
 		if (e.getActionCommand().equals("예매 확인")) {
 			if (moviedata.getMovieList() != null) {
@@ -92,6 +102,17 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 				System.out.println("예매 정보가 없습니다.");
 			}
 		}
+=======
+		
+		if (e.getActionCommand().equals("예매 확인")) {
+	         if (moviedata.getMovieList() != null) {
+	            f.setVisible(false);
+	            PaymentCompleted pay = new PaymentCompleted();
+	         } else {
+	            System.out.println("예매 정보가 없습니다.");
+	         }
+	      }
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 	}
 
 	public static void main(String[] args) {

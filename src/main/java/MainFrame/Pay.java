@@ -34,18 +34,23 @@ import DAO.MovieDAO;
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
-	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay;
+	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, moviename,
+			Date, MovieRoom, Seat;
 	private Choice coupon;
 	private Panel payinfo, movieinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
-	private int Year, Month, Day, year, month, day;
-	private String realYear, realMonth, realDay, today;
 	private double totalPrice;
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
+<<<<<<< HEAD
+=======
+
+	private boolean card, discount, phone;
+//	private String movieName;
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
@@ -55,6 +60,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 	public Pay(int adultCount, int teenagerCount) {
+		card = false;
+		discount = false;
+		phone = false;
 //		String calendar = new CalendarEx("Scheduler").returnCalendar();
 
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
@@ -77,6 +85,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
+		Font Movieposter = new Font("고딕", Font.BOLD, 15);
+
 		faPay = new Frame();
 		faPay.setLayout(null);
 		faPay.setResizable(false);
@@ -88,12 +98,14 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		pay = new Button(" 결 제 하 기 ");
 		pay.setBounds(350, 470, 100, 30);
 		pay.setBackground(new Color(188, 205, 227));
+		pay.setEnabled(false);
 		pay.addActionListener(this);
 
 		movie = new Label("예매 정보", Label.CENTER);
 		movie.setFont(new Font("돋움", Font.BOLD, 25));
 		movie.setBounds(20, 50, 370, 50);
 		movie.setBackground(Color.gray);
+
 		cash = new Label("결제 하기", Label.CENTER);
 		cash.setFont(new Font("돋움", Font.BOLD, 25));
 		cash.setBounds(410, 50, 370, 50);
@@ -108,11 +120,12 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		Image scaledImage = image.getScaledInstance(150, 200, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 		movieporster = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
-		movieporster.setBounds(10, 10, 150, 200);
+		movieporster.setBounds(110, 10, 150, 200);
 		movieporster.setBackground(Color.red);
 		movieporster.setBorderPainted(false);
 		movieporster.setFocusPainted(false);
 		movieporster.setContentAreaFilled(false);
+
 		movieinfo = new Panel();
 		movieinfo.setBounds(20, 110, 370, 345);
 		movieinfo.setLayout(null);
@@ -131,6 +144,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		coupon = new Choice();
 		coupon.setLocation(30, 140);
 		coupon.setSize(315, 0);
+		coupon.add("");
 		coupon.add("해당사항 없음");
 		coupon.add("신규 고객 15% 할인 쿠폰");
 		coupon.add("기존 고객 5% 할인 쿠폰");
@@ -189,10 +203,11 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		phonText3.setBounds(150, 70, 50, 20);
 		phonText3.addTextListener(this);
 
+		moviedata.setMoviePay(totalsum);
 		totalprice = new Label();
 		totalprice.setBounds(50, 220, 200, 22);
 		totalprice.setFont(new Font("돋움", Font.BOLD, 20));
-		totalprice.setText("총금액 : " + totalsum + "원");
+		totalprice.setText("총금액 : " + moviedata.getMoviePay() + "원");
 
 		disCountprice = new Label();
 		disCountprice.setBounds(30, 250, 200, 22);
@@ -205,6 +220,50 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		realPrice.setText("최종금액 : " + 0 + "원");
 		realPrice.setForeground(Color.red);
 
+		moviename = new Label();
+		moviename.setBounds(10, 220, 360, 17);
+		moviename.setFont(Movieposter);
+		moviename.setText("영화 제목 : " + moviedata.getMovieList());
+
+		Date = new Label();
+		Date.setBounds(10, 239, 360, 17);
+		Date.setFont(Movieposter);
+		Date.setText("일        시 : " + moviedata.getMovieDate());
+
+		MovieRoom = new Label();
+		MovieRoom.setBounds(10, 258, 360, 17);
+		MovieRoom.setFont(Movieposter);
+		if (moviedata.getMovieList().equals("30일")) {
+			MovieRoom.setText("상영관 : 1관");
+		} else if (moviedata.getMovieList().equals("플라워 킬링 문")) {
+			MovieRoom.setText("상영관 : 2관");
+		} else if (moviedata.getMovieList().equals("빌리와 용감한 녀석들")) {
+			MovieRoom.setText("상영관 : 3관");
+		} else if (moviedata.getMovieList().equals("소년들")) {
+			MovieRoom.setText("상영관 : 4관");
+		} else if (moviedata.getMovieList().equals("용감한 시민")) {
+			MovieRoom.setText("상영관 : 5관");
+		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
+			MovieRoom.setText("상영관 : 6관");
+		} else if (moviedata.getMovieList().equals("오픈 더 도어")) {
+			MovieRoom.setText("상영관 : 7관");
+		} else if (moviedata.getMovieList().equals("시수")) {
+			MovieRoom.setText("상영관 : 8관");
+		} else if (moviedata.getMovieList().equals("두사람을 위한 식탁")) {
+			MovieRoom.setText("상영관 : 9관");
+		} else if (moviedata.getMovieList().equals("톡투미")) {
+			MovieRoom.setText("상영관 : 10관");
+		} else if (moviedata.getMovieList().equals("더 킬러")) {
+			MovieRoom.setText("상영관 : 11관");
+		} else if (moviedata.getMovieList().equals("그대들은 어떻게 살 것인가")) {
+			MovieRoom.setText("상영관 : 12관");
+		}
+
+		Seat = new Label();
+		Seat.setBounds(10, 277, 360, 17);
+		Seat.setFont(Movieposter);
+		Seat.setText("인원 / 좌석 : " + moviedata.getMovieSeat());
+
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -213,6 +272,12 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		payinfo.add(payplan);
 		payinfo.add(coupon);
 		payinfo.add(disCount);
+
+		movieinfo.add(movieporster);
+		movieinfo.add(moviename);
+		movieinfo.add(Date);
+		movieinfo.add(MovieRoom);
+		movieinfo.add(Seat);
 
 		movieinfo.add(movieporster);
 		faPay.add(movieinfo);
@@ -229,6 +294,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
+			
 			faPay.setVisible(false);
 			PaymentCompleted paymentcompleted = new PaymentCompleted();
 		}
@@ -246,6 +312,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			payinfo.add(cardText2);
 			payinfo.add(cardText3);
 			payinfo.add(cardText4);
+			card = false;
+			phone = false;
 		}
 
 		if (e.getItem().equals("휴대폰")) {
@@ -258,6 +326,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			payinfo.add(phonText1);
 			payinfo.add(phonText2);
 			payinfo.add(phonText3);
+			pay.setEnabled(false);
+			phone = false;
+			card = false;
 		}
 		
 
@@ -266,42 +337,74 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			double discount = (double) totalPrice * 0;
 			String DisCountPrice = decimalFormat.format(discount);
 			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
+			moviedata.setMoviediscount(DisCountPrice);
 
 			double realnewPrice = totalPrice - discount;
 			String RealDisCountPrice = decimalFormat.format(realnewPrice);
 			realPrice.setText("최종금액 : " + RealDisCountPrice + "원");
+			moviedata.setDiscountprice(RealDisCountPrice);
 		}
 
 		if (e.getItem().equals("신규 고객 15% 할인 쿠폰")) {
 			double Newdiscount = (double) totalPrice * 0.15;
 			String NewDisCountPrice = decimalFormat.format(Newdiscount);
 			disCountprice.setText("할인금액 : -" + NewDisCountPrice + "원");
+			moviedata.setMoviediscount(NewDisCountPrice);
 
 			double realnewPrice = totalPrice - Newdiscount;
 			String NewRealDisCountPrice = decimalFormat.format(realnewPrice);
 			realPrice.setText("최종금액 : " + NewRealDisCountPrice + "원");
+			moviedata.setDiscountprice(NewRealDisCountPrice);
 		}
 
 		if (e.getItem().equals("기존 고객 5% 할인 쿠폰")) {
 			double discount = (double) totalPrice * 0.05;
 			String DisCountPrice = decimalFormat.format(discount);
 			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
-			realPrice.setText("최종금액 : " + (totalPrice - discount) + "원");
+			moviedata.setMoviediscount(DisCountPrice);
 
 			double realexistingPrice = totalPrice - discount;
 			String ExistingRealDisCountPrice = decimalFormat.format(realexistingPrice);
 			realPrice.setText("최종금액 : " + ExistingRealDisCountPrice + "원");
+			moviedata.setDiscountprice(ExistingRealDisCountPrice);
 		}
 
 		if (e.getItem().equals("컴백 고객 10% 할인 쿠폰")) {
 			double Combackdiscount = (double) totalPrice * 0.1;
 			String CombackDisCountPrice = decimalFormat.format(Combackdiscount);
 			disCountprice.setText("할인금액 : -" + CombackDisCountPrice + "원");
-			realPrice.setText("최종금액 : " + (totalPrice - Combackdiscount) + "원");
+			moviedata.setMoviediscount(CombackDisCountPrice);
 
 			double realCombakcPrice = totalPrice - Combackdiscount;
 			String CombakcRealDisCountPrice = decimalFormat.format(realCombakcPrice);
 			realPrice.setText("최종금액 : " + CombakcRealDisCountPrice + "원");
+			moviedata.setDiscountprice(CombakcRealDisCountPrice);
+		}
+
+		if (e.getItem().equals("해당사항 없음") || e.getItem().equals("신규 고객 15% 할인 쿠폰")
+				|| e.getItem().equals("기존 고객 5% 할인 쿠폰") || e.getItem().equals("컴백 고객 10% 할인 쿠폰")) {
+			discount = true;
+		} else if (e.getItem().equals("")) {
+			discount = false;
+		}
+
+		if (cardText1.getText().equals("") && cardText2.getText().equals("") && cardText3.getText().equals("")
+				&& cardText4.getText().equals("")) {
+			card = false;
+		} else {
+			card = true;
+		}
+		
+		if (phonText1.getText().equals("") && phonText2.getText().equals("") && phonText3.getText().equals("")) {
+			phone = false;
+		} else {
+			phone = true;
+		}
+
+		if ((phone == true || card == true) && discount == true) {
+			pay.setEnabled(true);
+		} else {
+			pay.setEnabled(false);
 		}
 	}
 

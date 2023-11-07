@@ -27,14 +27,14 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
-	private String SeatNumber[][], SeatsNumber, TestSeatsNumber;
+	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	private NumberOfPeople numberofpeople;
 
 	private String SeatIJ, SeatJ;
 	private char SeatRow;
-	
+
 	private MovieData moviedata = MovieData.getInstance();
 
 	// VO
@@ -103,13 +103,20 @@ public class Seat extends WindowAdapter implements ActionListener {
 							selectSeats.push(Seat[finalI][finalJ]);
 
 							if (totalSelected == 1) {
-								TestSeatsNumber = seatNumber;	
-							} else {
+								TestSeatsNumber = seatNumber;
+							} else if (totalSelected > 1) {
 								TestSeatsNumber += ", " + seatNumber;
 							}
 							moviedata.setMovieSeat(TestSeatsNumber);
+							moviedata.setMovieSeat2(TestSeatsNumber2);
 
 							if (totalSelected == adultCount + teenagerCount) {
+<<<<<<< HEAD
+=======
+								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
+										+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/"
+										+ moviedata.getMovieSeat());
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 //								System.out.println(moviedata.getMoviePeople());
 								Next.setEnabled(true);
 							}

@@ -110,7 +110,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 							moviedata.setMovieSeat(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
-								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
 //								System.out.println(moviedata.getMoviePeople());
 								Next.setEnabled(true);
 							}
@@ -148,6 +147,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
+			System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 

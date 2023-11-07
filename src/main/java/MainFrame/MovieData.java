@@ -18,7 +18,7 @@ public class MovieData {
 		return instance;
 	}
 	
-	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String MoviePay) {
+	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat,  String MoviePay) {
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;
 		this.MovieDate = MovieDate;
@@ -66,6 +66,7 @@ public class MovieData {
 	public void setMovieSeat(String movieSeat) {
 		MovieSeat = movieSeat;
 	}
+	
 
 	public String getMoviePay() {
 		return MoviePay;

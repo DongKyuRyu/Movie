@@ -28,6 +28,7 @@ import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import DAO.CustomerDAO;
 import DAO.MovieDAO;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
@@ -45,19 +46,13 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
-//	private String movieName;
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
+	private CustomerDAO customerDao = CustomerDAO.getInstance();
+	
 	private MovieData moviedata = MovieData.getInstance();
 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
-
-//	public Pay(String year, String month, String day) {
-//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
-//	}
-//	public String getMovieName() {
-//		return movieName;
-//	}
 
 	public Pay(int adultCount, int teenagerCount) {
 //		String calendar = new CalendarEx("Scheduler").returnCalendar();
@@ -229,7 +224,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	}
 
 	public static void main(String[] args) {
-		MovieList movieList = new MovieList();
 		Pay test = new Pay(5, 2);
 	}
 
@@ -265,6 +259,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			payinfo.add(phonText2);
 			payinfo.add(phonText3);
 		}
+		
 
 		if (e.getItem().equals("해당사항 없음")) {
 //         String totalsum = decimalFormat.format(totalPrice1);

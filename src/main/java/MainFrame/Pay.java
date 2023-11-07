@@ -45,12 +45,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
-<<<<<<< HEAD
-=======
-
 	private boolean card, discount, phone;
-//	private String movieName;
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private CustomerDAO customerDao = CustomerDAO.getInstance();

@@ -33,7 +33,6 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	
 	private MovieData moviedata = MovieData.getInstance();
 	private MovieDAO movieDao = MovieDAO.getInstance();
-	private MovieData moviedata = MovieData.getInstance();
 
 	public PaymentCompleted() {
 		Font Movieposter = new Font("고딕", Font.BOLD, 20);
@@ -74,10 +73,6 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		// 영화 포스터 자리
 		movieDao.connect();
 		String movieName = movieDao.SearchMovieposter(moviedata.getMovieList());
-<<<<<<< HEAD
-		System.out.println(movieName + " / " + moviedata.getMovieList());
-=======
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 		searchURL = getClass().getResource(movieName);
 		imageicon = new ImageIcon(searchURL);
 		movieposter = new JButton(imageicon);

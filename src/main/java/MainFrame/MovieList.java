@@ -1,15 +1,35 @@
 package MainFrame;
 
+<<<<<<< HEAD
 import java.awt.*;
 import java.awt.event.*;
+=======
+import java.awt.Button;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Panel;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
-public class MovieList extends WindowAdapter implements ActionListener, ItemListener {
+public class MovieList implements ActionListener, ItemListener, WindowListener {
     private Frame f;
     private Checkbox selectMovie1, selectMovie2, selectMovie3,selectMovie4,selectMovie5,selectMovie6,selectMovie7, selectMovie8, selectMovie9,selectMovie10,selectMovie11,selectMovie12;
     private Panel Movienamelist;
     private Label Title, movielist;
     private Button Next, Befor;
     private String movieName;
+<<<<<<< HEAD
    
     public void setMovieNames(String movieName) {
         this.movieName = movieName;
@@ -18,12 +38,30 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
     public String getMovieNames() {
         return movieName;
     }
+=======
+
+    private MovieData moviedata = MovieData.getInstance();
+    
+//    public void setMovieName(String movieName) {
+//        this.movieName = movieName;
+//    }
+//
+//    public String getMovieName() {
+//        return movieName;
+//    }
+    
+    
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 
     
     
     public MovieList() {
         Font TitleFont = new Font("고딕", Font.BOLD, 60);
+<<<<<<< HEAD
         Font movielistFont = new Font("고딕", Font.BOLD, 20);
+=======
+        Font movielistFont = new Font("고딕", Font.BOLD, 55);
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
         Font movieNameFont = new Font("고딕", Font.BOLD, 20);
 
         Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
@@ -37,6 +75,7 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
         f.addWindowListener(this);
 
         CheckboxGroup moviename = new CheckboxGroup();
+<<<<<<< HEAD
         selectMovie1 = new Checkbox("그대들은 어떻게 살 것인가", moviename, false);
         selectMovie2 = new Checkbox("플라워 킬링 문", moviename, false);
         selectMovie3 = new Checkbox("30일", moviename, false);
@@ -61,6 +100,14 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
         selectMovie10.setBounds(10, 270, 370, 22);
         selectMovie11.setBounds(10, 292, 370, 22);
         selectMovie12.setBounds(10, 314, 370, 22);
+=======
+        selectMovie1 = new Checkbox("30일", moviename, false);
+        selectMovie2 = new Checkbox("그대들은 어떻게 살 것인가", moviename, false);
+        selectMovie3 = new Checkbox("용감한시민", moviename, false);
+        selectMovie1.setBounds(10, 70, 370, 30);
+        selectMovie2.setBounds(10, 134, 370, 30);
+        selectMovie3.setBounds(10, 188, 370, 30);
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
         selectMovie1.setFont(movieNameFont);
         selectMovie2.setFont(movieNameFont);
         selectMovie3.setFont(movieNameFont);
@@ -140,11 +187,12 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
         }
         if (e.getActionCommand().equals("다 음")) {
             f.setVisible(false);
-            CalendarEx calendarEx = new CalendarEx("다 음", this);
+            CalendarEx calendarEx = new CalendarEx("다 음");
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
+<<<<<<< HEAD
         if (e.getItem().equals("그대들은 어떻게 살 것인가"))
             setMovieNames("그대들은 어떻게 살 것인가");
         else if (e.getItem().equals("플라워 킬링 문"))
@@ -170,11 +218,28 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
         else if (e.getItem().equals("더 킬러"))
             setMovieNames("더 킬러");
         if (e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("플라워 킬링 문") || e.getItem().equals("빌리와 용감한 녀석들")||e.getItem().equals("30일") || e.getItem().equals("소년들") ||e.getItem().equals("용감한시민") || e.getItem().equals("바람 따라 만나리") ||e.getItem().equals("오픈 더 도어") || e.getItem().equals("시수") ||e.getItem().equals("두사람을 위한 식탁") || e.getItem().equals("톡투미") ||e.getItem().equals("더 킬러")) {
+=======
+        if (e.getItem().equals("30일"))
+        	moviedata.setMovieList("30일");
+        else if (e.getItem().equals("용감한시민"))
+        	moviedata.setMovieList("용감한시민");
+        else if (e.getItem().equals("그대들은 어떻게 살 것인가"))
+        	moviedata.setMovieList("그대들은 어떻게 살 것인가");
+        if (e.getItem().equals("30일") || e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("용감한시민")) {
+>>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
             f.add(Next);
         }
     }
 
     public static void main(String[] args) {
         MovieList frame = new MovieList();
+        
     }
+
+	public void windowOpened(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {}
 }

@@ -30,7 +30,8 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieposter;
-
+	
+	private MovieData moviedata = MovieData.getInstance();
 	private MovieDAO movieDao = MovieDAO.getInstance();
 
 	public PaymentCompleted() {
@@ -71,7 +72,7 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 
 		// 영화 포스터 자리
 		movieDao.connect();
-		String movieName = movieDao.SearchMovieposter("30일");
+		String movieName = movieDao.SearchMovieposter(moviedata.getMovieList());
 		searchURL = getClass().getResource(movieName);
 		imageicon = new ImageIcon(searchURL);
 		movieposter = new JButton(imageicon);
@@ -85,41 +86,72 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		movieposter.setFocusPainted(false);
 		movieposter.setContentAreaFilled(false);
 
-		MovieName = new Label("영화 제목 :");
-		MovieName.setBounds(50, 420, 105, 25);
+		MovieName = new Label();
+		MovieName.setBounds(50, 420, 350, 25);
 		MovieName.setBackground(Color.lightGray);
 		MovieName.setFont(Movieposter);
+		MovieName.setText("영화 제목 : " + moviedata.getMovieList());
 
-		Date = new Label("일        시 :");
-		Date.setBounds(50, 450, 105, 25);
+		Date = new Label();
+		Date.setBounds(50, 450, 350, 25);
 		Date.setBackground(Color.lightGray);
 		Date.setFont(Movieposter);
+		Date.setText("일        시 : " + moviedata.getMovieDate());
 
 		MovieRoom = new Label("상  영  관 :");
-		MovieRoom.setBounds(50, 480, 105, 25);
+		MovieRoom.setBounds(52, 480, 350, 25);
 		MovieRoom.setBackground(Color.lightGray);
 		MovieRoom.setFont(Movieposter);
+		if (moviedata.getMovieList().equals("30일")) {
+			MovieRoom.setText("상 영 관 : 1관");
+		} else if (moviedata.getMovieList().equals("플라워 킬링 문")) {
+			MovieRoom.setText("상 영 관 : 2관");
+		} else if (moviedata.getMovieList().equals("빌리와 용감한 녀석들")) {
+			MovieRoom.setText("상 영 관 : 3관");
+		} else if (moviedata.getMovieList().equals("소년들")) {
+			MovieRoom.setText("상 영 관 : 4관");
+		} else if (moviedata.getMovieList().equals("용감한 시민")) {
+			MovieRoom.setText("상 영 관 : 5관");
+		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
+			MovieRoom.setText("상 영 관 : 6관");
+		} else if (moviedata.getMovieList().equals("오픈 더 도어")) {
+			MovieRoom.setText("상 영 관 : 7관");
+		} else if (moviedata.getMovieList().equals("시수")) {
+			MovieRoom.setText("상 영 관 : 8관");
+		} else if (moviedata.getMovieList().equals("두사람을 위한 식탁")) {
+			MovieRoom.setText("상 영 관 : 9관");
+		} else if (moviedata.getMovieList().equals("톡투미")) {
+			MovieRoom.setText("상 영 관 : 10관");
+		} else if (moviedata.getMovieList().equals("더 킬러")) {
+			MovieRoom.setText("상 영 관 : 11관");
+		} else if (moviedata.getMovieList().equals("그대들은 어떻게 살 것인가")) {
+			MovieRoom.setText("상 영 관 : 12관");
+		}
 
-		Seat = new Label("인원 / 좌석 :");
-		Seat.setBounds(50, 510, 105, 25);
+		Seat = new Label();
+		Seat.setBounds(52, 510, 350, 25);
 		Seat.setBackground(Color.lightGray);
 		Seat.setFont(Movieposter1);
+		Seat.setText("인원 / 좌석 : " + moviedata.getMovieSeat());
 
-		Discount = new Label("할        인 :");
-		Discount.setBounds(50, 540, 105, 25);
+		Discount = new Label("할        인 : 0원");
+		Discount.setBounds(50, 570, 350, 25);
 		Discount.setBackground(Color.lightGray);
 		Discount.setFont(Movieposter);
+		Discount.setText("할        인 : -" + moviedata.getMoviediscount() + "원");
 
-		Pay = new Label("금        액 :");
-		Pay.setBounds(50, 570, 105, 25);
+		Pay = new Label("금        액 : 0원");
+		Pay.setBounds(50, 540, 350, 25);
 		Pay.setBackground(Color.lightGray);
 		Pay.setFont(Movieposter);
+		Pay.setText("금        액 : " + moviedata.getMoviePay() + "원");
 
-		TotalPay = new Label("총금액 :");
-		TotalPay.setBounds(50, 600, 105, 29);
+		TotalPay = new Label("총금액 : 0원");
+		TotalPay.setBounds(50, 600, 350, 29);
 		TotalPay.setBackground(Color.lightGray);
 		TotalPay.setForeground(Color.red);
 		TotalPay.setFont(TotalPayFont);
+		TotalPay.setText("총금액 : " + moviedata.getDiscountprice() + "원");
 
 		clear = new Button("확인");
 		clear.setBounds((scr.width - 800) / 2, 735, 60, 30);

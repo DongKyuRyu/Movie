@@ -16,7 +16,8 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 	private Frame f;
 	private Button b1, b2, b3, b4, logout;
 	Label Title;
-
+private MovieData moviedata = MovieData.getInstance();
+	
 	public MainFrame() {
 		Font TitleFont = new Font("고딕", Font.BOLD, 60);  
 		
@@ -42,6 +43,7 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 		b3 = new Button("예매 확인");
 		b3.setBounds(50, 400, 175, 150);
 		b3.setBackground(new Color(188, 205, 227));
+		b3.addActionListener(this);
 		
 		b4 = new Button("내 정보");
 		b4.setBounds(275, 400, 175, 150);
@@ -79,6 +81,15 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 			f.setVisible(false);
 			MovieList movielist = new MovieList();
 		}
+		
+		if (e.getActionCommand().equals("예매 확인")) {
+	         if (moviedata.getMovieList() != null) {
+	            f.setVisible(false);
+	            PaymentCompleted pay = new PaymentCompleted();
+	         } else {
+	            System.out.println("예매 정보가 없습니다.");
+	         }
+	      }
 	}
 	
 	public static void main(String[] args) {

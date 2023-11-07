@@ -25,7 +25,6 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 	Label NameLabel, idtitle, EmailLabel, Info, IDCopyCheckLb;
 
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
-	CustomerVO customer = new CustomerVO();
 	private String name = "";
 	private String email = "";    
 
@@ -173,10 +172,6 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 			IDCopyCheck.setVisible(false);
 		}
 	}
-
-	String DBid = customer.getId();
-	String NoExits = "회원 정보가 존재하지 않습니다.";
-	String Error = "Error";
 
 	public String searchID(String name, String email) {
 		customerDao.connect();

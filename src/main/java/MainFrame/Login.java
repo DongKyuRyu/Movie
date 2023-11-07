@@ -31,9 +31,6 @@ public class Login extends WindowAdapter implements ActionListener {
 	private String password = "";
 
 	public Login() {
-		ImageIcon img1 = new ImageIcon("../img/Logo1.png");
-		JLabel Logo1 = new JLabel(img1);
-		Logo1.setBounds(0, 0, 900, 700);
 		
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
@@ -116,7 +113,6 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setFont(trueandfalseFont);
 		pwd.setEchoChar('*');
 
-		f.add(Logo1);
 		f.add(Login);
 		f.add(lid);
 		f.add(id);

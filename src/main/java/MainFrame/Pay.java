@@ -23,14 +23,18 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.Stack;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import DAO.SeatDAO;
+
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
-	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay, moviename, Date, MovieRoom, Seat;
+	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay,
+			moviename, Date, MovieRoom, Seat;
 	private Choice coupon;
 	private Panel payinfo, movieinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
@@ -40,22 +44,17 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
-	
-	// 메소드 선언 부분
-	private MovieList movielist;
-	
-	DecimalFormat decimalFormat = new DecimalFormat("###,###");
-	
-//	public Pay(String year, String month, String day) {
-//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
-//	}
 
+	// test------------------------------------------------------------
 	
+
+	// test------------------------------------------------------------
+
+	DecimalFormat decimalFormat = new DecimalFormat("###,###");
+
 	public Pay(int adultCount, int teenagerCount) {
-//		String calendar = new CalendarEx("Scheduler").returnCalendar();
-    
 		String totalPrice = NumberOfPeople.totalpice(adultCount, teenagerCount);
-		
+
 		int totalPrice1 = Integer.parseInt(totalPrice);
 		this.totalPrice = totalPrice1;
 		String totalsum = decimalFormat.format(totalPrice1);
@@ -73,7 +72,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		String ComBackDisCountPrice = decimalFormat.format(ComBackdiscount);
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
-		
+
 		Font Movieposter = new Font("고딕", Font.BOLD, 20);
 
 		faPay = new Frame();
@@ -98,13 +97,13 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		cash.setFont(new Font("돋움", Font.BOLD, 25));
 		cash.setBounds(410, 50, 370, 50);
 		cash.setBackground(Color.gray);
-		
+
 		searchURL = getClass().getResource("/img/30.jpg");
 		imageicon = new ImageIcon(searchURL);
 		Image image = imageicon.getImage();
 		Image scaledImage = image.getScaledInstance(150, 200, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-		movieporster= new JButton(scaledIcon);//크기 바꿀때 imageicon-->scaledIcon 으로 변경
+		movieporster = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
 		movieporster.setBounds(10, 10, 150, 200);
 		movieporster.setBackground(Color.red);
 		movieporster.setBorderPainted(false);
@@ -115,7 +114,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		movieinfo.setBounds(20, 110, 370, 345);
 		movieinfo.setLayout(null);
 		movieinfo.setBackground(Color.pink);
-		
+
 		payinfo = new Panel();
 		payinfo.setLayout(null);
 		payinfo.setBounds(410, 110, 370, 345);
@@ -196,29 +195,31 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		disCountprice.setBounds(30, 250, 200, 22);
 		disCountprice.setFont(new Font("돋움", Font.BOLD, 20));
 		disCountprice.setText("할인금액 : " + 0 + "원");
-		
+
 		realPrice = new Label();
 		realPrice.setBounds(30, 280, 200, 22);
 		realPrice.setFont(new Font("돋움", Font.BOLD, 20));
 		realPrice.setText("최종금액 : " + 0 + "원");
 		realPrice.setForeground(Color.red);
-		
-		moviename = new Label("영화 제목 :");
-		moviename.setBounds(165, 10, 105,25);
+
+		moviename = new Label();
+		moviename.setBounds(165, 10, 200, 25);
 		moviename.setFont(Movieposter);
-		
+		moviename.setBackground(Color.red);
+		moviename.setText("영화 제목 : ");
+
 		Date = new Label("일        시 :");
-		Date.setBounds(165, 37, 105,25);
+		Date.setBounds(165, 37, 105, 25);
 		Date.setFont(Movieposter);
-		
+
 		MovieRoom = new Label("상  영  관 :");
-		MovieRoom.setBounds(165, 64, 105,25);
+		MovieRoom.setBounds(165, 64, 105, 25);
 		MovieRoom.setFont(Movieposter);
-		
+
 		Seat = new Label("인원 / 좌석 :");
-		Seat.setBounds(165, 91, 115,25);
+		Seat.setBounds(165, 91, 115, 25);
 		Seat.setFont(Movieposter);
-		
+
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -227,7 +228,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		payinfo.add(payplan);
 		payinfo.add(coupon);
 		payinfo.add(disCount);
-		
+
 		movieinfo.add(movieporster);
 		movieinfo.add(moviename);
 		movieinfo.add(Date);
@@ -241,9 +242,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		faPay.add(movie);
 		faPay.setVisible(true);
 	}
-	
+
 	public static void main(String[] args) {
-		Pay test = new Pay(5,2);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -284,7 +284,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			double discount = (double) totalPrice * 0;
 			String DisCountPrice = decimalFormat.format(discount);
 			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
-			
+
 			double realnewPrice = totalPrice - discount;
 			String RealDisCountPrice = decimalFormat.format(realnewPrice);
 			realPrice.setText("최종금액 : " + RealDisCountPrice + "원");
@@ -294,7 +294,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			double Newdiscount = (double) totalPrice * 0.15;
 			String NewDisCountPrice = decimalFormat.format(Newdiscount);
 			disCountprice.setText("할인금액 : -" + NewDisCountPrice + "원");
-			
+
 			double realnewPrice = totalPrice - Newdiscount;
 			String NewRealDisCountPrice = decimalFormat.format(realnewPrice);
 			realPrice.setText("최종금액 : " + NewRealDisCountPrice + "원");
@@ -305,7 +305,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			String DisCountPrice = decimalFormat.format(discount);
 			disCountprice.setText("할인금액 : -" + DisCountPrice + "원");
 			realPrice.setText("최종금액 : " + (totalPrice - discount) + "원");
-			
+
 			double realexistingPrice = totalPrice - discount;
 			String ExistingRealDisCountPrice = decimalFormat.format(realexistingPrice);
 			realPrice.setText("최종금액 : " + ExistingRealDisCountPrice + "원");
@@ -316,7 +316,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			String CombackDisCountPrice = decimalFormat.format(Combackdiscount);
 			disCountprice.setText("할인금액 : -" + CombackDisCountPrice + "원");
 			realPrice.setText("최종금액 : " + (totalPrice - Combackdiscount) + "원");
-			
+
 			double realCombakcPrice = totalPrice - Combackdiscount;
 			String CombakcRealDisCountPrice = decimalFormat.format(realCombakcPrice);
 			realPrice.setText("최종금액 : " + CombakcRealDisCountPrice + "원");

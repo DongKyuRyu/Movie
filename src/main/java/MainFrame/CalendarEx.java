@@ -34,8 +34,7 @@ public class CalendarEx extends Frame {
 	}
 
 	public String getChoiceDay() {
-		movieList.getMovieName();
-		String sum = movieList.getMovieName() + "/" + today;
+		String sum = movieList.getChoiceMovieName() + "/" + today;
 		return sum;
 	}
 
@@ -118,12 +117,11 @@ public class CalendarEx extends Frame {
 					today = year + "-" + month + "-" + day;
 
 					// MovieList 클래스의 getMovieName 메서드를 사용하여 movieName 가져오기
-					String movieName = movieList.getMovieName();
-					System.out.println(movieName);
-					System.out.println(today);
+					String movieName = movieList.getChoiceMovieName();
 
 					btnArr[i].setEnabled(false);
 					setVisible(false);
+					System.out.println(getChoiceDay());
 					MovieTime movie = new MovieTime(CalendarEx.this);
 				}
 			}

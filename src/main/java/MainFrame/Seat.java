@@ -27,7 +27,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
-	private String SeatNumber[][], SeatsNumber, TestSeatsNumber;
+	private String SeatNumber[][], SeatsNumber, TestSeatsNumber, selectedSeats;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	private NumberOfPeople numberofpeople;
@@ -50,14 +50,15 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public String getSeatsNumber() {
-		return SeatsNumber;
+		String sum = numberofpeople.getHumanCount() + "/" + SeatsNumber;
+		return sum;
 	}
 
 	public Seat(int adultCount, int teenagerCount, NumberOfPeople numberofpeople) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
 		this.numberofpeople = numberofpeople;
-
+		
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame("좌석 선택");
@@ -110,15 +111,14 @@ public class Seat extends WindowAdapter implements ActionListener {
 							selectSeats.push(Seat[finalI][finalJ]);
 
 							if (totalSelected == 1) {
-								TestSeatsNumber = seatNumber;	
+								TestSeatsNumber = seatNumber;
 							} else {
 								TestSeatsNumber += ", " + seatNumber;
 							}
 							setSeatsNumber(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
-								System.out.println(TestSeatsNumber);
-								System.out.println(numberofpeople.getHumanCount());
+								
 								Next.setEnabled(true);
 							}
 						}
@@ -155,6 +155,11 @@ public class Seat extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			seatDao.connect();
+			
+			System.out.println(getSeatsNumber());
+			
+			selectedSeats = getSeatsNumber();
+			
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 

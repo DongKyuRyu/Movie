@@ -23,19 +23,18 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	private Panel MovieTimelist;
 	private Label Title, movieTime;
 	private Button Next, Befor;
-	private CalendarEx calendarex;
-	private String Choicetime;
 	
-	public void setChoiceTime(String Choicetime) {
-		this.Choicetime = Choicetime;
-	}
+	private MovieData moviedata = MovieData.getInstance();
 	
-	public String getChoiceTime() {
-		return Choicetime;
-	}
+//	public void setChoiceTime(String Choicetime) {
+//		this.Choicetime = Choicetime;
+//	}
+//	
+//	public String getChoiceTime() {
+//		return Choicetime;
+//	}
 	
-	public MovieTime(CalendarEx calendarex) {
-		this.calendarex = calendarex;
+	public MovieTime() {
 	Font TitleFont = new Font("고딕", Font.BOLD, 60);
 	Font movielistFont = new Font("고딕", Font.BOLD, 55);
 	Font movieNameFont = new Font("고딕", Font.BOLD, 50);
@@ -92,7 +91,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	MovieTimelist.add(selectMovie2);
 	MovieTimelist.add(selectMovie3);
 	
-	calendarex.setVisible(false);
+//	calendarex.setVisible(false);
 	f.add(MovieTimelist);
 	f.add(Befor);
 	f.add(Title);
@@ -105,16 +104,15 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getItem().equals("12:00 ~ 14:20")) {
-			setChoiceTime("12:00 ~ 14:20");
+			moviedata.setMovieTime("12:00 ~ 14:20");
 		}else if(e.getItem().equals("14:30 ~ 16:50")) {
-			setChoiceTime("14:30 ~ 16:50");
+			moviedata.setMovieTime("14:30 ~ 16:50");
 		}else if(e.getItem().equals("17:00 ~ 19:20")) {
-			setChoiceTime("17:00 ~ 19:20");
+			moviedata.setMovieTime("17:00 ~ 19:20");
 		}
 		
 		if (e.getItem().equals("12:00 ~ 14:20") || e.getItem().equals("14:30 ~ 16:50") || e.getItem().equals("17:00 ~ 19:20")) {
-			String Choiceday = calendarex.getChoiceDay();
-			System.out.println(Choicetime);
+			System.out.println(moviedata.getMovieList() + " " + moviedata.getMovieDate() + " " + moviedata.getMovieTime());
 			f.add(Next);
 		}
 	}
@@ -126,13 +124,11 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 		}
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			NumberOfPeople numberofpeople = new NumberOfPeople(MovieTime.this);
+			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 	}
 	
 	public static void main(String[] args) {
-		MovieList movieList = new MovieList();
-		CalendarEx calendarex = new CalendarEx("Scheduler", movieList);
-		MovieTime movie = new MovieTime(calendarex);
+		MovieTime movie = new MovieTime();
 	}
 }

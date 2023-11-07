@@ -14,10 +14,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
-public class MovieList extends WindowAdapter implements ActionListener, ItemListener {
+public class MovieList implements ActionListener, ItemListener, WindowListener {
     private Frame f;
     private Checkbox selectMovie1, selectMovie2, selectMovie3;
     private Panel Movienamelist;
@@ -25,18 +25,22 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
     private Button Next, Befor;
     private String movieName;
 
-    public void setMovieName(String movieName) {
-        this.movieName = movieName;
-    }
-
-    public String getMovieName() {
-        return movieName;
-    }
+    private MovieData moviedata = MovieData.getInstance();
+    
+//    public void setMovieName(String movieName) {
+//        this.movieName = movieName;
+//    }
+//
+//    public String getMovieName() {
+//        return movieName;
+//    }
+    
+    
 
     public MovieList() {
         Font TitleFont = new Font("고딕", Font.BOLD, 60);
         Font movielistFont = new Font("고딕", Font.BOLD, 55);
-        Font movieNameFont = new Font("고딕", Font.BOLD, 50);
+        Font movieNameFont = new Font("고딕", Font.BOLD, 20);
 
         Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -50,11 +54,11 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
 
         CheckboxGroup moviename = new CheckboxGroup();
         selectMovie1 = new Checkbox("30일", moviename, false);
-        selectMovie2 = new Checkbox("용감한 시민", moviename, false);
-        selectMovie3 = new Checkbox("천박사", moviename, false);
-        selectMovie1.setBounds(10, 70, 370, 54);
-        selectMovie2.setBounds(10, 134, 370, 54);
-        selectMovie3.setBounds(10, 188, 370, 54);
+        selectMovie2 = new Checkbox("그대들은 어떻게 살 것인가", moviename, false);
+        selectMovie3 = new Checkbox("용감한시민", moviename, false);
+        selectMovie1.setBounds(10, 70, 370, 30);
+        selectMovie2.setBounds(10, 134, 370, 30);
+        selectMovie3.setBounds(10, 188, 370, 30);
         selectMovie1.setFont(movieNameFont);
         selectMovie2.setFont(movieNameFont);
         selectMovie3.setFont(movieNameFont);
@@ -107,23 +111,31 @@ public class MovieList extends WindowAdapter implements ActionListener, ItemList
         }
         if (e.getActionCommand().equals("다 음")) {
             f.setVisible(false);
-            CalendarEx calendarEx = new CalendarEx("다 음", this);
+            CalendarEx calendarEx = new CalendarEx("다 음");
         }
     }
 
     public void itemStateChanged(ItemEvent e) {
         if (e.getItem().equals("30일"))
-            setMovieName("30일");
-        else if (e.getItem().equals("용감한 시민"))
-            setMovieName("용감한 시민");
-        else if (e.getItem().equals("천박사"))
-            setMovieName("천박사");
-        if (e.getItem().equals("30일") || e.getItem().equals("천박사") || e.getItem().equals("용감한 시민")) {
+        	moviedata.setMovieList("30일");
+        else if (e.getItem().equals("용감한시민"))
+        	moviedata.setMovieList("용감한시민");
+        else if (e.getItem().equals("그대들은 어떻게 살 것인가"))
+        	moviedata.setMovieList("그대들은 어떻게 살 것인가");
+        if (e.getItem().equals("30일") || e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("용감한시민")) {
             f.add(Next);
         }
     }
 
     public static void main(String[] args) {
         MovieList frame = new MovieList();
+        
     }
+
+	public void windowOpened(WindowEvent e) {}
+	public void windowClosed(WindowEvent e) {}
+	public void windowIconified(WindowEvent e) {}
+	public void windowDeiconified(WindowEvent e) {}
+	public void windowActivated(WindowEvent e) {}
+	public void windowDeactivated(WindowEvent e) {}
 }

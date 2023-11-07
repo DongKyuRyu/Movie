@@ -34,6 +34,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 	private String SeatIJ, SeatJ;
 	private char SeatRow;
+	
+	private MovieData moviedata = MovieData.getInstance();
 
 	// VO
 	private TicketVO ticket;
@@ -45,18 +47,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
 
-	public void setSeatsNumber(String SeatsNumber) {
-		this.SeatsNumber = SeatsNumber;
-	}
-
-	public String getSeatsNumber() {
-		return SeatsNumber;
-	}
-
-	public Seat(int adultCount, int teenagerCount, NumberOfPeople numberofpeople) {
+	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
-		this.numberofpeople = numberofpeople;
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -114,11 +107,11 @@ public class Seat extends WindowAdapter implements ActionListener {
 							} else {
 								TestSeatsNumber += ", " + seatNumber;
 							}
-							setSeatsNumber(TestSeatsNumber);
+							moviedata.setMovieSeat(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
-								System.out.println(TestSeatsNumber);
-								System.out.println(numberofpeople.getHumanCount());
+								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
+//								System.out.println(moviedata.getMoviePeople());
 								Next.setEnabled(true);
 							}
 						}
@@ -176,5 +169,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public static void main(String[] args) {
+		Seat seat = new Seat(1, 1);
 	}
 }

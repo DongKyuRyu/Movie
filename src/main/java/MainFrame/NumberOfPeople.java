@@ -21,19 +21,11 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	private String SeatNumber[];
 	private Button[] seletedButton;
 	private Label adult, Teenager, price, adultpeople, teenagerpeople, totalpeople;
-	private MovieTime movieTime;
 	private int HumanCount;
 	
-	public void setHumanCount(int HumanCount) {
-		this.HumanCount = HumanCount;
-	}
-	
-	public int getHumanCount() {
-		return HumanCount;
-	}
+	private MovieData moviedata = MovieData.getInstance();
 
-	public NumberOfPeople(MovieTime movieTime) {
-		this.movieTime = movieTime;
+	public NumberOfPeople() {
     
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -130,7 +122,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 				        int adultCount = Integer.parseInt(adultpeople.getText().replaceAll("[^0-9]", ""));
 				        int teenagerCount = Integer.parseInt(teenagerpeople.getText().replaceAll("[^0-9]", ""));
 				        int totalPeopleCount = adultCount + teenagerCount;
-				        setHumanCount(totalPeopleCount);
+				        moviedata.setMoviePeople(totalPeopleCount);
 				        totalpeople.setText("총 : " + totalPeopleCount + "명");
 					}
 				});
@@ -159,13 +151,11 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 			f.setVisible(false);
 			int adultCount = Integer.parseInt(adultpeople.getText().replaceAll("[^0-9]", ""));
 		    int teenagerCount = Integer.parseInt(teenagerpeople.getText().replaceAll("[^0-9]", ""));
-		    
 		   
-		    int HumanCount = getHumanCount();
+		    int HumanCount = moviedata.getMoviePeople();
 		    
-		    System.out.println(HumanCount);
-		    
-			Seat seat = new Seat(adultCount, teenagerCount, NumberOfPeople.this);
+		    System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople());
+			Seat seat = new Seat(adultCount, teenagerCount);
 			
 		}
 	}
@@ -180,10 +170,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		MovieList movieList = new MovieList();
-		CalendarEx calendarex = new CalendarEx("Scheduler", movieList);
-		MovieTime movieTime = new MovieTime(calendarex);
-		NumberOfPeople num = new NumberOfPeople(movieTime);
+		NumberOfPeople num = new NumberOfPeople();
 
 	}
 }

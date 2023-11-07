@@ -33,14 +33,12 @@ import DAO.MovieDAO;
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
 	private Button pay;
-	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay;
+	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, ToDay, moviename, Date, MovieRoom, Seat;
 	private Choice coupon;
 	private Panel payinfo, movieinfo;
 	private TextField cardText1, cardText2, cardText3, cardText4, phonText1, phonText2, phonText3;
 	private Checkbox paycard, payphone;
 	private int cardmaxLength = 4, phonemaxLength = 3;
-	private int Year, Month, Day, year, month, day;
-	private String realYear, realMonth, realDay, today;
 	private double totalPrice;
 	private URL searchURL;
 	private ImageIcon imageicon;
@@ -49,7 +47,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private MovieData moviedata = MovieData.getInstance();
-
+  
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 //	public Pay(String year, String month, String day) {
@@ -81,6 +79,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		String ComBackDisCountPrice = decimalFormat.format(ComBackdiscount);
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
+		
+		Font Movieposter = new Font("고딕", Font.BOLD, 20);
 
 		faPay = new Frame();
 		faPay.setLayout(null);
@@ -210,6 +210,22 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		realPrice.setText("최종금액 : " + 0 + "원");
 		realPrice.setForeground(Color.red);
 
+		moviename = new Label("영화 제목 :");
+		moviename.setBounds(165, 10, 105,25);
+		moviename.setFont(Movieposter);
+		
+		Date = new Label("일        시 :");
+		Date.setBounds(165, 37, 105,25);
+		Date.setFont(Movieposter);
+		
+		MovieRoom = new Label("상  영  관 :");
+		MovieRoom.setBounds(165, 64, 105,25);
+		MovieRoom.setFont(Movieposter);
+		
+		Seat = new Label("인원 / 좌석 :");
+		Seat.setBounds(165, 91, 115,25);
+		Seat.setFont(Movieposter);
+		
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -218,6 +234,12 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		payinfo.add(payplan);
 		payinfo.add(coupon);
 		payinfo.add(disCount);
+
+		movieinfo.add(movieporster);
+		movieinfo.add(moviename);
+		movieinfo.add(Date);
+		movieinfo.add(MovieRoom);
+		movieinfo.add(Seat);
 
 		movieinfo.add(movieporster);
 		faPay.add(movieinfo);

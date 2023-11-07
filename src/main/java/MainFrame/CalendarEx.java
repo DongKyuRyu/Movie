@@ -27,23 +27,21 @@ public class CalendarEx extends Frame {
 	private String month;
 	private String day;
 	private String today;
-	private MovieList movieList;
+  
+	private MovieData moviedata = MovieData.getInstance();
 
-	public void setChoiceDay(String today) {
-		this.today = today;
-	}
+//    public void setChoiceDay(String today) {
+//        this.today = today;
+//    }
+//
+//    public String getChoiceDay() {
+//        return today;
+//    }
 
-	public String getChoiceDay() {
-		String sum = movieList.getChoiceMovieName() + "/" + today;
-		return sum;
-	}
-
-	public CalendarEx(String title, MovieList movieList) {
-		super(title);
-		this.movieList = movieList;
-
-		Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
-
+    public CalendarEx(String title) {
+        super(title);
+        
+        Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
 		pUp.setBackground(Color.yellow);
 		pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pUp.add(btnPrevMon);
@@ -115,14 +113,16 @@ public class CalendarEx extends Frame {
 				if (src == btnArr[i]) {
 					day = btnArr[i].getLabel();
 					today = year + "-" + month + "-" + day;
+					moviedata.setMovieDate(today);
 
 					// MovieList 클래스의 getMovieName 메서드를 사용하여 movieName 가져오기
-					String movieName = movieList.getChoiceMovieName();
+					String movieName = moviedata.getMovieList();
+					System.out.println(movieName);
+					System.out.println(today);
 
 					btnArr[i].setEnabled(false);
 					setVisible(false);
-					System.out.println(getChoiceDay());
-					MovieTime movie = new MovieTime(CalendarEx.this);
+					MovieTime movie = new MovieTime();
 				}
 			}
 
@@ -135,15 +135,8 @@ public class CalendarEx extends Frame {
 			repaint();
 		}
 	}
-
-	public String returnCalendar() {
-		return today;
-	}
-
-	public static void main(String[] args) {
-		// MovieList 인스턴스 생성
-		MovieList movieList = new MovieList();
-		// CalendarEx 인스턴스 생성 및 MovieList 인스턴스 전달
-		CalendarEx mainWin = new CalendarEx("Scheduler", movieList);
-	}
+    public static void main(String[] args) {
+        MovieList movieList = new MovieList();
+        CalendarEx mainWin = new CalendarEx("Scheduler");
+    }
 }

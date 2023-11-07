@@ -50,10 +50,10 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	f.setLocation((scr.width-500)/2,(scr.height-700)/2);
 	f.addWindowListener(this);
 	
-	CheckboxGroup moviename = new CheckboxGroup();
-	selectMovie1 = new Checkbox("12:00 ~ 14:20", moviename, false);
-	selectMovie2 = new Checkbox("14:30 ~ 16:50", moviename, false);
-	selectMovie3 = new Checkbox("17:00 ~ 19:20", moviename, false);
+	CheckboxGroup movienames = new CheckboxGroup();
+	selectMovie1 = new Checkbox("12:00 ~ 14:20", movienames, false);
+	selectMovie2 = new Checkbox("14:30 ~ 16:50", movienames, false);
+	selectMovie3 = new Checkbox("17:00 ~ 19:20", movienames, false);
 	selectMovie1.setBounds(10, 70, 370, 54);
 	selectMovie2.setBounds(10, 128, 370, 54);
 	selectMovie3.setBounds(10, 188, 370, 54);

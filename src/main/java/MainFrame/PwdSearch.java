@@ -30,7 +30,7 @@ public class PwdSearch extends WindowAdapter implements ActionListener {
 	CustomerVO customer = new CustomerVO();
 	private String name = "";
 	private String id = "";
-
+  
 	public PwdSearch() {
 		Font clearFont = new Font("고딕", Font.PLAIN, 25);
 

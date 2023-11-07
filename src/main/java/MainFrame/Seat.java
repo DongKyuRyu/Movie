@@ -34,6 +34,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 	private String SeatIJ, SeatJ;
 	private char SeatRow;
+	
+	private MovieData moviedata = MovieData.getInstance();
 
 	// VO
 	private TicketVO ticket;
@@ -45,18 +47,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
 
-	public void setSeatsNumber(String SeatsNumber) {
-		this.SeatsNumber = SeatsNumber;
-	}
-
-	public String getSeatsNumber() {
-		return SeatsNumber;
-	}
-
-	public Seat(int adultCount, int teenagerCount, NumberOfPeople numberofpeople) {
+	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
 		this.teenagerCount = teenagerCount;
-		this.numberofpeople = numberofpeople;
 
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -100,6 +93,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 				int finalJ = j;
 				SeatRow = seatRow;
 				Seat[i][j].addActionListener(new ActionListener() {
+					private String realSeatIJ;
+
 					public void actionPerformed(ActionEvent e) {
 						if (totalSelected < adultCount + teenagerCount) {
 							Seat[finalI][finalJ].setEnabled(false);
@@ -108,18 +103,16 @@ public class Seat extends WindowAdapter implements ActionListener {
 							selectSeats.push(Seat[finalI][finalJ]);
 
 							if (totalSelected == 1) {
-								TestSeatsNumber = seatNumber;
+								TestSeatsNumber = seatNumber;	
 							} else {
 								TestSeatsNumber += ", " + seatNumber;
 							}
-
-							setSeatsNumber(TestSeatsNumber);
-
-							System.out.println(TestSeatsNumber);
+							moviedata.setMovieSeat(TestSeatsNumber);
 
 							if (totalSelected == adultCount + teenagerCount) {
-								System.out.print(SeatIJ);
-								f.add(Next);
+								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
+//								System.out.println(moviedata.getMoviePeople());
+								Next.setEnabled(true);
 							}
 						}
 					}
@@ -136,7 +129,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.setBounds(475, 625, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
+		Next.setEnabled(false);
 
+		f.add(Next);
 		f.add(Cancel);
 		f.add(Befor);
 		f.add(SeatPanel);
@@ -147,7 +142,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//         NumberOfPeople numberofpeople = new NumberOfPeople();
+//			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 
 		if (e.getActionCommand().equals("다 음")) {
@@ -163,7 +158,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 				Button lastSelectedSeat = selectSeats.pop();
 				lastSelectedSeat.setEnabled(true);
 				if (totalSelected < adultCount + teenagerCount) {
-					f.remove(Next);
+					Next.setEnabled(false);
 				}
 			}
 		}
@@ -174,10 +169,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		MovieList movieList = new MovieList();
-		CalendarEx calendarex = new CalendarEx("Scheduler", movieList);
-		MovieTime movieTime = new MovieTime(calendarex);
-		NumberOfPeople num = new NumberOfPeople(movieTime);
-		Seat seat = new Seat(1, 1, num);
+		Seat seat = new Seat(1, 1);
 	}
 }

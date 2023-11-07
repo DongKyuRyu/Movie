@@ -14,6 +14,6 @@ public class ConnUtil {
 		}
 	}
 	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost/xe", "c##greenhouse", "greenhouse");	// 동규: 192.168.56.1:1521 // 그 외: localhost
+		return DriverManager.getConnection("jdbc:oracle:thin:@localhost", "c##greenhouse", "greenhouse");	// 동규: 192.168.56.1:1521 // 그 외: localhost
 	}
 }

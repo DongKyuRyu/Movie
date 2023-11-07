@@ -1,7 +1,5 @@
 package VO;
 
-import java.util.Date;
-
 public class SeatVO {
 	private String seatNumber;// 좌석번호
 	private String reservedDate;

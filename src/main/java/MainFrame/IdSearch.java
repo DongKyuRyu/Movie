@@ -27,7 +27,7 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	CustomerVO customer = new CustomerVO();
 	private String name = "";
-	private String email = "";
+	private String email = "";    
 
 	public IdSearch() {
 		Font IdSearchFont = new Font("고딕", Font.BOLD, 50);

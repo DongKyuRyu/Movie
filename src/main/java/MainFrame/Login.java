@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 import DAO.CustomerDAO;
 import VO.CustomerVO;
 
@@ -21,6 +24,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private Button login, Register, PwdSearch, IdSearch;
 	TextField id, pwd;
 	Label Lab_1;
+	private JLabel img1;
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	private CustomerVO customer = new CustomerVO();
 	private String pid = "";
@@ -31,7 +35,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
 		Font IdPwdFont = new Font("고딕", Font.BOLD, 40);
 		Font trueandfalseFont = new Font("고딕", Font.BOLD, 17);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
 
 		f = new Frame("Login");

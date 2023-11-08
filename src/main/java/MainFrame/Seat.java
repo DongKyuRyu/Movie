@@ -108,7 +108,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 								TestSeatsNumber += ", " + seatNumber;
 							}
 							moviedata.setMovieSeat(TestSeatsNumber);
-							moviedata.setMovieSeat2(TestSeatsNumber2);
 
 							if (totalSelected == adultCount + teenagerCount) {
 								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
@@ -145,7 +144,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			NumberOfPeople numberofpeople = new NumberOfPeople();
+			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 
 		if (e.getActionCommand().equals("다 음")) {

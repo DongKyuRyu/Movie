@@ -21,7 +21,6 @@ import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.net.URL;
 import java.text.DecimalFormat;
 
@@ -29,6 +28,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import DAO.MovieDAO;
+import DAO.TicketDAO;
+import VO.CustomerVO;
+import VO.TicketVO;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
@@ -45,11 +47,17 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private ImageIcon imageicon;
 	private JButton movieporster;
 
+	private String pid = "", pseatnum = "", proomnum = "", pmoviename = "", pdday = "", ptime = "", pcost = "";
+	private int pperson = 0;
+
 	private boolean card, discount, phone;
 //	private String movieName;
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private MovieData moviedata = MovieData.getInstance();
+	private TicketVO ticketvo = new TicketVO();
+	private TicketDAO ticketdao = TicketDAO.getInstance();
+	private CustomerVO customervo;
 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
@@ -61,6 +69,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 //	}
 
 	public Pay(int adultCount, int teenagerCount) {
+		System.out.println(moviedata.getId());
 		card = false;
 		discount = false;
 		phone = false;
@@ -236,28 +245,40 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		MovieRoom.setFont(Movieposter);
 		if (moviedata.getMovieList().equals("30일")) {
 			MovieRoom.setText("상영관 : 1관");
+			moviedata.setMovieRoomNum("1관");
 		} else if (moviedata.getMovieList().equals("플라워 킬링 문")) {
 			MovieRoom.setText("상영관 : 2관");
+			moviedata.setMovieRoomNum("2관");
 		} else if (moviedata.getMovieList().equals("빌리와 용감한 녀석들")) {
 			MovieRoom.setText("상영관 : 3관");
+			moviedata.setMovieRoomNum("3관");
 		} else if (moviedata.getMovieList().equals("소년들")) {
 			MovieRoom.setText("상영관 : 4관");
+			moviedata.setMovieRoomNum("4관");
 		} else if (moviedata.getMovieList().equals("용감한 시민")) {
 			MovieRoom.setText("상영관 : 5관");
+			moviedata.setMovieRoomNum("5관");
 		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
 			MovieRoom.setText("상영관 : 6관");
+			moviedata.setMovieRoomNum("6관");
 		} else if (moviedata.getMovieList().equals("오픈 더 도어")) {
 			MovieRoom.setText("상영관 : 7관");
+			moviedata.setMovieRoomNum("7관");
 		} else if (moviedata.getMovieList().equals("시수")) {
 			MovieRoom.setText("상영관 : 8관");
+			moviedata.setMovieRoomNum("8관");
 		} else if (moviedata.getMovieList().equals("두사람을 위한 식탁")) {
 			MovieRoom.setText("상영관 : 9관");
+			moviedata.setMovieRoomNum("9관");
 		} else if (moviedata.getMovieList().equals("톡투미")) {
 			MovieRoom.setText("상영관 : 10관");
+			moviedata.setMovieRoomNum("10관");
 		} else if (moviedata.getMovieList().equals("더 킬러")) {
 			MovieRoom.setText("상영관 : 11관");
+			moviedata.setMovieRoomNum("11관");
 		} else if (moviedata.getMovieList().equals("그대들은 어떻게 살 것인가")) {
 			MovieRoom.setText("상영관 : 12관");
+			moviedata.setMovieRoomNum("12관");
 		}
 
 		Seat = new Label();
@@ -295,10 +316,23 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
-			
+
+			ticketvo = new TicketVO(moviedata.getId(), moviedata.getMovieSeat(), moviedata.getMovieRoomNum(),
+					moviedata.getMovieList(), moviedata.getMovieDate(), moviedata.getMovieTime(),
+					moviedata.getDiscountprice(), moviedata.getMoviePeople());
+
+			PaymentCompleted(pid, pseatnum, proomnum, pmoviename, pdday, ptime, pcost, pperson);
+
 			faPay.setVisible(false);
 			PaymentCompleted paymentcompleted = new PaymentCompleted();
 		}
+	}
+
+	public void PaymentCompleted(String id, String seatNumber, String roomNumber, String movieName, String dDay,
+			String time, String cost, int person) {
+		ticketdao.connect();
+		ticketdao.insert(ticketvo);
+
 	}
 
 	public void itemStateChanged(ItemEvent e) {
@@ -394,7 +428,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		} else {
 			card = true;
 		}
-		
+
 		if (phonText1.getText().equals("") && phonText2.getText().equals("") && phonText3.getText().equals("")) {
 			phone = false;
 		} else {

@@ -13,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import DAO.CustomerDAO;
@@ -26,7 +25,8 @@ public class Login extends WindowAdapter implements ActionListener {
 	Label Lab_1;
 	private JLabel img1;
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
-	private CustomerVO customer = new CustomerVO();
+	private CustomerVO customer;
+	private MovieData moviedata = MovieData.getInstance();
 	private String pid = "";
 	private String password = "";
 
@@ -157,6 +157,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		switch (checkIndex) {
 		case 0: // 성공
 			loginSuccess();
+			moviedata.setId(pid);
 			break;
 		case -1:
 			passwordError();

@@ -9,22 +9,39 @@ public class MovieData {
 	private String MovieDate;
 	private int MoviePeople;
 	private String MovieSeat;
-	private String MovieSeat2;
-	
+	private String Id;
 	private String MoviePay; //원가
 	private String Moviediscount; //할인
-	private String discountprice; //최종
+	private String Discountprice; //최종
+	private String MovieRoomnNum;
 
-	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String MovieSeat2, String MoviePay, String Moviediscount, String diiscountprice) {
+	public MovieData(String Id, String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String MoviePay, String Moviediscount, String Discountprice, String MovieRoomnNum) {
+		this.Id = Id;
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;
 		this.MovieDate = MovieDate;
 		this.MoviePeople = MoviePeople;
 		this.MovieSeat = MovieSeat;
-		this.MovieSeat = MovieSeat2;
 		this.MoviePay = MoviePay;
 		this.Moviediscount = Moviediscount;
-		this.discountprice =diiscountprice;
+		this.Discountprice = Discountprice;
+		this.MovieRoomnNum = MovieRoomnNum;
+	}
+	
+	public String getMovieRoomNum() {
+		return MovieRoomnNum;
+	}
+	
+	public void setMovieRoomNum(String movieroomnum) {
+		MovieRoomnNum = movieroomnum;
+	}
+	
+	public String getId() {
+		return Id;
+	}
+	
+	public void setId(String id) {
+		Id = id;
 	}
 
 	public String getMovieList() {
@@ -67,14 +84,6 @@ public class MovieData {
 		MovieSeat = movieSeat;
 	}
 	
-	public String getMovieSeat2() {
-		return MovieSeat;
-	}
-
-	public void setMovieSeat2(String movieSeat2) {
-		MovieSeat2 = movieSeat2;
-	}
-
 	public String getMoviePay() {
 		return MoviePay;
 	}
@@ -99,10 +108,10 @@ public class MovieData {
 	}
 
 	public String getDiscountprice() {
-		return discountprice;
+		return Discountprice;
 	}
 
 	public void setDiscountprice(String discountprice) {
-		this.discountprice = discountprice;
+		Discountprice = discountprice;
 	}
 }

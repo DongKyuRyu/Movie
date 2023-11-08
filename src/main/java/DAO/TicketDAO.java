@@ -47,18 +47,17 @@ public class TicketDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String name = rs.getString("name");
 				String seatNumber = rs.getString("seatNumber");
 				String roomNumber = rs.getString("roomNumber");
 				String movieName = rs.getString("movieName");
 				String dDay = rs.getString("dDay");
 				String time = rs.getString("time");
 				String reservedDate = rs.getString("reservedDate");
-				int cost = rs.getInt("cost");
+				String cost = rs.getString("cost");
 				int person = rs.getInt("person");
 				TicketVO ticketVO = new TicketVO(
-						name,customerId,seatNumber,roomNumber,movieName,
-						dDay,time, reservedDate, cost, person	
+						customerId,seatNumber,roomNumber,movieName,
+						dDay,time, cost, person	
 						);
 				list.add(ticketVO);
 			}
@@ -127,36 +126,28 @@ public class TicketDAO {
 	
 	// 티켓 등록  insert
 	public void insert(TicketVO ticket) {
-		String name = ticket.getName(); // 고객 이름 -ticketingView 0
 		String id = ticket.getId();// 고객 아이디 -ticketingView 0
 		String seatNumber = ticket.getSeatNumber(); // 좌석 이름 -seatView 0
 		String roomNumber = ticket.getRoomNumber(); // 관 번호 -ticketingView 0
 		String movieName = ticket.getMovieName(); // 영화 이름 -ticketingView 0
 		String dDay = ticket.getDday();
 		String time = ticket.getTime(); // 영화 회차 -ticketingView 0
-		int cost = ticket.getCost(); // 티켓 가격 -ticketingView 0
+		String cost = ticket.getCost(); // 티켓 가격 -ticketingView 0
 		int person = ticket.getPerson(); // 인원 수 -ticketingView 0
 
 		// 예약한 시간 저장하기
-		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
-		Calendar c = Calendar.getInstance();
-		String reservedDate = f.format(c.getTime()); // 현재날짜를 전달.
-		ticket.setReservedDate(reservedDate);
-
-		String sql = "insert into ticket values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into ticket values (?,?,?,?,?,?,?,?)";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, id);
-			pstmt.setString(3, seatNumber);
-			pstmt.setString(4, roomNumber);
-			pstmt.setString(5, movieName);
-			pstmt.setString(6, dDay);
-			pstmt.setString(7, time);
-			pstmt.setString(8, reservedDate);
-			pstmt.setInt(9, cost);
-			pstmt.setInt(10, person);
+			pstmt.setString(1, id);
+			pstmt.setString(2, seatNumber);
+			pstmt.setString(3, roomNumber);
+			pstmt.setString(4, movieName);
+			pstmt.setString(5, dDay);
+			pstmt.setString(6, time);
+			pstmt.setString(7, cost);
+			pstmt.setInt(8, person);
 			System.out.println(ticket.toString());
 			pstmt.executeUpdate();
 			System.out.println("티켓 등록 완료");
@@ -166,5 +157,4 @@ public class TicketDAO {
 			CloseUtil.close(pstmt, con);
 		}
 	}
-
 }

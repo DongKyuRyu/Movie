@@ -32,7 +32,8 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 	private JButton movieposter;
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
-
+	private MovieData moviedata = MovieData.getInstance();
+	
 	public PaymentCompleted() {
 		Font Movieposter = new Font("고딕", Font.BOLD, 20);
 		Font Movieposter1 = new Font("고딕", Font.BOLD, 17);
@@ -71,21 +72,21 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 
 		// 영화 포스터 자리
 		movieDao.connect();
-		String movieName = movieDao.SearchMovieposter("30일");
+		String movieName = movieDao.SearchMovieposter(moviedata.getMovieList());
 		searchURL = getClass().getResource(movieName);
 		imageicon = new ImageIcon(searchURL);
 		movieposter = new JButton(imageicon);
 		Image image = imageicon.getImage();
 		Image scaledImage = image.getScaledInstance(300, 350, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
-		movieposter = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
+		movieposter = new JButton(scaledIcon);
 		movieposter.setBounds(50, 50, 300, 350);
 		movieposter.setBackground(Color.PINK);
 		movieposter.setBorderPainted(false);
 		movieposter.setFocusPainted(false);
 		movieposter.setContentAreaFilled(false);
 
-		MovieName = new Label("영화 제목 :");
+		MovieName = new Label("영화 제목 :" );
 		MovieName.setBounds(50, 420, 105, 25);
 		MovieName.setBackground(Color.lightGray);
 		MovieName.setFont(Movieposter);

@@ -29,7 +29,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private CustomerVO customer = new CustomerVO();
 	private String pid = "";
 	private String password = "";
-
+	private MovieData moviedata =MovieData.getInstance();
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
@@ -156,6 +156,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		int checkIndex = customerDao.login(pid, password);
 		switch (checkIndex) {
 		case 0: // 성공
+			moviedata.setMovieID(pid);
 			loginSuccess();
 			break;
 		case -1:
@@ -174,7 +175,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private void loginSuccess() {
 		Lab_1.setText("로그인이 되었습니다.");
 		f.setVisible(false);
-		customer = customerDao.selectById(pid);
+		customer = customerDao.selectById(pid);		
 		MainFrame mainframe = new MainFrame();
 	}
 
@@ -192,6 +193,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		id.setText("");
 		pwd.setText("");
 	}
+
 
 	public static void main(String[] args) {
 		Login tft = new Login();

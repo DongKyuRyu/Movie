@@ -64,10 +64,10 @@ public class CustomerDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return null;
 	}
-	
+
 	// 회원가입에서 아이디 중복 체크
 	// 중복 : 0 실패 : 사용 가능 : -1 | 데이터베이스 오류 : -2
 	public int Duplication(String id) {
@@ -86,20 +86,19 @@ public class CustomerDAO {
 					System.out.println("이미 존재하는 ID입니다.");
 					return 0;
 				}
-			}
-			else {
+			} else {
 				System.out.println("사용 가능한 아이디입니다.");
 				return -1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return -2;
 	}
-	
-	
+
 	// 아이디 찾기
-	// 1. 이름, 이메일을 입력 받는다. 2. 받은 값을 DataBase에서 select 사용해서 아이디를 찾는다. 3. 찾은 아이디값을 String 타입으로 return 해준다. 
+	// 1. 이름, 이메일을 입력 받는다. 2. 받은 값을 DataBase에서 select 사용해서 아이디를 찾는다. 3. 찾은 아이디값을
+	// String 타입으로 return 해준다.
 	public String SearchID(String name, String email) {
 		String sql = "select * from customer where name = ? AND EMAIL = ? ";
 
@@ -108,7 +107,7 @@ public class CustomerDAO {
 			pstmt.setString(1, name);
 			pstmt.setString(2, email);
 			rs = pstmt.executeQuery();
-			
+
 			CustomerVO customer = new CustomerVO();
 
 			// id 확인
@@ -122,19 +121,19 @@ public class CustomerDAO {
 					System.out.println("일치하는 회원 정보가 존재합니다.");
 					return ID;
 				}
-			}
-			else {
+			} else {
 				System.out.println("회원 정보가 존재하지 않습니다.");
 				return "NonExist";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return "Error";
 	}
-	
+
 	// 비밀번호 찾기
-	// 1. 이름, 아이디를 입력 받는다. 2. 받은 값을 DataBase에서 select 사용해서 비밀번호가 존재하는지 확인한다. 3. 비밀번호가 존재한다면 0을 return한다.
+	// 1. 이름, 아이디를 입력 받는다. 2. 받은 값을 DataBase에서 select 사용해서 비밀번호가 존재하는지 확인한다. 3.
+	// 비밀번호가 존재한다면 0을 return한다.
 	public int SearchPWD(String name, String id) {
 		String sql = "select * from customer where name = ? AND id = ? ";
 
@@ -143,7 +142,7 @@ public class CustomerDAO {
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
-			
+
 //			CustomerVO customer = new CustomerVO();
 
 			// id 확인
@@ -157,35 +156,31 @@ public class CustomerDAO {
 					System.out.println("PassWord를 찾았습니다.");
 					return 0;
 				}
-			}
-			else {
+			} else {
 				System.out.println("정확하게 입력해 주세요.");
 				return -1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return -2;
 	}
-	
-	
-	
+
 	// 비밀번호 변경
 	public void ChangePWD(String password, String id) {
 		String sql = "update customer set password = ? where id = ?";
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, password);
 			pstmt.setString(2, id);
 			rs = pstmt.executeQuery();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-		
-	
+
 	// 로그인
 	// 성공 : 0 실패 : 비밀번호오류 : -1, 등록되지않은 아이디 : -2 | 데이터베이스 오류 : -3;
 	public int login(String id, String password) {
@@ -220,8 +215,8 @@ public class CustomerDAO {
 		}
 		return -3; // 데이터베이스 오류
 	}
-	
-	//회원가입
+
+	// 회원가입
 	public boolean register(CustomerVO customer) {
 		String name = customer.getName();
 		String id = customer.getId();
@@ -249,7 +244,48 @@ public class CustomerDAO {
 		return false;
 	}
 
+	public String fullname(String id) {
+		String sql = "select name from customer where id = ? ";
 
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			CustomerVO customer = new CustomerVO();
+			// id 확인
+			if (rs.next()) {
+				String fullname = rs.getString("name");
+				customer.setName(fullname);
+				String name = customer.getName();
+				return name;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public String fullemail(String id) {
+		String sql = "select email from customer where id = ? ";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			CustomerVO customer = new CustomerVO();
+			// id 확인
+			if (rs.next()) {
+				String fullemail = rs.getString("email");
+				customer.setEmail(fullemail);
+				String email = customer.getEmail();
+				return email;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	// update - 아이디 및 비밀번호 변경
 
 	// delete - 회원 삭제

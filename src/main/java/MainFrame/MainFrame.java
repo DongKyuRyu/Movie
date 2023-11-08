@@ -46,6 +46,7 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 		b4 = new Button("내 정보");
 		b4.setBounds(275, 400, 175, 150);
 		b4.setBackground(new Color(188, 205, 227));
+		b4.addActionListener(this);
 		
 		logout = new Button("Logout");
 		logout.setBounds(165, 600, 170, 50);
@@ -79,6 +80,12 @@ public class MainFrame extends WindowAdapter implements ActionListener{
 			f.setVisible(false);
 			MovieList movielist = new MovieList();
 		}
+		if (e.getActionCommand().equals("내 정보")) {
+			f.setVisible(false);
+			information infort = new information();
+		}
+		
+		
 	}
 	
 	public static void main(String[] args) {

@@ -43,19 +43,13 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
-//	private String movieName;
+
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private MovieData moviedata = MovieData.getInstance();
   
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
-//	public Pay(String year, String month, String day) {
-//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
-//	}
-//	public String getMovieName() {
-//		return movieName;
-//	}
 
 	public Pay(int adultCount, int teenagerCount) {
 //		String calendar = new CalendarEx("Scheduler").returnCalendar();

@@ -29,6 +29,8 @@ public class Login extends WindowAdapter implements ActionListener {
 	private MovieData moviedata = MovieData.getInstance();
 	private String pid = "";
 	private String password = "";
+	
+	private MovieData moviedata = MovieData.getInstance();
 
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
@@ -156,6 +158,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		int checkIndex = customerDao.login(pid, password);
 		switch (checkIndex) {
 		case 0: // 성공
+			moviedata.setMovieID(pid);
 			loginSuccess();
 			moviedata.setId(pid);
 			break;

@@ -27,7 +27,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel;
-	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2;
+	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2, SEATDATA;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	private NumberOfPeople numberofpeople;
@@ -78,11 +78,33 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Cancel.setBounds(400, 585, 100, 30);
 		Cancel.setBackground(new Color(188, 205, 227));
 		Cancel.addActionListener(this);
+		
+		// 좌석 중복 확인
+		ticketDao.connect();
+		for (int i = 0; i < SeatNumberr.size(); i++) {
+			String seatdata = SeatNumberr.get(i);
+			
+			if (i == 0) {
+				SEATDATA = seatdata;
+			} else if (i > 0) {
+				SEATDATA += ", " + seatdata;
+			}
+		}
+		
+		String[] SeatDATA = SEATDATA.split(", ");
+		
+		for (int i = 0; i < SeatDATA.length; i++) {
+			System.out.println(SeatDATA[i]);
+		}
 
+		
+		// 좌석 생성
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 20; j++) {
 				char seatRow = (char) (i + 65);
 				String seatNumber = String.format("%c%d", seatRow, j + 1);
+				
+				
 
 				SeatNumber[i][j] = seatNumber;
 				Seat[i][j] = new Button(SeatNumber[i][j]);
@@ -94,6 +116,13 @@ public class Seat extends WindowAdapter implements ActionListener {
 				int finalI = i;
 				int finalJ = j;
 				SeatRow = seatRow;
+				
+				for (int k =0; k < SeatDATA.length; k++) {
+					if (SeatDATA[k].equals(seatNumber)) {
+						Seat[finalI][finalJ].setEnabled(false);
+					}
+				}
+				
 				Seat[i][j].addActionListener(new ActionListener() {
 					private String realSeatIJ;
 
@@ -123,18 +152,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 				});
 			}
 		}
-
-		ticketDao.connect();
-
-		for (int i = 0; i < SeatNumberr.size(); i++) {
-			String seatdata = SeatNumberr.get(i);
-			String Duplicateseat = seatdata;
-			
-			String SEATDATA += seatdata;
-			
-//			System.out.println(Duplicateseat);
-		}
-
+		
 		Befor = new Button("이 전");
 		Befor.setBounds(325, 625, 100, 30);
 		Befor.setBackground(new Color(188, 205, 227));

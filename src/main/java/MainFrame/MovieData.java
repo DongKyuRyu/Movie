@@ -17,10 +17,11 @@ public class MovieData {
 	private String IdEmail;
 	
 	private String MovieRoomNum;
-	
+
 	private String MoviePay; //원가
 	private String Moviediscount; //할인
-	private String discountprice; //최종
+	private String Discountprice; //최종
+	private String MovieRoomnNum;
 
 	public MovieData() {
 	}
@@ -147,10 +148,10 @@ public class MovieData {
 	}
 
 	public String getDiscountprice() {
-		return discountprice;
+		return Discountprice;
 	}
 
 	public void setDiscountprice(String discountprice) {
-		this.discountprice = discountprice;
+		Discountprice = discountprice;
 	}
 }

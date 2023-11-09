@@ -50,7 +50,6 @@ public class TicketDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String name = rs.getString("name");
 				String seatNumber = rs.getString("seatNumber");
 				String roomNumber = rs.getString("roomNumber");
 				String movieName = rs.getString("movieName");
@@ -139,7 +138,6 @@ public class TicketDAO {
 		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
 		Calendar c = Calendar.getInstance();
 		String reservedDate = f.format(c.getTime()); // 현재날짜를 전달.
-
 		String sql = "insert into ticket values (?,?,?,?,?,?,?,?)";
 		try {
 			connect();

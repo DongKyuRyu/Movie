@@ -30,6 +30,8 @@ import javax.swing.JButton;
 import DAO.CustomerDAO;
 import DAO.MovieDAO;
 import DAO.TicketDAO;
+
+import VO.CustomerVO;
 import VO.TicketVO;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
@@ -46,6 +48,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private URL searchURL;
 	private ImageIcon imageicon;
 	private JButton movieporster;
+
 	private boolean card, discount, phone;
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
@@ -55,10 +58,14 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private TicketVO ticketVo;
 
 	private MovieData moviedata = MovieData.getInstance();
+	private TicketVO ticketvo = new TicketVO();
+	private TicketDAO ticketdao = TicketDAO.getInstance();
+	private CustomerVO customervo;
 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 	public Pay(int adultCount, int teenagerCount) {
+		System.out.println(moviedata.getId());
 		card = false;
 		discount = false;
 		phone = false;

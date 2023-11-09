@@ -155,7 +155,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			NumberOfPeople numberofpeople = new NumberOfPeople();
+			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 
 		if (e.getActionCommand().equals("다 음")) {

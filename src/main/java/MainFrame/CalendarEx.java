@@ -18,8 +18,10 @@ import java.util.Calendar;
 public class CalendarEx extends Frame {
 	private Panel pDate = new Panel();
 	private Panel pUp = new Panel();
+	private Panel BA = new Panel();
 	private Button btnPrevMon = new Button("◀");
 	private Button btnNextMon = new Button("▶");
+	private Button Befor = new Button("이 전");
 	private Label lblYearMon = new Label();
 	private Button[] btnArr = new Button[42];
 	private Calendar curMon = Calendar.getInstance();
@@ -42,6 +44,9 @@ public class CalendarEx extends Frame {
         super(title);
         
         Dimension scr1 = Toolkit.getDefaultToolkit().getScreenSize();
+        BA.add(Befor);
+        BA.setBackground(Color.lightGray);
+        
 		pUp.setBackground(Color.yellow);
 		pUp.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pUp.add(btnPrevMon);
@@ -58,6 +63,7 @@ public class CalendarEx extends Frame {
 
 		btnPrevMon.addActionListener(new BtnEventHandler());
 		btnNextMon.addActionListener(new BtnEventHandler());
+		Befor.addActionListener(new BtnEventHandler());
 		addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				we.getWindow().setVisible(false);
@@ -68,6 +74,7 @@ public class CalendarEx extends Frame {
 
 		add(pUp, "North");
 		add(pDate, "Center");
+		add(BA, "South");
 		setBounds(200, 200, 500, 300);
 		setDays(curMon);
 		setVisible(true);
@@ -131,12 +138,16 @@ public class CalendarEx extends Frame {
 			} else if (src == btnNextMon) {
 				curMon.add(Calendar.MONTH, 1);
 			}
+			if (src == Befor) {
+				setVisible(false);
+				MovieList movielist = new MovieList();
+			}
+			
 			setDays(curMon);
 			repaint();
 		}
 	}
     public static void main(String[] args) {
-        MovieList movieList = new MovieList();
         CalendarEx mainWin = new CalendarEx("Scheduler");
     }
 }

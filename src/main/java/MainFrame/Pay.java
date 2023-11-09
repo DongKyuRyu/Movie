@@ -36,7 +36,7 @@ import VO.TicketVO;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
-	private Button pay;
+	private Button pay, befor;
 	private Label movie, cash, disCount, payplan, cardnum, phonenum, totalprice, disCountprice, realPrice, moviename,
 			Date, MovieRoom, Seat;
 	private Choice coupon;
@@ -102,10 +102,15 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		faPay.addWindowListener(this);
 
 		pay = new Button(" 결 제 하 기 ");
-		pay.setBounds(350, 470, 100, 30);
+		pay.setBounds(405, 470, 100, 30);
 		pay.setBackground(new Color(188, 205, 227));
 		pay.setEnabled(false);
 		pay.addActionListener(this);
+		
+		befor = new Button("이 전");
+		befor.setBounds(295, 470, 100, 30);
+		befor.setBackground(new Color(188, 205, 227));
+		befor.addActionListener(this);
 
 		movie = new Label("예매 정보", Label.CENTER);
 		movie.setFont(new Font("돋움", Font.BOLD, 25));
@@ -299,8 +304,9 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		movieinfo.add(Date);
 		movieinfo.add(MovieRoom);
 		movieinfo.add(Seat);
-
 		movieinfo.add(movieporster);
+		
+		faPay.add(befor);
 		faPay.add(movieinfo);
 		faPay.add(payinfo);
 		faPay.add(cash);
@@ -435,6 +441,11 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			System.out.println(moviedata.getMovieID());
 
 			PaymentCompleted paymentcompleted = new PaymentCompleted();
+		}
+		
+		if (e.getActionCommand().equals("이 전")) {
+			faPay.setVisible(false);
+			Seat seat = new Seat(moviedata.getAdultCount(), moviedata.getTeenagerCount());
 		}
 	}
 

@@ -63,19 +63,19 @@ public class Login extends WindowAdapter implements ActionListener {
 		// 아이디 찾기 버튼
 		IdSearch = new Button("ID 찾기");
 		IdSearch.setBackground(new Color(188, 205, 227));
-		IdSearch.setBounds(300, 435, 60, 40);
+		IdSearch.setBounds(300, 435, 75, 40);
 		IdSearch.addActionListener(this);
 
 		// 비밀번호찾기 버튼
 		PwdSearch = new Button("Pwd 찾기");
 		PwdSearch.setBackground(new Color(188, 205, 227));
-		PwdSearch.setBounds(365, 435, 60, 40);
+		PwdSearch.setBounds(380, 435, 70, 40);
 		PwdSearch.addActionListener(this);
 
 		// 회원가입 버튼
 		Register = new Button("회원가입");
 		Register.setBackground(new Color(188, 205, 227));
-		Register.setBounds(430, 435, 60, 40);
+		Register.setBounds(455, 435, 145, 40);
 		Register.addActionListener(this);
 
 		// ID 라벨
@@ -92,7 +92,7 @@ public class Login extends WindowAdapter implements ActionListener {
 
 		// login 라벨
 		Label Login = new Label("Green House", Label.CENTER);
-		Login.setBounds(140, 150, 620, 100);
+		Login.setBounds(190, 150, 620, 100);
 		Login.setForeground(Color.WHITE);
 		Login.setBackground(new Color(188, 205, 194));
 		Login.setFont(LoginFont);
@@ -104,7 +104,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 		ImageIcon scaledIcon = new ImageIcon(scaledImage);
 		movieporster = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
-		movieporster.setBounds(40, 150, 100, 100);
+		movieporster.setBounds(90, 150, 100, 100);
 		movieporster.setBackground(Color.red);
 		movieporster.setBorderPainted(false);
 		movieporster.setFocusPainted(false);

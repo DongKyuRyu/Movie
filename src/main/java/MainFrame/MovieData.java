@@ -8,8 +8,15 @@ public class MovieData {
 	private String MovieTime;
 	private String MovieDate;
 	private int MoviePeople;
+	
 	private String MovieSeat;
-	private String MovieSeat2;
+	private String DuplicateSeat;
+	
+	private String MovieID;
+	private String IdName;
+	private String IdEmail;
+	
+	private String MovieRoomNum;
 	
 	private String MoviePay; //원가
 	private String Moviediscount; //할인
@@ -22,16 +29,65 @@ public class MovieData {
 		return instance;
 	}
 	
-	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String MovieSeat2, String MoviePay, String Moviediscount, String diiscountprice) {
+	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String DuplicateSeat, String MovieID, String IdName, String IdEmail, String MovieRoomNum, String MoviePay, String Moviediscount, String diiscountprice) {
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;
 		this.MovieDate = MovieDate;
 		this.MoviePeople = MoviePeople;
+		
 		this.MovieSeat = MovieSeat;
-		this.MovieSeat = MovieSeat2;
+		this.DuplicateSeat = DuplicateSeat;
+		
+		this.MovieID = MovieID;
+		this.IdName = IdName;
+		this.IdEmail = IdEmail;
+		
+		this.MovieRoomNum = MovieRoomNum;
+		
 		this.MoviePay = MoviePay;
 		this.Moviediscount = Moviediscount;
 		this.discountprice =diiscountprice;
+		
+	}
+
+	public String getDuplicateSeat() {
+		return DuplicateSeat;
+	}
+
+	public void setDuplicateSeat(String duplicateSeat) {
+		DuplicateSeat = duplicateSeat;
+	}
+
+	public String getMovieRoomNum() {
+		return MovieRoomNum;
+	}
+
+	public void setMovieRoomNum(String movieRoomNum) {
+		MovieRoomNum = movieRoomNum;
+	}
+
+	public String getMovieID() {
+		return MovieID;
+	}
+
+	public void setMovieID(String movieID) {
+		MovieID = movieID;
+	}
+
+	public String getIdName() {
+		return IdName;
+	}
+
+	public void setIdName(String idName) {
+		IdName = idName;
+	}
+
+	public String getIdEmail() {
+		return IdEmail;
+	}
+
+	public void setIdEmail(String idEmail) {
+		IdEmail = idEmail;
 	}
 
 	public String getMovieList() {
@@ -72,14 +128,6 @@ public class MovieData {
 
 	public void setMovieSeat(String movieSeat) {
 		MovieSeat = movieSeat;
-	}
-
-	public String getMovieSeat2() {
-		return MovieSeat;
-	}
-
-	public void setMovieSeat2(String movieSeat2) {
-		MovieSeat2 = movieSeat2;
 	}
 
 	public String getMoviePay() {

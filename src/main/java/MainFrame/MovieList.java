@@ -60,7 +60,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
         selectMovie5 = new Checkbox("용감한시민", moviename, false);
         selectMovie6 = new Checkbox("바람 따라 만나리", moviename, false);
         selectMovie7 = new Checkbox("오픈 더 도어", moviename, false);
-        selectMovie8 = new Checkbox("용감한 시민", moviename, false);
+        selectMovie8 = new Checkbox("소년들", moviename, false);
         selectMovie9 = new Checkbox("시수", moviename, false);
         selectMovie10 = new Checkbox("두사람을 위한 식탁", moviename, false);
         selectMovie11 = new Checkbox("톡투미", moviename, false);
@@ -152,7 +152,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("이 전")) {
             f.setVisible(false);
-            // MainFrame mainframe = new MainFrame();
+            MainFrame mainframe = new MainFrame();
         }
         if (e.getActionCommand().equals("다 음")) {
             f.setVisible(false);

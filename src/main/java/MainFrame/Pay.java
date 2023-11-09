@@ -21,7 +21,6 @@ import java.awt.event.TextEvent;
 import java.awt.event.TextListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.net.URL;
 import java.text.DecimalFormat;
 
@@ -30,6 +29,8 @@ import javax.swing.JButton;
 
 import DAO.CustomerDAO;
 import DAO.MovieDAO;
+import DAO.TicketDAO;
+import VO.TicketVO;
 
 public class Pay extends WindowAdapter implements ActionListener, ItemListener, TextListener {
 	private Frame faPay;
@@ -49,7 +50,10 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
-	
+	private TicketDAO ticketDao = TicketDAO.getInstance();
+
+	private TicketVO ticketVo;
+
 	private MovieData moviedata = MovieData.getInstance();
 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
@@ -228,36 +232,51 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		MovieRoom = new Label();
 		MovieRoom.setBounds(10, 258, 360, 17);
 		MovieRoom.setFont(Movieposter);
+
 		if (moviedata.getMovieList().equals("30일")) {
 			MovieRoom.setText("상영관 : 1관");
+			moviedata.setMovieRoomNum("1관");
 		} else if (moviedata.getMovieList().equals("플라워 킬링 문")) {
 			MovieRoom.setText("상영관 : 2관");
+			moviedata.setMovieRoomNum("2관");
 		} else if (moviedata.getMovieList().equals("빌리와 용감한 녀석들")) {
 			MovieRoom.setText("상영관 : 3관");
+			moviedata.setMovieRoomNum("3관");
 		} else if (moviedata.getMovieList().equals("소년들")) {
 			MovieRoom.setText("상영관 : 4관");
-		} else if (moviedata.getMovieList().equals("용감한 시민")) {
+			moviedata.setMovieRoomNum("4관");
+		} else if (moviedata.getMovieList().equals("용감한시민")) {
 			MovieRoom.setText("상영관 : 5관");
+			moviedata.setMovieRoomNum("5관");
 		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
 			MovieRoom.setText("상영관 : 6관");
+			moviedata.setMovieRoomNum("6관");
 		} else if (moviedata.getMovieList().equals("오픈 더 도어")) {
 			MovieRoom.setText("상영관 : 7관");
+			moviedata.setMovieRoomNum("7관");
 		} else if (moviedata.getMovieList().equals("시수")) {
 			MovieRoom.setText("상영관 : 8관");
+			moviedata.setMovieRoomNum("8관");
 		} else if (moviedata.getMovieList().equals("두사람을 위한 식탁")) {
 			MovieRoom.setText("상영관 : 9관");
+			moviedata.setMovieRoomNum("9관");
 		} else if (moviedata.getMovieList().equals("톡투미")) {
 			MovieRoom.setText("상영관 : 10관");
+			moviedata.setMovieRoomNum("10관");
 		} else if (moviedata.getMovieList().equals("더 킬러")) {
 			MovieRoom.setText("상영관 : 11관");
+			moviedata.setMovieRoomNum("11관");
 		} else if (moviedata.getMovieList().equals("그대들은 어떻게 살 것인가")) {
 			MovieRoom.setText("상영관 : 12관");
+			moviedata.setMovieRoomNum("12관");
 		}
 
 		Seat = new Label();
 		Seat.setBounds(10, 277, 360, 17);
 		Seat.setFont(Movieposter);
 		Seat.setText("인원 / 좌석 : " + moviedata.getMovieSeat());
+
+
 
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
@@ -285,14 +304,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	public static void main(String[] args) {
 		Pay test = new Pay(5, 2);
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
-			
-			faPay.setVisible(false);
-			PaymentCompleted paymentcompleted = new PaymentCompleted();
-		}
 	}
 
 	public void itemStateChanged(ItemEvent e) {
@@ -325,7 +336,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			phone = false;
 			card = false;
 		}
-		
 
 		if (e.getItem().equals("해당사항 없음")) {
 //         String totalsum = decimalFormat.format(totalPrice1);
@@ -389,7 +399,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		} else {
 			card = true;
 		}
-		
+
 		if (phonText1.getText().equals("") && phonText2.getText().equals("") && phonText3.getText().equals("")) {
 			phone = false;
 		} else {
@@ -400,6 +410,24 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			pay.setEnabled(true);
 		} else {
 			pay.setEnabled(false);
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
+			faPay.setVisible(false);
+			
+			ticketVo = new TicketVO(moviedata.getMovieID(), moviedata.getMovieSeat(), moviedata.getMovieRoomNum(),
+					moviedata.getMovieList(), moviedata.getMovieDate(), moviedata.getMovieTime(),
+					moviedata.getDiscountprice(), moviedata.getMoviePeople());
+
+			customerDao.connect();
+			ticketDao.connect();
+			ticketDao.insert(ticketVo);
+			
+			System.out.println(moviedata.getMovieID());
+
+			PaymentCompleted paymentcompleted = new PaymentCompleted();
 		}
 	}
 

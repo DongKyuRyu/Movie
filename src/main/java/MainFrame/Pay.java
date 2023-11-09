@@ -27,8 +27,10 @@ import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import DAO.CustomerDAO;
 import DAO.MovieDAO;
 import DAO.TicketDAO;
+
 import VO.CustomerVO;
 import VO.TicketVO;
 
@@ -47,13 +49,14 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	private ImageIcon imageicon;
 	private JButton movieporster;
 
-	private String pid = "", pseatnum = "", proomnum = "", pmoviename = "", pdday = "", ptime = "", pcost = "";
-	private int pperson = 0;
-
 	private boolean card, discount, phone;
-//	private String movieName;
 
 	private MovieDAO movieDao = MovieDAO.getInstance();
+	private CustomerDAO customerDao = CustomerDAO.getInstance();
+	private TicketDAO ticketDao = TicketDAO.getInstance();
+
+	private TicketVO ticketVo;
+
 	private MovieData moviedata = MovieData.getInstance();
 	private TicketVO ticketvo = new TicketVO();
 	private TicketDAO ticketdao = TicketDAO.getInstance();
@@ -61,15 +64,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
-//	public Pay(String year, String month, String day) {
-//		String returnCalendar = CalendarEx.returnCalendar(year, month, day);
-//	}
-//	public String getMovieName() {
-//		return movieName;
-//	}
-
 	public Pay(int adultCount, int teenagerCount) {
-		System.out.println(moviedata.getId());
+		System.out.println(moviedata.getMovieID());
 		card = false;
 		discount = false;
 		phone = false;
@@ -243,6 +239,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		MovieRoom = new Label();
 		MovieRoom.setBounds(10, 258, 360, 17);
 		MovieRoom.setFont(Movieposter);
+
 		if (moviedata.getMovieList().equals("30일")) {
 			MovieRoom.setText("상영관 : 1관");
 			moviedata.setMovieRoomNum("1관");
@@ -255,7 +252,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		} else if (moviedata.getMovieList().equals("소년들")) {
 			MovieRoom.setText("상영관 : 4관");
 			moviedata.setMovieRoomNum("4관");
-		} else if (moviedata.getMovieList().equals("용감한 시민")) {
+		} else if (moviedata.getMovieList().equals("용감한시민")) {
 			MovieRoom.setText("상영관 : 5관");
 			moviedata.setMovieRoomNum("5관");
 		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
@@ -286,6 +283,8 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		Seat.setFont(Movieposter);
 		Seat.setText("인원 / 좌석 : " + moviedata.getMovieSeat());
 
+
+
 		payinfo.add(realPrice);
 		payinfo.add(disCountprice);
 		payinfo.add(totalprice);
@@ -312,27 +311,6 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 
 	public static void main(String[] args) {
 		Pay test = new Pay(5, 2);
-	}
-
-	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
-
-			ticketvo = new TicketVO(moviedata.getId(), moviedata.getMovieSeat(), moviedata.getMovieRoomNum(),
-					moviedata.getMovieList(), moviedata.getMovieDate(), moviedata.getMovieTime(),
-					moviedata.getDiscountprice(), moviedata.getMoviePeople());
-
-			PaymentCompleted(pid, pseatnum, proomnum, pmoviename, pdday, ptime, pcost, pperson);
-
-			faPay.setVisible(false);
-			PaymentCompleted paymentcompleted = new PaymentCompleted();
-		}
-	}
-
-	public void PaymentCompleted(String id, String seatNumber, String roomNumber, String movieName, String dDay,
-			String time, String cost, int person) {
-		ticketdao.connect();
-		ticketdao.insert(ticketvo);
-
 	}
 
 	public void itemStateChanged(ItemEvent e) {
@@ -439,6 +417,24 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 			pay.setEnabled(true);
 		} else {
 			pay.setEnabled(false);
+		}
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals(" 결 제 하 기 ")) {
+			faPay.setVisible(false);
+			
+			ticketVo = new TicketVO(moviedata.getMovieID(), moviedata.getMovieSeat(), moviedata.getMovieRoomNum(),
+					moviedata.getMovieList(), moviedata.getMovieDate(), moviedata.getMovieTime(),
+					moviedata.getDiscountprice(), moviedata.getMoviePeople());
+
+			customerDao.connect();
+			ticketDao.connect();
+			ticketDao.insert(ticketVo);
+			
+			System.out.println(moviedata.getMovieID());
+
+			PaymentCompleted paymentcompleted = new PaymentCompleted();
 		}
 	}
 

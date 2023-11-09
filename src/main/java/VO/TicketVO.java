@@ -7,7 +7,6 @@ public class TicketVO {
 	private String movieName; // 영화 이름 -ticketing
 	private String dDay; // 영화 시작 날짜 -ticketing
 	private String time; // 영화 회차 - seat
-	private String reservedDate; // 영화 예매 날짜. 년 월 일 -- > 예약한 날짜만 나옴. - seat
 	private String cost; // 티켓 가격 -ticketing
 	private int person; // 인원 수 -ticketing
 
@@ -15,8 +14,8 @@ public class TicketVO {
 		super();
 	}
 
-	public TicketVO(String id, String seatNumber, String roomNumber, String movieName, String dDay, String time,
-			String cost, int person) {
+	public TicketVO(String id, String seatNumber, String roomNumber, String movieName,
+			String dDay, String time, String cost, int person) {
 		super();
 		this.id = id;
 		this.seatNumber = seatNumber;
@@ -30,8 +29,11 @@ public class TicketVO {
 
 	@Override
 	public String toString() {
-		String text = id + " " + seatNumber + " " + roomNumber + " " + movieName + " " + dDay + " " + time + " "
-				+ cost + " " + person;
+		String text =
+				id + " "+ seatNumber + " " + roomNumber + " " + movieName
+				+ " " + dDay
+				+ " " + time
+				+ " " + cost +" " + person;
 		return text;
 	}
 
@@ -81,14 +83,6 @@ public class TicketVO {
 
 	public void setTime(String time) {
 		this.time = time;
-	}
-
-	public String getReservedDate() {
-		return reservedDate;
-	}
-
-	public void setReservedDate(String reserveDate) {
-		this.reservedDate = reserveDate;
 	}
 
 	public String getCost() {

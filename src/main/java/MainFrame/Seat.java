@@ -13,11 +13,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import DAO.MovieDAO;
 import DAO.TicketDAO;
 import VO.MovieVO;
+import VO.SeatVO;
 import VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
@@ -34,6 +36,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private char SeatRow;
 
 	private MovieData moviedata = MovieData.getInstance();
+	private SeatVO seatvo = SeatVO.getInstance();
 
 	// VO
 	private TicketVO ticket;
@@ -42,6 +45,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 	// DAO
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
+
+	private ArrayList<String> SeatNumberr = ticketDao.selectSeat(moviedata.getMovieList(), moviedata.getMovieDate(),
+			moviedata.getMovieTime());
 
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
@@ -118,6 +124,16 @@ public class Seat extends WindowAdapter implements ActionListener {
 			}
 		}
 
+		ticketDao.connect();
+
+		for (int i = 0; i < SeatNumberr.size(); i++) {
+			String seatdata = seatvo.getSeatdata();
+			
+			String SEATDATA += seatdata;
+			
+//			System.out.println(Duplicateseat);
+		}
+
 		Befor = new Button("이 전");
 		Befor.setBounds(325, 625, 100, 30);
 		Befor.setBackground(new Color(188, 205, 227));
@@ -145,6 +161,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
+			System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
+					+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 

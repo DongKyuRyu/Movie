@@ -17,6 +17,7 @@ import VO.TicketVO;
 public class TicketDAO {
 	private static TicketDAO instance = new TicketDAO();
 	private MovieData moviedata = MovieData.getInstance();
+	private SeatVO seatvo = SeatVO.getInstance();
 
 	private TicketDAO() {
 	}

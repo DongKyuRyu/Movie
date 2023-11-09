@@ -1,6 +1,5 @@
 package MainFrame;
 
-import DAO.CustomerDAO;
 
 public class MovieData {
 	private static MovieData instance = new MovieData();
@@ -8,20 +7,15 @@ public class MovieData {
 	private String MovieTime;
 	private String MovieDate;
 	private int MoviePeople;
-	
 	private String MovieSeat;
 	private String DuplicateSeat;
-	
 	private String MovieID;
 	private String IdName;
 	private String IdEmail;
-	
 	private String MovieRoomNum;
-
 	private String MoviePay; //원가
 	private String Moviediscount; //할인
 	private String Discountprice; //최종
-	private String MovieRoomnNum;
 
 	public MovieData() {
 	}
@@ -30,6 +24,7 @@ public class MovieData {
 		return instance;
 	}
 	
+
 	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String DuplicateSeat, String MovieID, String IdName, String IdEmail, String MovieRoomNum, String MoviePay, String Moviediscount, String discountprice) {
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;

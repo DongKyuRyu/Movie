@@ -130,7 +130,9 @@ public class Seat extends WindowAdapter implements ActionListener {
 			String seatdata = SeatNumberr.get(i);
 			String Duplicateseat = seatdata;
 			
-			System.out.println(Duplicateseat);
+			String SEATDATA += seatdata;
+			
+//			System.out.println(Duplicateseat);
 		}
 
 		Befor = new Button("이 전");

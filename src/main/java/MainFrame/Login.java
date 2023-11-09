@@ -29,7 +29,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private MovieData moviedata = MovieData.getInstance();
 	private String pid = "";
 	private String password = "";
-
+  
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);

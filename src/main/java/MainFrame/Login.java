@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -12,7 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import DAO.CustomerDAO;
@@ -29,6 +33,9 @@ public class Login extends WindowAdapter implements ActionListener {
 	private MovieData moviedata = MovieData.getInstance();
 	private String pid = "";
 	private String password = "";
+	private ImageIcon imageicon;
+	private JButton movieporster;
+	private URL searchURL;
   
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
@@ -84,11 +91,24 @@ public class Login extends WindowAdapter implements ActionListener {
 		lpwd.setFont(IdPwdFont);
 
 		// login 라벨
-		Label Login = new Label("로그인");
-		Login.setBounds(300, 150, 300, 100);
+		Label Login = new Label("Green House", Label.CENTER);
+		Login.setBounds(140, 150, 620, 100);
 		Login.setForeground(Color.WHITE);
 		Login.setBackground(new Color(188, 205, 194));
 		Login.setFont(LoginFont);
+		
+		// 로고
+		searchURL = getClass().getResource("/img/Logo2.png");
+		imageicon = new ImageIcon(searchURL);
+		Image image = imageicon.getImage();
+		Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		movieporster = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
+		movieporster.setBounds(40, 150, 100, 100);
+		movieporster.setBackground(Color.red);
+		movieporster.setBorderPainted(false);
+		movieporster.setFocusPainted(false);
+		movieporster.setContentAreaFilled(false);
 
 		// ID 입력창
 		id = new TextField();
@@ -112,6 +132,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setFont(trueandfalseFont);
 		pwd.setEchoChar('*');
 
+		f.add(movieporster);
 		f.add(Login);
 		f.add(lid);
 		f.add(id);

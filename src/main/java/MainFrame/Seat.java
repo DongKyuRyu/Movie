@@ -80,7 +80,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Cancel.addActionListener(this);
 
 		AllCancel = new Button("좌석 전체 다시 선택");
-		AllCancel.setBounds(475, 585, 100, 30);
+		AllCancel.setBounds(470, 585, 110, 30);
 		AllCancel.setBackground(new Color(188, 205, 227));
 		AllCancel.addActionListener(this);
 
@@ -243,6 +243,21 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 				Button lastSelectedSeat = selectSeats.pop();
 				lastSelectedSeat.setEnabled(true);
+				if (totalSelected < adultCount + teenagerCount) {
+					Next.setEnabled(false);
+				}
+			}
+		}
+
+		if (e.getActionCommand().equals("좌석 전체 다시 선택")) {
+			if (totalSelected > 0) {
+				int AllClear = totalSelected;
+				for (int i = 0; i < AllClear; i++) {
+					totalSelected--;
+
+					Button lastSelectedSeat = selectSeats.pop();
+					lastSelectedSeat.setEnabled(true);
+				}
 				if (totalSelected < adultCount + teenagerCount) {
 					Next.setEnabled(false);
 				}

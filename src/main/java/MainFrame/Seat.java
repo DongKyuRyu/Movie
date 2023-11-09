@@ -95,6 +95,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 				SEATDATA += ", " + seatdata;
 			}
 		}
+		
 		if (SEATDATA == null) {
 			// 좌석 생성
 			for (int i = 0; i < 5; i++) {

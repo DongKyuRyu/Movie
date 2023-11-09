@@ -13,8 +13,12 @@ public class SeatVO {
 		return instance;
 	}
 
-	public SeatVO(String SeatNumberr) {
+	public void setSeatVO(String SeatNumberrr) {
 		this.SeatNumberrr = SeatNumberrr;
+	}
+	
+	public String getSeatVO() {
+		return SeatNumberrr;
 	}
 
 	public String toString() {
@@ -26,7 +30,7 @@ public class SeatVO {
 		return SeatNumberrr;
 	}
 
-	public void setSeatNumberrr(String seatNumberrr) {
-		SeatNumberrr = seatNumberrr;
-	}
+//	public void setSeatNumberrr(String seatNumberrr) {
+//		SeatNumberrr = seatNumberrr;
+//	}
 }

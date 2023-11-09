@@ -65,7 +65,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 	DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
 	public Pay(int adultCount, int teenagerCount) {
-		System.out.println(moviedata.getId());
+		System.out.println(moviedata.getMovieID());
 		card = false;
 		discount = false;
 		phone = false;

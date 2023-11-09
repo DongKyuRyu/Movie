@@ -46,7 +46,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
 
-	private ArrayList<SeatVO> SeatNumberr = ticketDao.selectSeat(moviedata.getMovieList(), moviedata.getMovieDate(),
+	private ArrayList<String> SeatNumberr = ticketDao.selectSeat(moviedata.getMovieList(), moviedata.getMovieDate(),
 			moviedata.getMovieTime());
 
 	public Seat(int adultCount, int teenagerCount) {
@@ -127,8 +127,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 		ticketDao.connect();
 
 		for (int i = 0; i < SeatNumberr.size(); i++) {
-			SeatVO seatdata = (SeatVO) SeatNumberr.get(i);
-			String Duplicateseat = seatdata.getSeatNumberrr();
+			String seatdata = SeatNumberr.get(i);
+			String Duplicateseat = seatdata;
 			
 			System.out.println(Duplicateseat);
 		}

@@ -127,7 +127,8 @@ public class Seat extends WindowAdapter implements ActionListener {
 		ticketDao.connect();
 
 		for (int i = 0; i < SeatNumberr.size(); i++) {
-			String seatdata = seatvo.getSeatdata();
+			String seatdata = SeatNumberr.get(i);
+			String Duplicateseat = seatdata;
 			
 			String SEATDATA += seatdata;
 			

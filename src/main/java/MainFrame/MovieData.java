@@ -24,7 +24,8 @@ public class MovieData {
 		return instance;
 	}
 	
-	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String DuplicateSeat, String MovieID, String IdName, String IdEmail, String MovieRoomNum, String MoviePay, String Moviediscount, String Discountprice) {
+
+	public MovieData(String MovieList, String MovieTime, String MovieDate, int MoviePeople, String MovieSeat, String DuplicateSeat, String MovieID, String IdName, String IdEmail, String MovieRoomNum, String MoviePay, String Moviediscount, String discountprice) {
 		this.MovieList = MovieList;
 		this.MovieTime = MovieTime;
 		this.MovieDate = MovieDate;
@@ -41,7 +42,7 @@ public class MovieData {
 		
 		this.MoviePay = MoviePay;
 		this.Moviediscount = Moviediscount;
-		this.Discountprice =Discountprice;
+		this.Discountprice =discountprice;
 		
 	}
 

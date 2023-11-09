@@ -1,26 +1,36 @@
 package VO;
 
 public class SeatVO {
-
 	private static SeatVO instance = new SeatVO();
-	private String SeatData;
+	
+	private String SeatNumberrr;
 
 	public SeatVO() {
+		super();
 	}
-
+	
 	public static SeatVO getInstance() {
 		return instance;
 	}
 
-	public SeatVO(String SeatData) {
-		this.SeatData = SeatData;
+	public void setSeatVO(String SeatNumberrr) {
+		this.SeatNumberrr = SeatNumberrr;
+	}
+	
+	public String getSeatVO() {
+		return SeatNumberrr;
 	}
 
-	public void setSeatdata(String seatdata) {
-		SeatData = seatdata;
+	public String toString() {
+		String SeatText = SeatNumberrr;
+		return SeatText;
 	}
 
-	public String getSeatdata() {
-		return SeatData;
+	public String getSeatNumberrr() {
+		return SeatNumberrr;
 	}
+
+//	public void setSeatNumberrr(String seatNumberrr) {
+//		SeatNumberrr = seatNumberrr;
+//	}
 }

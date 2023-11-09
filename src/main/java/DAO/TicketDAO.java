@@ -163,6 +163,7 @@ public class TicketDAO {
 	
 	public ArrayList<String> selectSeat(String Moviename, String Dday, String Time) {
 		ArrayList<String> SeatNumber = new ArrayList<String>();
+		SeatVO Seatnum = new SeatVO();
 		
 		try {
 			connect();
@@ -171,12 +172,13 @@ public class TicketDAO {
 			pstmt.setString(1, Moviename);
 			pstmt.setString(2, Dday);
 			pstmt.setString(3, Time);
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();		
 			
 			while(rs.next()) {
 //				String duplicateseat = rs.getString("SEATNUMBER");
-				seatvo.setSeatdata(rs.getString("seatNumber"));
+				Seatnum.setSeatVO(rs.getString("SEATNUMBER"));
 				
+				SeatNumber.add(Seatnum.getSeatVO());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

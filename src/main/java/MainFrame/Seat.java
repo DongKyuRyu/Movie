@@ -13,10 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Stack;
 
 import DAO.MovieDAO;
-import DAO.SeatDAO;
 import DAO.TicketDAO;
 import VO.MovieVO;
 import VO.SeatVO;
@@ -26,26 +26,28 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
-	private Button Seat[][], Befor, Next, Cancel;
-	private String SeatNumber[][], SeatsNumber, TestSeatsNumber;
+	private Button Seat[][], Befor, Next, Cancel, AllCancel;
+	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2, SEATDATA;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 	private NumberOfPeople numberofpeople;
 
 	private String SeatIJ, SeatJ;
 	private char SeatRow;
-	
+
 	private MovieData moviedata = MovieData.getInstance();
+	private SeatVO seatvo = SeatVO.getInstance();
 
 	// VO
 	private TicketVO ticket;
 	private MovieVO movie;
-	private SeatVO seat;
 
 	// DAO
 	private MovieDAO movieDao = MovieDAO.getInstance();
-	private SeatDAO seatDao = SeatDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도
+
+	private ArrayList<String> SeatNumberr = ticketDao.selectSeat(moviedata.getMovieList(), moviedata.getMovieDate(),
+			moviedata.getMovieTime());
 
 	public Seat(int adultCount, int teenagerCount) {
 		this.adultCount = adultCount;
@@ -73,50 +75,133 @@ public class Seat extends WindowAdapter implements ActionListener {
 		SeatNumber = new String[5][20];
 
 		Cancel = new Button("좌석 다시 선택");
-		Cancel.setBounds(400, 585, 100, 30);
+		Cancel.setBounds(325, 585, 100, 30);
 		Cancel.setBackground(new Color(188, 205, 227));
 		Cancel.addActionListener(this);
 
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 20; j++) {
-				char seatRow = (char) (i + 65);
-				String seatNumber = String.format("%c%d", seatRow, j + 1);
+		AllCancel = new Button("좌석 전체 다시 선택");
+		AllCancel.setBounds(470, 585, 110, 30);
+		AllCancel.setBackground(new Color(188, 205, 227));
+		AllCancel.addActionListener(this);
 
-				SeatNumber[i][j] = seatNumber;
-				Seat[i][j] = new Button(SeatNumber[i][j]);
-				Seat[i][j].setBackground(Color.gray);
-				Seat[i][j].setFont(new Font("맑은 고딕", Font.PLAIN, 10));
-				Seat[i][j].setBackground(Color.white);
+		// 좌석 중복 확인
+		ticketDao.connect();
+		for (int i = 0; i < SeatNumberr.size(); i++) {
+			String seatdata = SeatNumberr.get(i);
 
-				SeatPanel.add(Seat[i][j]);
-				int finalI = i;
-				int finalJ = j;
-				SeatRow = seatRow;
-				Seat[i][j].addActionListener(new ActionListener() {
-					private String realSeatIJ;
+			if (i == 0) {
+				SEATDATA = seatdata;
+			} else if (i > 0) {
+				SEATDATA += ", " + seatdata;
+			}
+		}
+		
+		if (SEATDATA == null) {
+			// 좌석 생성
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 20; j++) {
+					char seatRow = (char) (i + 65);
+					String seatNumber = String.format("%c%d", seatRow, j + 1);
 
-					public void actionPerformed(ActionEvent e) {
-						if (totalSelected < adultCount + teenagerCount) {
-							Seat[finalI][finalJ].setEnabled(false);
-							totalSelected++;
+					SeatNumber[i][j] = seatNumber;
+					Seat[i][j] = new Button(SeatNumber[i][j]);
+					Seat[i][j].setBackground(Color.gray);
+					Seat[i][j].setFont(new Font("맑은 고딕", Font.PLAIN, 10));
+					Seat[i][j].setBackground(Color.white);
 
-							selectSeats.push(Seat[finalI][finalJ]);
+					SeatPanel.add(Seat[i][j]);
+					int finalI = i;
+					int finalJ = j;
+					SeatRow = seatRow;
 
-							if (totalSelected == 1) {
-								TestSeatsNumber = seatNumber;	
-							} else {
-								TestSeatsNumber += ", " + seatNumber;
-							}
-							moviedata.setMovieSeat(TestSeatsNumber);
+					Seat[i][j].addActionListener(new ActionListener() {
+						private String realSeatIJ;
 
-							if (totalSelected == adultCount + teenagerCount) {
-								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/" + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
-//								System.out.println(moviedata.getMoviePeople());
-								Next.setEnabled(true);
+						public void actionPerformed(ActionEvent e) {
+							if (totalSelected < adultCount + teenagerCount) {
+								Seat[finalI][finalJ].setEnabled(false);
+								totalSelected++;
+
+								selectSeats.push(Seat[finalI][finalJ]);
+
+								if (totalSelected == 1) {
+									TestSeatsNumber = seatNumber;
+								} else if (totalSelected > 1) {
+									TestSeatsNumber += ", " + seatNumber;
+								}
+								moviedata.setMovieSeat(TestSeatsNumber);
+
+								if (totalSelected == adultCount + teenagerCount) {
+//											System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
+//													+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/"
+//													+ moviedata.getMovieSeat());
+//											System.out.println(moviedata.getMoviePeople());
+									Next.setEnabled(true);
+								}
 							}
 						}
+					});
+				}
+			}
+
+		} else {
+			String[] SeatDATA = SEATDATA.split(", ");
+
+			for (int i = 0; i < SeatDATA.length; i++) {
+				System.out.println(SeatDATA[i]);
+			}
+
+			// 좌석 생성
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 20; j++) {
+					char seatRow = (char) (i + 65);
+					String seatNumber = String.format("%c%d", seatRow, j + 1);
+
+					SeatNumber[i][j] = seatNumber;
+					Seat[i][j] = new Button(SeatNumber[i][j]);
+					Seat[i][j].setBackground(Color.gray);
+					Seat[i][j].setFont(new Font("맑은 고딕", Font.PLAIN, 10));
+					Seat[i][j].setBackground(Color.white);
+
+					SeatPanel.add(Seat[i][j]);
+					int finalI = i;
+					int finalJ = j;
+					SeatRow = seatRow;
+
+					for (int k = 0; k < SeatDATA.length; k++) {
+						if (SeatDATA[k].equals(seatNumber)) {
+							Seat[finalI][finalJ].setEnabled(false);
+						}
 					}
-				});
+
+					Seat[i][j].addActionListener(new ActionListener() {
+						private String realSeatIJ;
+
+						public void actionPerformed(ActionEvent e) {
+							if (totalSelected < adultCount + teenagerCount) {
+								Seat[finalI][finalJ].setEnabled(false);
+								totalSelected++;
+
+								selectSeats.push(Seat[finalI][finalJ]);
+
+								if (totalSelected == 1) {
+									TestSeatsNumber = seatNumber;
+								} else if (totalSelected > 1) {
+									TestSeatsNumber += ", " + seatNumber;
+								}
+								moviedata.setMovieSeat(TestSeatsNumber);
+
+								if (totalSelected == adultCount + teenagerCount) {
+//								System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
+//										+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/"
+//										+ moviedata.getMovieSeat());
+//								System.out.println(moviedata.getMoviePeople());
+									Next.setEnabled(true);
+								}
+							}
+						}
+					});
+				}
 			}
 		}
 
@@ -131,6 +216,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 		Next.addActionListener(this);
 		Next.setEnabled(false);
 
+		f.add(AllCancel);
 		f.add(Next);
 		f.add(Cancel);
 		f.add(Befor);
@@ -142,12 +228,13 @@ public class Seat extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			NumberOfPeople numberofpeople = new NumberOfPeople();
+			NumberOfPeople numberofpeople = new NumberOfPeople();
 		}
 
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			seatDao.connect();
+			System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
+					+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 
@@ -157,6 +244,21 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 				Button lastSelectedSeat = selectSeats.pop();
 				lastSelectedSeat.setEnabled(true);
+				if (totalSelected < adultCount + teenagerCount) {
+					Next.setEnabled(false);
+				}
+			}
+		}
+
+		if (e.getActionCommand().equals("좌석 전체 다시 선택")) {
+			if (totalSelected > 0) {
+				int AllClear = totalSelected;
+				for (int i = 0; i < AllClear; i++) {
+					totalSelected--;
+
+					Button lastSelectedSeat = selectSeats.pop();
+					lastSelectedSeat.setEnabled(true);
+				}
 				if (totalSelected < adultCount + teenagerCount) {
 					Next.setEnabled(false);
 				}

@@ -8,12 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import MainFrame.MovieData;
 import Util.CloseUtil;
 import Util.ConnUtil;
+import VO.SeatVO;
 import VO.TicketVO;
 
 public class TicketDAO {
 	private static TicketDAO instance = new TicketDAO();
+	private MovieData moviedata = MovieData.getInstance();
+	private SeatVO seatvo = SeatVO.getInstance();
 
 	private TicketDAO() {
 	}
@@ -47,18 +51,17 @@ public class TicketDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String name = rs.getString("name");
 				String seatNumber = rs.getString("seatNumber");
 				String roomNumber = rs.getString("roomNumber");
 				String movieName = rs.getString("movieName");
 				String dDay = rs.getString("dDay");
 				String time = rs.getString("time");
 				String reservedDate = rs.getString("reservedDate");
-				int cost = rs.getInt("cost");
+				String cost = rs.getString("cost");
 				int person = rs.getInt("person");
 				TicketVO ticketVO = new TicketVO(
-						name,customerId,seatNumber,roomNumber,movieName,
-						dDay,time, reservedDate, cost, person	
+						customerId,seatNumber,roomNumber,movieName,
+						dDay,time, cost, person	
 						);
 				list.add(ticketVO);
 			}
@@ -74,18 +77,16 @@ public class TicketDAO {
 	//예매 취소 -> delete - 그냥 삭제 해버린다.
 		public void setSeatCancel(TicketVO ticket) {
 			String seatNumber = ticket.getSeatNumber();
-			String reservedDate = ticket.getReservedDate();
 			String roomNumber = ticket.getRoomNumber();
 			String Time = ticket.getTime();
 			
-			String sql = "delete from seat where seatNumber = ? and reservedDate = ? and roomNumber = ? and Time = ? ";
+			String sql = "delete from seat where seatNumber = ? and roomNumber = ? and Time = ? ";
 			try {
 				connect();
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, seatNumber);
-				pstmt.setString(2, reservedDate);
-				pstmt.setString(3, roomNumber);
-				pstmt.setString(4, Time);
+				pstmt.setString(2, roomNumber);
+				pstmt.setString(3, Time);
 				pstmt.executeUpdate();
 				System.out.println("좌석 예약 취소");
 			} catch (SQLException e) {
@@ -101,10 +102,9 @@ public class TicketDAO {
 		String seatNumber = ticket.getSeatNumber(); // 좌석 이름 -seatView 0
 		String roomNumber = ticket.getRoomNumber(); // 극장 이름 -ticketingView 0
 		String movieName = ticket.getMovieName(); // 관 번호 -ticketingView 0
-		String reservedDate = ticket.getReservedDate(); // 영화 이름 -ticketingView 0
 		String time = ticket.getTime(); // 영화 회차 -ticketingView 0
 		String sql = "delete from ticket "
-				+ "where id = ? and seatNumber = ? and roomNumber = ? and movieName = ? and reservedDate = ? "
+				+ "where id = ? and seatNumber = ? and roomNumber = ? and movieName = ?"
 				+ "and time = ? ";
 		try {
 			connect();
@@ -113,8 +113,7 @@ public class TicketDAO {
 			pstmt.setString(2, seatNumber);
 			pstmt.setString(3, roomNumber);
 			pstmt.setString(4, movieName);
-			pstmt.setString(5, reservedDate);
-			pstmt.setString(6, time);
+			pstmt.setString(5, time);
 			pstmt.executeUpdate();
 			System.out.println("티켓 삭제 완료");
 		} catch (SQLException e) {
@@ -127,36 +126,31 @@ public class TicketDAO {
 	
 	// 티켓 등록  insert
 	public void insert(TicketVO ticket) {
-		String name = ticket.getName(); // 고객 이름 -ticketingView 0
 		String id = ticket.getId();// 고객 아이디 -ticketingView 0
 		String seatNumber = ticket.getSeatNumber(); // 좌석 이름 -seatView 0
 		String roomNumber = ticket.getRoomNumber(); // 관 번호 -ticketingView 0
 		String movieName = ticket.getMovieName(); // 영화 이름 -ticketingView 0
 		String dDay = ticket.getDday();
 		String time = ticket.getTime(); // 영화 회차 -ticketingView 0
-		int cost = ticket.getCost(); // 티켓 가격 -ticketingView 0
+		String cost = ticket.getCost(); // 티켓 가격 -ticketingView 0
 		int person = ticket.getPerson(); // 인원 수 -ticketingView 0
 
 		// 예약한 시간 저장하기
 		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
 		Calendar c = Calendar.getInstance();
 		String reservedDate = f.format(c.getTime()); // 현재날짜를 전달.
-		ticket.setReservedDate(reservedDate);
-
-		String sql = "insert into ticket values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into ticket values (?,?,?,?,?,?,?,?)";
 		try {
 			connect();
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, name);
-			pstmt.setString(2, id);
-			pstmt.setString(3, seatNumber);
-			pstmt.setString(4, roomNumber);
-			pstmt.setString(5, movieName);
-			pstmt.setString(6, dDay);
-			pstmt.setString(7, time);
-			pstmt.setString(8, reservedDate);
-			pstmt.setInt(9, cost);
-			pstmt.setInt(10, person);
+			pstmt.setString(1, id);
+			pstmt.setString(2, seatNumber);
+			pstmt.setString(3, roomNumber);
+			pstmt.setString(4, movieName);
+			pstmt.setString(5, dDay);
+			pstmt.setString(6, time);
+			pstmt.setString(7, cost);
+			pstmt.setInt(8, person);
 			System.out.println(ticket.toString());
 			pstmt.executeUpdate();
 			System.out.println("티켓 등록 완료");
@@ -166,5 +160,31 @@ public class TicketDAO {
 			CloseUtil.close(pstmt, con);
 		}
 	}
-
+	
+	public ArrayList<String> selectSeat(String Moviename, String Dday, String Time) {
+		ArrayList<String> SeatNumber = new ArrayList<String>();
+		SeatVO Seatnum = new SeatVO();
+		
+		try {
+			connect();
+			String sql = "select SEATNUMBER from TICKET where Moviename = ? and Dday = ? and Time = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, Moviename);
+			pstmt.setString(2, Dday);
+			pstmt.setString(3, Time);
+			rs = pstmt.executeQuery();		
+			
+			while(rs.next()) {
+//				String duplicateseat = rs.getString("SEATNUMBER");
+				Seatnum.setSeatVO(rs.getString("SEATNUMBER"));
+				
+				SeatNumber.add(Seatnum.getSeatVO());
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			CloseUtil.close(pstmt, con);
+		}
+		return SeatNumber;
+	}
 }

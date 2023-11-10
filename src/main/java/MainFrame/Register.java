@@ -26,8 +26,6 @@ public class Register extends WindowAdapter implements ActionListener {
 
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	private CustomerVO customer = new CustomerVO();
-
-	
 	private String pid = "";
 	private String password = "";
 	private String newName = "";
@@ -254,7 +252,6 @@ public class Register extends WindowAdapter implements ActionListener {
 			customer = new CustomerVO(Name.getText().trim(), newId.getText().trim(), newPwd.getText().trim(),
 					Email.getText());
 			if (customerDao.register(customer)) {
-
 				System.out.println("회원가입 완료");
 			} else {
 				System.out.println("회원가입 실패");

@@ -1,6 +1,9 @@
 package VO;
 
+import DAO.CustomerDAO;
+
 public class CustomerVO {
+	
 	
 	private String name;
 	private String id;
@@ -9,7 +12,9 @@ public class CustomerVO {
 //	private String birthday;
 //	private String preference;
 	
+
 	public CustomerVO() {}
+
 	public CustomerVO(String name, String id, String password, String email) {
 		super();
 		this.name = name;

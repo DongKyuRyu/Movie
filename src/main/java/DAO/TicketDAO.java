@@ -40,7 +40,7 @@ public class TicketDAO {
 	
 	// 티켓 검색 select List (input 고객 이름)
 	public ArrayList<TicketVO> selectList(String customerId) {
-		String sql = "select * from ticket where customerId = ? "; //이 아이디가 예매한 내역을 모조리 뽑아주세요!
+		String sql = "select * from ticket where Id = ? "; //이 아이디가 예매한 내역을 모조리 뽑아주세요!
 		
 		ArrayList<TicketVO> list = new ArrayList<>();
 		try {
@@ -50,13 +50,11 @@ public class TicketDAO {
 			rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
-				String name = rs.getString("name");
 				String seatNumber = rs.getString("seatNumber");
 				String roomNumber = rs.getString("roomNumber");
 				String movieName = rs.getString("movieName");
 				String dDay = rs.getString("dDay");
 				String time = rs.getString("time");
-				String reservedDate = rs.getString("reservedDate");
 				String cost = rs.getString("cost");
 				int person = rs.getInt("person");
 				TicketVO ticketVO = new TicketVO(
@@ -187,4 +185,22 @@ public class TicketDAO {
 		}
 		return SeatNumber;
 	}
+	
+	   public String ticketid(String Id) { // 영화 이름 을 받고 영화를 출력함.
+		      String sql = "select movieName from ticket where Id = ? ";
+		      try {
+		         pstmt = con.prepareStatement(sql);
+		         pstmt.setString(1, Id);
+		         ResultSet rs = pstmt.executeQuery();
+		         if (rs.next()) {
+		            String setMovieName  = rs.getString("movieName");
+		            return setMovieName;
+		         }
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         CloseUtil.close(pstmt, con);
+		      }
+		      return null;
+		   }
 }

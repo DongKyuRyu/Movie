@@ -150,7 +150,7 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			MovieTime movie = new MovieTime(CalendarEx.this);
+			MovieTime movie = new MovieTime();
 		}
 
 		if (e.getActionCommand().equals("다 음")) {

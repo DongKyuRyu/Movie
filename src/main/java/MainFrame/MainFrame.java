@@ -83,12 +83,8 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		}
 		
 		if (e.getActionCommand().equals("예매 확인")) {
-	         if (moviedata.getMovieList() != null) {
 	            f.setVisible(false);
-	            PaymentCompleted pay = new PaymentCompleted();
-	         } else {
-	            System.out.println("예매 정보가 없습니다.");
-	         }
+	            Cancellation cancellation = new Cancellation();
 	      }
 	}
 

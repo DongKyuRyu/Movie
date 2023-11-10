@@ -28,7 +28,7 @@ public class ThisIsForYou extends WindowAdapter implements ActionListener {
 	private URL searchURL;
 	private Button MainMove;
 	private int num;
-
+	
 	public ThisIsForYou() {
 		Font TitleFont = new Font("고딕", Font.BOLD, 30);
 		Font TalkFont = new Font("고딕", Font.BOLD, 17);
@@ -39,7 +39,7 @@ public class ThisIsForYou extends WindowAdapter implements ActionListener {
 		f.setSize(500, 370);
 		f.setBackground(new Color(188, 205, 194));
 		f.setLayout(null);
-		f.setLocation((scr.width - 500) / 2, (scr.height - 500) / 2);
+		f.setLocation((scr.width + 475) / 2, (scr.height - 500) / 2);
 
 		Title = new Label("오늘도 빛나는 너에게");
 		Title.setForeground(Color.BLACK);
@@ -80,7 +80,7 @@ public class ThisIsForYou extends WindowAdapter implements ActionListener {
 		Talk6.setBackground(Color.LIGHT_GRAY);
 		Talk6.setFont(TalkFont);
 
-		num = (int) (Math.random() * 28);
+		num = (int) (Math.random() * 46);
 
 		switch (num) {
 		case 0: {
@@ -372,6 +372,186 @@ public class ThisIsForYou extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
+		
+		case 29: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("자신은 부드럽게 기분은 풍족하게.");
+			Talk4.setText("인생의 디자인은 진한 연필로 쉽게 쓱 그린다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 30: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("판단 기준은");
+			Talk4.setText("'마음의 평온' 입니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 31: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("사랑받기 위해서 비굴해지지 않는다");
+			Talk4.setText("나를 바꾸지 않고 타인과 소통한다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 32: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("대단한 사람이 어디 숨어 있을지 모른다.");
+			Talk4.setText("누구를 대하든 예의를 갖춰서 대한다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 33: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("부족하다고 느끼는 마음이");
+			Talk4.setText("다음 만남을 이어줍니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 34: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("정직한 것과 솔직한 것은 다릅니다.");
+			Talk4.setText("생각한 것을 다 말해도 되는것은 아닙니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 35: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("상대방을 자신의 존재를 과시하는");
+			Talk4.setText("대상으로 삼아선 안 됩니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 36: {
+			Talk.setText("");
+			Talk2.setText("자신 자신에게 여유가 없다면");
+			Talk3.setText("타인에게도 친절해질 수 없어요.");
+			Talk4.setText("무슨 일이든 내가 어떤사람이어야 하는지 ");
+			Talk5.setText("생각하는 것부터 시작하는 겁니다.");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 37: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("원했던 일에서 실패하면 많은 것을 배울 수 있습니다.");
+			Talk4.setText("뭐든 손해를 보지 않으면 얻을 수 없어요.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 38: {
+			Talk.setText("아아, 순서가 중요한데요.");
+			Talk2.setText("이익을 얻으려다가 실패하는 건 당연합니다.");
+			Talk3.setText("하지만 먼저 손해를 받아들이고");
+			Talk4.setText("새로운 일에 도전하면");
+			Talk5.setText("생각지도 못한 길이 보이기도 해요.");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 39: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("잘되지 않는 것이 당연합니다.");
+			Talk4.setText("");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 40: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("'고민은 일을 복잡하게 만든다.");
+			Talk4.setText("생각은 일을 단순하게 만든다.'");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 41: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("연등감은 우월감의 반증");
+			Talk4.setText("나 자신과는 겸허하게 지내기.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 42: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("자신감은 뜨기 위한 것이 아니라");
+			Talk4.setText("휩쓸리지 않기 위한 추입니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 43: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("좋은 일을 하면 좋은사람과 함께 하는");
+			Talk4.setText("좋은 일을 만날 수 있습니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 44: {
+			Talk.setText("");
+			Talk2.setText("");
+			Talk3.setText("남에게 보여주는 것 같지만 사실은 남이 보고있다.");
+			Talk4.setText("내가 편하지 않으면 남도 그렇게 생각한다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 45: {
+			Talk.setText("");
+			Talk2.setText("센스가 뭐냐고 붇는다면");
+			Talk3.setText("쓸데없는 일을 하지 않는것이라고 대답한다.");
+			Talk4.setText("쓸데없는 일이 뭔지 모르겠다고 한다면");
+			Talk5.setText("그것이 센스라고 대답합니다.");
+			Talk6.setText("");
+			break;
+		}
+		
+		case 46: {
+			Talk.setText("");
+			Talk2.setText("스스로 '어떤 사람' 이라고 정해놓지 마세요");
+			Talk3.setText("아무도 그 가실에 관심이 없습니다.");
+			Talk4.setText("스스로 자신을 구속하고 있을 뿐입니다.");
+			Talk5.setText("");
+			Talk6.setText("");
+			break;
+		}
 		}
 		// 로고
 		searchURL = getClass().getResource("/img/Logo2.png");
@@ -404,7 +584,7 @@ public class ThisIsForYou extends WindowAdapter implements ActionListener {
 		f.add(Title);
 		f.setVisible(true);
 	}
-
+	
 	public void windowClosing(WindowEvent e) {
 		System.exit(0);
 	}

@@ -2,9 +2,12 @@ package VO;
 
 
 public class SeatVO {
+
    private static SeatVO instance = new SeatVO();
    
    private String SeatNumberrr;
+
+
 
    public SeatVO() {
       super();
@@ -14,6 +17,8 @@ public class SeatVO {
       return instance;
    }
 
+
+
    public void setSeatVO(String SeatNumberrr) {
       this.SeatNumberrr = SeatNumberrr;
    }
@@ -22,16 +27,14 @@ public class SeatVO {
       return SeatNumberrr;
    }
 
-   public String toString() {
-      String SeatText = SeatNumberrr;
-      return SeatText;
-   }
 
-   public String getSeatNumberrr() {
-      return SeatNumberrr;
-   }
+	   public String toString() {
+	      String SeatText = SeatNumberrr;
+	      return SeatText;
+	   }
 
-//   public void setSeatNumberrr(String seatNumberrr) {
-//      SeatNumberrr = seatNumberrr;
-//   }
+
+	   public String getSeatNumberrr() {
+	      return SeatNumberrr;
+	   }
 }

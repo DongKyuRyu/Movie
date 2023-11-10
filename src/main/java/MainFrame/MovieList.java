@@ -24,7 +24,8 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
     private Label Title, movielist;
     private Button Next, Befor;
     private String movieName;
-    private MovieData moviedata = MovieData.getInstance(); 
+
+    private MovieData moviedata = MovieData.getInstance();
     
     public MovieList() {
         Font TitleFont = new Font("고딕", Font.BOLD, 60);
@@ -49,7 +50,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
         selectMovie5 = new Checkbox("용감한시민", moviename, false);
         selectMovie6 = new Checkbox("바람 따라 만나리", moviename, false);
         selectMovie7 = new Checkbox("오픈 더 도어", moviename, false);
-        selectMovie8 = new Checkbox("용감한 시민", moviename, false);
+        selectMovie8 = new Checkbox("소년들", moviename, false);
         selectMovie9 = new Checkbox("시수", moviename, false);
         selectMovie10 = new Checkbox("두사람을 위한 식탁", moviename, false);
         selectMovie11 = new Checkbox("톡투미", moviename, false);
@@ -92,7 +93,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
         selectMovie12.addItemListener(this);
 
         movielist = new Label("영화 제목");
-        movielist.setBounds(75, 10, 250, 50);
+        movielist.setBounds(75, 10, 250, 57);
         movielist.setFont(movielistFont);
 
         Title = new Label("GreenHouse");
@@ -141,7 +142,8 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("이 전")) {
             f.setVisible(false);
-            // MainFrame mainframe = new MainFrame();
+          
+            MainFrame mainframe = new MainFrame();
         }
         if (e.getActionCommand().equals("다 음")) {
             f.setVisible(false);
@@ -149,35 +151,37 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
         }
     }
 
-    public void itemStateChanged(ItemEvent e) {
-        if (e.getItem().equals("그대들은 어떻게 살 것인가"))
-            moviedata.setMovieList("그대들은 어떻게 살 것인가");
-        else if (e.getItem().equals("플라워 킬링 문"))
-        	 moviedata.setMovieList("플라워 킬링 문");
-        else if (e.getItem().equals("30일"))
-        	 moviedata.setMovieList("30일");
-        else if (e.getItem().equals("빌리와 용감한 녀석들"))
-        	 moviedata.setMovieList("빌리와 용감한 녀석들");
-        else if (e.getItem().equals("소년들"))
-        	 moviedata.setMovieList("소년들");
-        else if (e.getItem().equals("용감한시민"))
-        	 moviedata.setMovieList("용감한시민");
-        else if (e.getItem().equals("바람 따라 만나리"))
-        	 moviedata.setMovieList("바람 따라 만나리");
-        else if (e.getItem().equals("오픈 더 도어"))
-        	 moviedata.setMovieList("오픈 더 도어");
-        else if (e.getItem().equals("시수"))
-        	 moviedata.setMovieList("시수");
-        else if (e.getItem().equals("두사람을 위한 식탁"))
-        	 moviedata.setMovieList("두사람을 위한 식탁");
-        else if (e.getItem().equals("톡투미"))
-        	 moviedata.setMovieList("톡투미");
-        else if (e.getItem().equals("더 킬러"))
-        	 moviedata.setMovieList("더 킬러");
-        if (e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("플라워 킬링 문") || e.getItem().equals("빌리와 용감한 녀석들")||e.getItem().equals("30일") || e.getItem().equals("소년들") ||e.getItem().equals("용감한시민") || e.getItem().equals("바람 따라 만나리") ||e.getItem().equals("오픈 더 도어") || e.getItem().equals("시수") ||e.getItem().equals("두사람을 위한 식탁") || e.getItem().equals("톡투미") ||e.getItem().equals("더 킬러")) {
-            f.add(Next);
+
+        public void itemStateChanged(ItemEvent e) {
+            if (e.getItem().equals("그대들은 어떻게 살 것인가"))
+                moviedata.setMovieList("그대들은 어떻게 살 것인가");
+            else if (e.getItem().equals("플라워 킬링 문"))
+                moviedata.setMovieList("플라워 킬링 문");
+            else if (e.getItem().equals("30일"))
+                moviedata.setMovieList("30일");
+            else if (e.getItem().equals("빌리와 용감한 녀석들"))
+                moviedata.setMovieList("빌리와 용감한 녀석들");
+            else if (e.getItem().equals("소년들"))
+                moviedata.setMovieList("소년들");
+            else if (e.getItem().equals("용감한시민"))
+                moviedata.setMovieList("용감한시민");
+            else if (e.getItem().equals("바람 따라 만나리"))
+                moviedata.setMovieList("바람 따라 만나리");
+            else if (e.getItem().equals("오픈 더 도어"))
+                moviedata.setMovieList("오픈 더 도어");
+            else if (e.getItem().equals("시수"))
+                moviedata.setMovieList("시수");
+            else if (e.getItem().equals("두사람을 위한 식탁"))
+                moviedata.setMovieList("두사람을 위한 식탁");
+            else if (e.getItem().equals("톡투미"))
+                moviedata.setMovieList("톡투미");
+            else if (e.getItem().equals("더 킬러"))
+                moviedata.setMovieList("더 킬러");
+            if (e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("플라워 킬링 문") || e.getItem().equals("빌리와 용감한 녀석들")||e.getItem().equals("30일") || e.getItem().equals("소년들") ||e.getItem().equals("용감한시민") || e.getItem().equals("바람 따라 만나리") ||e.getItem().equals("오픈 더 도어") || e.getItem().equals("시수") ||e.getItem().equals("두사람을 위한 식탁") || e.getItem().equals("톡투미") ||e.getItem().equals("더 킬러")) {
+                f.add(Next);
+            }
+
         }
-    }
 
     public static void main(String[] args) {
         MovieList frame = new MovieList();

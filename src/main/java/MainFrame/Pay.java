@@ -246,47 +246,47 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		MovieRoom.setFont(Movieposter);
 
 		if (moviedata.getMovieList().equals("30일")) {
-			MovieRoom.setText("상영관 : 1관");
+			MovieRoom.setText("상  영  관 : 1관");
 			moviedata.setMovieRoomNum("1관");
 		} else if (moviedata.getMovieList().equals("플라워 킬링 문")) {
-			MovieRoom.setText("상영관 : 2관");
+			MovieRoom.setText("상  영  관 : 2관");
 			moviedata.setMovieRoomNum("2관");
 		} else if (moviedata.getMovieList().equals("빌리와 용감한 녀석들")) {
-			MovieRoom.setText("상영관 : 3관");
+			MovieRoom.setText("상  영  관 : 3관");
 			moviedata.setMovieRoomNum("3관");
 		} else if (moviedata.getMovieList().equals("소년들")) {
-			MovieRoom.setText("상영관 : 4관");
+			MovieRoom.setText("상  영  관 : 4관");
 			moviedata.setMovieRoomNum("4관");
 		} else if (moviedata.getMovieList().equals("용감한시민")) {
-			MovieRoom.setText("상영관 : 5관");
+			MovieRoom.setText("상  영  관 : 5관");
 			moviedata.setMovieRoomNum("5관");
 		} else if (moviedata.getMovieList().equals("바람 따라 만나리")) {
-			MovieRoom.setText("상영관 : 6관");
+			MovieRoom.setText("상  영  관 : 6관");
 			moviedata.setMovieRoomNum("6관");
 		} else if (moviedata.getMovieList().equals("오픈 더 도어")) {
-			MovieRoom.setText("상영관 : 7관");
+			MovieRoom.setText("상  영  관 : 7관");
 			moviedata.setMovieRoomNum("7관");
 		} else if (moviedata.getMovieList().equals("시수")) {
-			MovieRoom.setText("상영관 : 8관");
+			MovieRoom.setText("상  영  관 : 8관");
 			moviedata.setMovieRoomNum("8관");
 		} else if (moviedata.getMovieList().equals("두사람을 위한 식탁")) {
-			MovieRoom.setText("상영관 : 9관");
+			MovieRoom.setText("상  영  관 : 9관");
 			moviedata.setMovieRoomNum("9관");
 		} else if (moviedata.getMovieList().equals("톡투미")) {
-			MovieRoom.setText("상영관 : 10관");
+			MovieRoom.setText("상  영  관 : 10관");
 			moviedata.setMovieRoomNum("10관");
 		} else if (moviedata.getMovieList().equals("더 킬러")) {
-			MovieRoom.setText("상영관 : 11관");
+			MovieRoom.setText("상  영  관 : 11관");
 			moviedata.setMovieRoomNum("11관");
 		} else if (moviedata.getMovieList().equals("그대들은 어떻게 살 것인가")) {
-			MovieRoom.setText("상영관 : 12관");
+			MovieRoom.setText("상  영  관 : 12관");
 			moviedata.setMovieRoomNum("12관");
 		}
 
 		Seat = new Label();
 		Seat.setBounds(10, 277, 360, 17);
 		Seat.setFont(Movieposter);
-		Seat.setText("인원 / 좌석 : " + moviedata.getMovieSeat());
+		Seat.setText("좌        석 : " + moviedata.getMovieSeat());
 
 
 

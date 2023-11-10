@@ -36,7 +36,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private char SeatRow;
 
 	private MovieData moviedata = MovieData.getInstance();
-	private SeatVO seatvo = SeatVO.getInstance();
 
 	// VO
 	private TicketVO ticket;

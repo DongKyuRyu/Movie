@@ -37,13 +37,15 @@ public class information extends WindowAdapter implements ActionListener {
 		customerDao.connect();
 		Font greenFont = new Font("고딕", Font.BOLD, 60);
 		Font TitleFont = new Font("고딕", Font.BOLD, 20);
+		
 		Dimension scr = Toolkit.getDefaultToolkit().getScreenSize();
+		
 		f = new Frame();
 		f.setResizable(false);
 		f.setSize(800, 850);
 		f.setBackground(new Color(188, 205, 194));
 		f.setLayout(null);
-		f.setLocation((scr.width - 500) / 2, (scr.height - 700) / 2);
+		f.setLocation((scr.width - 800) / 2, (scr.height - 850) / 2);
 		f.addWindowListener(this);
 
 		Background = new Panel();
@@ -55,30 +57,31 @@ public class information extends WindowAdapter implements ActionListener {
 		Title = new Label("GreenHouse");
 		Title.setBounds(230, 50, 360, 80);
 		Title.setFont(greenFont);
+		
 		//이름표시란
 		name = new Label("name");
 		name.setBounds(380,  200, 300, 50);
 		name.setFont(TitleFont);
-		name.setBackground(Color.blue);
+		name.setBackground(Color.lightGray);
 		
 		//이름적는칸
-	
-		
 		name1 = new Label(customerDao.fullname(moviedata.getMovieID()));
 		name1.setBounds(380, 250, 300, 50);
 		name1.setFont(TitleFont);
-		name1.setBackground(Color.blue);
+		name1.setBackground(Color.lightGray);
+		
 		//이메일표시란
 		email = new Label("email");
 		email.setBounds(380, 300, 300, 50);
 		email.setFont(TitleFont);
-		email.setBackground(Color.gray);
-		//이메일 적는칸
+		email.setBackground(Color.lightGray);
 		
+		//이메일 적는칸
 		email1 = new Label(customerDao.fullemail(moviedata.getMovieID()));
 		email1.setBounds(380, 350, 300, 50);
 		email1.setFont(TitleFont);
-		email1.setBackground(Color.gray);
+		email1.setBackground(Color.lightGray);
+
 		//사진넣을 칸
 		searchURL = getClass().getResource("/img/my.png");
 		imageicon = new ImageIcon(searchURL);
@@ -94,11 +97,13 @@ public class information extends WindowAdapter implements ActionListener {
 		history.setBounds(120, 440, 300, 50);
 		history.setFont(TitleFont);
 		history.setBackground(Color.gray);
+		
 		//히스토리 적히는칸
 		historys = new Panel();
 		historys.setLayout(null);
-		historys.setBounds(120, 500, 550, 230);
-		historys.setBackground(Color.green);
+		historys.setBounds(120, 500, 560, 230);
+		historys.setBackground(Color.white);
+		
 		//홈 버튼
 		b2 = new Button("HOME");
 		b2.setBounds(350,770, 100, 50);

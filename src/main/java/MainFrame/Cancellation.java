@@ -52,7 +52,7 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       f.setLocation((scr.width - 800) / 2, (scr.height - 800) / 2);
       f.addWindowListener(this);
 
-      String Id = moviedata.getId();
+      String Id = moviedata.getMovieID();
       String movie = TicketDao.ticketid(Id);
       String movieName = movieDao.SearchMovieposter(movie);
       searchURL = getClass().getResource(movieName);

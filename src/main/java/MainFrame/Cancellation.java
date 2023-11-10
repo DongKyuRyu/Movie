@@ -99,8 +99,8 @@ public class Cancellation extends WindowAdapter implements ActionListener {
 		Date = new Label();
 		Date.setBounds(50, 450, 350, 25);
 		Date.setBackground(Color.lightGray);
-		Date.setFont(Movieposter);
-		Date.setText("일        시 : " + TicketDao.selectList(Id).get(0).getDday()+" / "+TicketDao.selectList(Id).get(0).getTime());
+		Date.setFont(Movieposter1);
+		Date.setText("일          시 : " + TicketDao.selectList(Id).get(0).getDday()+" / "+TicketDao.selectList(Id).get(0).getTime());
 
 		MovieRoom = new Label("상  영  관 :" + TicketDao.selectList(Id).get(0).getRoomNumber());
 		MovieRoom.setBounds(52, 480, 350, 25);

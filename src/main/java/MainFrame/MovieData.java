@@ -1,6 +1,7 @@
 package MainFrame;
 
 public class MovieData {
+
 	private static MovieData instance = new MovieData();
 	private String MovieList;
 	private String MovieTime;
@@ -132,6 +133,7 @@ public class MovieData {
 	public void setMoviePeople(int moviePeople) {
 		MoviePeople = moviePeople;
 	}
+
 
 	public String getMovieSeat() {
 		return MovieSeat;

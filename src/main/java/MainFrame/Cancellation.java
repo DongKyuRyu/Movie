@@ -113,12 +113,12 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       TotalPay.setText("총금액 : "+ TicketDao.selectList(Id).get(0).getCost() + "원");
 
       clear = new Button("예매 취소");
-      clear.setBounds((scr.width - 800) / 2, 735, 60, 30);
+      clear.setBounds(440, 735, 60, 30);
       clear.setBackground(Color.cyan);
       clear.addActionListener(this);
       
       ok = new Button("HOME");
-      ok.setBounds((scr.width - 400) / 2, 735, 60, 30);
+      ok.setBounds(370, 735, 60, 30);
       ok.setBackground(Color.cyan);
       ok.addActionListener(this);
 
@@ -144,6 +144,11 @@ public class Cancellation extends WindowAdapter implements ActionListener {
    }
 
    public void actionPerformed(ActionEvent e) {
+	   if (e.getActionCommand().equals("HOME")) {
+		   f.setVisible(false);
+		   MainFrame main = new MainFrame();
+	   }
+	   
       if (e.getActionCommand().equals("확인")) {
          f.setVisible(false);
          MainFrame main = new MainFrame();

@@ -108,11 +108,6 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("예매 확인")) {
-<<<<<<< HEAD
-	            f.setVisible(false);
-	            Cancellation cancellation = new Cancellation();
-	      }
-=======
 			if (moviedata.getMovieList() != null) {
 				f.setVisible(false);
 				PaymentCompleted pay = new PaymentCompleted();
@@ -124,7 +119,6 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		if (e.getActionCommand().equals("너에게 해주고싶은말")) {
 			ThisIsForYou thisis = new ThisIsForYou();
 		}
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 	}
 
 	public static void main(String[] args) {

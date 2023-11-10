@@ -27,16 +27,11 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen, seatLabel;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel, AllCancel;
-	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2, SEATDATA;
+	private String SeatNumber[][], TestSeatsNumber, SEATDATA;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
-	private NumberOfPeople numberofpeople;
-
-	private String SeatIJ, SeatJ;
-	private char SeatRow;
 
 	private MovieData moviedata = MovieData.getInstance();
-	private SeatVO seatvo = SeatVO.getInstance();
 
 	// VO
 	private TicketVO ticket;
@@ -88,42 +83,10 @@ public class Seat extends WindowAdapter implements ActionListener {
 		ticketDao.connect();
 		for (int i = 0; i < SeatNumberr.size(); i++) {
 			String seatdata = SeatNumberr.get(i);
-
-<<<<<<< HEAD
-				SeatPanel.add(Seat[i][j]);
-				int finalI = i;
-				int finalJ = j;
-				SeatRow = seatRow;
-				Seat[i][j].addActionListener(new ActionListener() {
-					private String realSeatIJ;
-
-					public void actionPerformed(ActionEvent e) {
-						if (totalSelected < adultCount + teenagerCount) {
-							Seat[finalI][finalJ].setEnabled(false);
-							totalSelected++;
-
-							selectSeats.push(Seat[finalI][finalJ]);
-
-							if (totalSelected == 1) {
-								TestSeatsNumber = seatNumber;
-							} else if (totalSelected > 1) {
-								TestSeatsNumber += ", " + seatNumber;
-							}
-							moviedata.setMovieSeat(TestSeatsNumber);
-
-							if (totalSelected == adultCount + teenagerCount) {
-//								System.out.println(moviedata.getMoviePeople());
-								Next.setEnabled(true);
-							}
-						}
-					}
-				});
-=======
 			if (i == 0) {
 				SEATDATA = seatdata;
 			} else if (i > 0) {
 				SEATDATA += ", " + seatdata;
->>>>>>> branch 'master' of https://github.com/DongKyuRyu/Movie.git
 			}
 		}
 		
@@ -143,7 +106,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 					SeatPanel.add(Seat[i][j]);
 					int finalI = i;
 					int finalJ = j;
-					SeatRow = seatRow;
 
 					Seat[i][j].addActionListener(new ActionListener() {
 						private String realSeatIJ;
@@ -197,7 +159,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 					SeatPanel.add(Seat[i][j]);
 					int finalI = i;
 					int finalJ = j;
-					SeatRow = seatRow;
 
 					for (int k = 0; k < SeatDATA.length; k++) {
 						if (SeatDATA[k].equals(seatNumber)) {

@@ -144,9 +144,13 @@ public class Cancellation extends WindowAdapter implements ActionListener {
    }
 
    public void actionPerformed(ActionEvent e) {
-      if (e.getActionCommand().equals("확인")) {
+      if (e.getActionCommand().equals("HOME")) {
          f.setVisible(false);
          MainFrame main = new MainFrame();
       }
+      if (e.getActionCommand().equals("예매 취소")) {
+          f.setVisible(false);
+          MainFrame main = new MainFrame();
+       }
    }
 }

@@ -27,16 +27,6 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
 
     private MovieData moviedata = MovieData.getInstance();
     
-//    public void setMovieName(String movieName) {
-//        this.movieName = movieName;
-//    }
-//
-//    public String getMovieName() {
-//        return movieName;
-//    }
-    
-    
-
     public MovieList() {
         Font TitleFont = new Font("고딕", Font.BOLD, 60);
         Font movielistFont = new Font("고딕", Font.BOLD, 55);
@@ -161,6 +151,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
         }
     }
 
+
         public void itemStateChanged(ItemEvent e) {
             if (e.getItem().equals("그대들은 어떻게 살 것인가"))
                 moviedata.setMovieList("그대들은 어떻게 살 것인가");
@@ -189,6 +180,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
             if (e.getItem().equals("그대들은 어떻게 살 것인가") || e.getItem().equals("플라워 킬링 문") || e.getItem().equals("빌리와 용감한 녀석들")||e.getItem().equals("30일") || e.getItem().equals("소년들") ||e.getItem().equals("용감한시민") || e.getItem().equals("바람 따라 만나리") ||e.getItem().equals("오픈 더 도어") || e.getItem().equals("시수") ||e.getItem().equals("두사람을 위한 식탁") || e.getItem().equals("톡투미") ||e.getItem().equals("더 킬러")) {
                 f.add(Next);
             }
+
         }
 
     public static void main(String[] args) {

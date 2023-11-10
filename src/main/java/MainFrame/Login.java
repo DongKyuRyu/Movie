@@ -36,7 +36,7 @@ public class Login extends WindowAdapter implements ActionListener {
 	private ImageIcon imageicon;
 	private JButton movieporster;
 	private URL searchURL;
-  
+
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
@@ -96,7 +96,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Login.setForeground(Color.WHITE);
 		Login.setBackground(new Color(188, 205, 194));
 		Login.setFont(LoginFont);
-		
+
 		// 로고
 		searchURL = getClass().getResource("/img/Logo2.png");
 		imageicon = new ImageIcon(searchURL);

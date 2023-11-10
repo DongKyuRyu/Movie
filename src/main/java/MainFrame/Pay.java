@@ -445,7 +445,7 @@ public class Pay extends WindowAdapter implements ActionListener, ItemListener, 
 		
 		if (e.getActionCommand().equals("이 전")) {
 			faPay.setVisible(false);
-			Seat seat = new Seat(moviedata.getAdultCount(), moviedata.getTeenagerCount());
+			Seat seat = new Seat((moviedata.getAdultCount()), moviedata.getTeenagerCount());
 		}
 	}
 

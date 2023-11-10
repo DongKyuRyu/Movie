@@ -13,7 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.URL;
+import java.net.URL; 
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -29,7 +29,7 @@ public class Cancellation extends WindowAdapter implements ActionListener {
    private URL searchURL;
    private ImageIcon imageicon;
    private JButton movieposter;
-
+ 
    private MovieData moviedata = MovieData.getInstance();
    private MovieDAO movieDao = MovieDAO.getInstance();
    private TicketDAO TicketDao = TicketDAO.getInstance();
@@ -99,7 +99,7 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       Person .setFont(Movieposter);
       Person .setText("인        원 :"+ TicketDao.selectList(Id).get(0).getPerson());
       
-      Seat = new Label();
+      Seat = new Label(); 
       Seat.setBounds(52, 550, 350, 25);
       Seat.setBackground(Color.lightGray);
       Seat.setFont(Movieposter1);
@@ -113,12 +113,12 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       TotalPay.setText("총금액 : "+ TicketDao.selectList(Id).get(0).getCost() + "원");
 
       clear = new Button("예매 취소");
-      clear.setBounds((scr.width - 750) / 2, 735, 60, 30);
+      clear.setBounds((scr.width - 800) / 2, 735, 60, 30);
       clear.setBackground(Color.cyan);
       clear.addActionListener(this);
       
       ok = new Button("HOME");
-      ok.setBounds((scr.width - 900) / 2, 735, 60, 30);
+      ok.setBounds((scr.width - 400) / 2, 735, 60, 30);
       ok.setBackground(Color.cyan);
       ok.addActionListener(this);
 
@@ -144,13 +144,9 @@ public class Cancellation extends WindowAdapter implements ActionListener {
    }
 
    public void actionPerformed(ActionEvent e) {
-      if (e.getActionCommand().equals("HOME")) {
+      if (e.getActionCommand().equals("확인")) {
          f.setVisible(false);
          MainFrame main = new MainFrame();
       }
-      if (e.getActionCommand().equals("예매 취소")) {
-          f.setVisible(false);
-          MainFrame main = new MainFrame();
-       }
    }
 }

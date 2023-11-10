@@ -49,12 +49,11 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		f.addWindowListener(this);
 
 		b1 = new Button("영화 예매");
-		b1.setBounds(50, 200, 175, 150);
+		b1.setBounds(50, 200, 400, 150);
 		b1.setBackground(new Color(188, 205, 227));
 		b1.addActionListener(this);
 
 		b2 = new Button("오늘도 빛날 네게 해주고싶은말");
-
 		b2.setBounds(275, 200, 175, 150);
 		b2.setBackground(new Color(188, 205, 227));
 
@@ -110,7 +109,6 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		f.add(logout);
 		f.add(b4);
 		f.add(b3);
-		f.add(b2);
 		f.add(b1);
 		f.setVisible(true);
 	}
@@ -152,11 +150,6 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 			popup.setVisible(false);
 			System.out.println(TicketDao.selectList(moviedata.getMovieID()));
 
-		}
-
-		if (e.getActionCommand().equals("내 정보")) {
-			f.setVisible(false);
-			information info = new information();
 		}
 
 		if (e.getActionCommand().equals("오늘도 빛날 네게 해주고싶은말")) {

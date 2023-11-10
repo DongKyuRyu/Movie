@@ -248,6 +248,49 @@ public class CustomerDAO {
 		}
 		return false;
 	}
+	
+	public String fullemail(String id) {
+		String sql = "select email from customer where id = ? ";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			CustomerVO customer = new CustomerVO();
+			// id 확인
+			if (rs.next()) {
+				String fullemail = rs.getString("email");
+				customer.setEmail(fullemail);
+				String email = customer.getEmail();
+				return email;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String fullname(String id) {
+		String sql = "select name from customer where id = ? ";
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			CustomerVO customer = new CustomerVO();
+			// id 확인
+			if (rs.next()) {
+				String fullname = rs.getString("name");
+				customer.setName(fullname);
+				String name = customer.getName();
+				return name;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 
 	// update - 아이디 및 비밀번호 변경

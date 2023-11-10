@@ -2,6 +2,7 @@ package MainFrame;
 
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -13,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.net.URL; 
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -24,12 +25,12 @@ import DAO.TicketDAO;
 public class Cancellation extends WindowAdapter implements ActionListener {
    private Frame f;
    private Panel mainposter;
-   private Label name, Date, MovieRoom, Seat,Person , TotalPay;
-   private Button ok, clear;
+   private Label name,Cancell, Date, MovieRoom, Seat,Person , TotalPay;
+   private Button ok, clear,Check;
    private URL searchURL;
    private ImageIcon imageicon;
    private JButton movieposter;
- 
+   private Dialog Dialog;
    private MovieData moviedata = MovieData.getInstance();
    private MovieDAO movieDao = MovieDAO.getInstance();
    private TicketDAO TicketDao = TicketDAO.getInstance();
@@ -52,8 +53,8 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       f.setLocation((scr.width - 800) / 2, (scr.height - 800) / 2);
       f.addWindowListener(this);
 
-      String Id = moviedata.getId();
-      String movie = TicketDao.ticketid(Id);
+      String Id = moviedata.getMovieID();
+      String movie = TicketDao.ticketId(Id);
       String movieName = movieDao.SearchMovieposter(movie);
       searchURL = getClass().getResource(movieName);
       imageicon = new ImageIcon(searchURL);
@@ -68,7 +69,15 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       movieposter.setFocusPainted(false);
       movieposter.setContentAreaFilled(false);
       
-
+      Dialog = new Dialog(f, "예매 취소 확인 창", true);
+      Dialog.setSize(200,150);
+      Dialog.setLocation(150, 150);
+      Dialog.setLayout(null);
+      
+      Cancell = new Label("취소가 완료 되었습니다",Label.CENTER);
+      Check = new Button("확인");
+      
+      
 //      TicketDao.selectList(Id).get(0).getSeatNumber()
       // 영수증 크기
       mainposter = new Panel();
@@ -121,7 +130,9 @@ public class Cancellation extends WindowAdapter implements ActionListener {
       ok.setBounds((scr.width - 400) / 2, 735, 60, 30);
       ok.setBackground(Color.cyan);
       ok.addActionListener(this);
-
+      
+      Dialog.add(Check);
+      Dialog.add(Cancell);
       mainposter.add(movieposter);
       mainposter.add(name);
       mainposter.add(Person);
@@ -144,9 +155,20 @@ public class Cancellation extends WindowAdapter implements ActionListener {
    }
 
    public void actionPerformed(ActionEvent e) {
-      if (e.getActionCommand().equals("확인")) {
-         f.setVisible(false);
-         MainFrame main = new MainFrame();
-      }
-   }
+	      if (e.getActionCommand().equals("HOME")) {
+	         f.setVisible(false);
+	         MainFrame main = new MainFrame();
+	      }
+	      
+	      if (e.getActionCommand().equals("예매 취소")) {
+	          f.setVisible(true);
+	          Dialog.setVisible(true);
+	          if (e.getActionCommand().equals("확인")) {
+	              f.setVisible(false);
+	              TicketDao.connect();
+	              MainFrame main = new MainFrame();
+	           }
+	       }
+	      
+	   }
 }

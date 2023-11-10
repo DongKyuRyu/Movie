@@ -55,9 +55,11 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		b3.setBounds(50, 400, 175, 150);
 		b3.setBackground(new Color(188, 205, 227));
 		b3.addActionListener(this);
+		
 		b4 = new Button("내 정보");
 		b4.setBounds(275, 400, 175, 150);
 		b4.setBackground(new Color(188, 205, 227));
+		b4.addActionListener(this);
 
 		logout = new Button("Logout");
 		logout.setBounds(165, 600, 170, 50);
@@ -109,14 +111,15 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 		}
 
 		if (e.getActionCommand().equals("예매 확인")) {
-			if (moviedata.getMovieList() != null) {
-				f.setVisible(false);
-				PaymentCompleted pay = new PaymentCompleted();
-			} else {
-				System.out.println("예매 정보가 없습니다.");
-			}
+			f.setVisible(false);
+			Cancellation cancellation = new Cancellation();
 		}
 		
+		if (e.getActionCommand().equals("내 정보")) {
+			f.setVisible(false);
+			information info = new information();
+		}
+
 		if (e.getActionCommand().equals("오늘도 빛날 네게 해주고싶은말")) {
 			ThisIsForYou thisis = new ThisIsForYou();
 		}

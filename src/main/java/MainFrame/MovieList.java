@@ -152,6 +152,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("이 전")) {
             f.setVisible(false);
+          
             MainFrame mainframe = new MainFrame();
         }
         if (e.getActionCommand().equals("다 음")) {

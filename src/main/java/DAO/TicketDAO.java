@@ -17,6 +17,7 @@ import VO.TicketVO;
 public class TicketDAO {
 	private static TicketDAO instance = new TicketDAO();
 	private MovieData moviedata = MovieData.getInstance();
+	private SeatVO seatvo = SeatVO.getInstance();
 
 	private TicketDAO() {
 	}
@@ -137,7 +138,6 @@ public class TicketDAO {
 		SimpleDateFormat f = new SimpleDateFormat("yyyy년 MM월dd일 HH시mm분ss초");
 		Calendar c = Calendar.getInstance();
 		String reservedDate = f.format(c.getTime()); // 현재날짜를 전달.
-
 		String sql = "insert into ticket values (?,?,?,?,?,?,?,?)";
 		try {
 			connect();
@@ -160,8 +160,9 @@ public class TicketDAO {
 		}
 	}
 	
-	public ArrayList<SeatVO> selectSeat(String Moviename, String Dday, String Time) {
-		ArrayList<SeatVO> SeatNumber = new ArrayList<SeatVO>();
+	public ArrayList<String> selectSeat(String Moviename, String Dday, String Time) {
+		ArrayList<String> SeatNumber = new ArrayList<String>();
+		SeatVO Seatnum = new SeatVO();
 		
 		try {
 			connect();
@@ -170,13 +171,13 @@ public class TicketDAO {
 			pstmt.setString(1, Moviename);
 			pstmt.setString(2, Dday);
 			pstmt.setString(3, Time);
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();		
 			
 			while(rs.next()) {
 //				String duplicateseat = rs.getString("SEATNUMBER");
-				SeatVO Seatnum = new SeatVO(rs.getString("SEATNUMBER"));
+				Seatnum.setSeatVO(rs.getString("SEATNUMBER"));
 				
-				SeatNumber.add(Seatnum);
+				SeatNumber.add(Seatnum.getSeatVO());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

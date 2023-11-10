@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -12,8 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import DAO.CustomerDAO;
@@ -26,12 +29,14 @@ public class Login extends WindowAdapter implements ActionListener {
 	Label Lab_1;
 	private JLabel img1;
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
-	private CustomerVO customer = new CustomerVO();
+	private CustomerVO customer;
+	private MovieData moviedata = MovieData.getInstance();
 	private String pid = "";
 	private String password = "";
-	
-	private MovieData moviedata = MovieData.getInstance();
-
+	private ImageIcon imageicon;
+	private JButton movieporster;
+	private URL searchURL;
+  
 	public Login() {
 		Font LoginFont = new Font("고딕", Font.BOLD, 100);
 		Font LoginFont1 = new Font("고딕", Font.BOLD, 40);
@@ -58,19 +63,19 @@ public class Login extends WindowAdapter implements ActionListener {
 		// 아이디 찾기 버튼
 		IdSearch = new Button("ID 찾기");
 		IdSearch.setBackground(new Color(188, 205, 227));
-		IdSearch.setBounds(300, 435, 60, 40);
+		IdSearch.setBounds(300, 435, 75, 40);
 		IdSearch.addActionListener(this);
 
 		// 비밀번호찾기 버튼
 		PwdSearch = new Button("Pwd 찾기");
 		PwdSearch.setBackground(new Color(188, 205, 227));
-		PwdSearch.setBounds(365, 435, 60, 40);
+		PwdSearch.setBounds(380, 435, 70, 40);
 		PwdSearch.addActionListener(this);
 
 		// 회원가입 버튼
 		Register = new Button("회원가입");
 		Register.setBackground(new Color(188, 205, 227));
-		Register.setBounds(430, 435, 60, 40);
+		Register.setBounds(455, 435, 145, 40);
 		Register.addActionListener(this);
 
 		// ID 라벨
@@ -86,11 +91,24 @@ public class Login extends WindowAdapter implements ActionListener {
 		lpwd.setFont(IdPwdFont);
 
 		// login 라벨
-		Label Login = new Label("로그인");
-		Login.setBounds(300, 150, 300, 100);
+		Label Login = new Label("Green House", Label.CENTER);
+		Login.setBounds(190, 150, 620, 100);
 		Login.setForeground(Color.WHITE);
 		Login.setBackground(new Color(188, 205, 194));
 		Login.setFont(LoginFont);
+		
+		// 로고
+		searchURL = getClass().getResource("/img/Logo2.png");
+		imageicon = new ImageIcon(searchURL);
+		Image image = imageicon.getImage();
+		Image scaledImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		movieporster = new JButton(scaledIcon);// 크기 바꿀때 imageicon-->scaledIcon 으로 변경
+		movieporster.setBounds(90, 150, 100, 100);
+		movieporster.setBackground(Color.red);
+		movieporster.setBorderPainted(false);
+		movieporster.setFocusPainted(false);
+		movieporster.setContentAreaFilled(false);
 
 		// ID 입력창
 		id = new TextField();
@@ -114,6 +132,7 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setFont(trueandfalseFont);
 		pwd.setEchoChar('*');
 
+		f.add(movieporster);
 		f.add(Login);
 		f.add(lid);
 		f.add(id);

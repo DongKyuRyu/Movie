@@ -26,6 +26,7 @@ public class TicketVO {
 		this.cost = cost;
 		this.person = person;
 	}
+
 	@Override
 	public String toString() {
 		String text =
@@ -67,7 +68,7 @@ public class TicketVO {
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
 	}
-	
+
 	public String getDday() {
 		return dDay;
 	}

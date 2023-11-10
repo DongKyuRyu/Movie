@@ -49,21 +49,6 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 		f.setLocation((scr.width - 800) / 2, (scr.height - 800) / 2);
 		f.addWindowListener(this);
 
-		b1 = new Button("01 상영관");
-		b1.setBackground(Color.lightGray);
-		b1.setBounds(245, 35, 70, 21);
-		b2 = new Button("02 인원 / 좌석");
-		b2.setBackground(Color.lightGray);
-		b2.setBounds(320, 35, 86, 21);
-
-		b3 = new Button("03 결제");
-		b3.setBackground(Color.lightGray);
-		b3.setBounds(410, 35, 60, 21);
-
-		b4 = new Button("04 결제 완료");
-		b4.setBackground(new Color(188, 205, 194));
-		b4.setBounds(475, 35, 80, 21);
-
 		// 영수증 크기
 		mainposter = new Panel();
 		mainposter.setLayout(null);
@@ -169,10 +154,6 @@ public class PaymentCompleted extends WindowAdapter implements ActionListener {
 
 		f.add(clear);
 		f.add(mainposter);
-		f.add(b1);
-		f.add(b2);
-		f.add(b3);
-		f.add(b4);
 		f.setVisible(true);
 	}
 

@@ -1,4 +1,4 @@
-# 다이어그램
+#영화 예매 프로그램 / 다이어그램
 
 ### 클래스 다이어그램
 ![클래스 다이어그램](https://github.com/DongKyuRyu/Movie/assets/139706868/47a7cf9a-1a7e-4f69-9c75-840c6d47372c)

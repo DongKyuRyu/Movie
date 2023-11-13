@@ -1,3 +1,4 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjbae1212%2Fhit-counter&count_bg=%23A4C6DE&title_bg=%23274259&icon=&icon_color=%23020715&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 #영화 예매 프로그램 / 다이어그램
 
 ### 클래스 다이어그램

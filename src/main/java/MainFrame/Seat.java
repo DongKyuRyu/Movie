@@ -24,15 +24,13 @@ import VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
 	private Frame f;
-	private Label Screen, seatLabel;
+	private Label Screen;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel, AllCancel;
-	private String SeatNumber[][], SeatsNumber, SeatsNumber2, TestSeatsNumber, TestSeatsNumber2, SEATDATA;
+	private String SeatNumber[][], TestSeatsNumber, SEATDATA;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
-	private NumberOfPeople numberofpeople;
 
-	private String SeatIJ, SeatJ;
 	private char SeatRow;
 
 	private MovieData moviedata = MovieData.getInstance();

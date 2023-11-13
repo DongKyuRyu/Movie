@@ -210,11 +210,6 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setText("회원 정보가 존재하지 않습니다.");
 	}
 
-	private void clear() {
-		id.setText("");
-		pwd.setText("");
-	}
-
 	public static void main(String[] args) {
 		Login tft = new Login();
 	}

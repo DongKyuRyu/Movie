@@ -2,6 +2,7 @@
 <br>
 ![Eclipse IDE](https://img.shields.io/badge/Eclipse%20IDE-2C2255.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 ![Figma](https://img.shields.io/badge/figma-F24E1E.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
+![Diagramsdotnet](https://img.shields.io/badge/diagramsdotnet-#F08705.svg?&style=for-the-badge&logo=Eclipse%20IDE&logoColor=white)
 <hr>
 #영화 예매 프로그램 / 다이어그램
 

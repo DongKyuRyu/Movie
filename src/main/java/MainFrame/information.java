@@ -28,7 +28,6 @@ public class information extends WindowAdapter implements ActionListener {
 	private ImageIcon imageicon;
 	private JButton b1;
 	private Label Title, name, email, name1, email1, history, Talk, Talk2, Talk3, Talk4, Talk5, Talk6;
-	private String full;
 	private int num;
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	private MovieData moviedata = MovieData.getInstance();

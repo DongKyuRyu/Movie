@@ -110,6 +110,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
 		Next.setBounds(260, 625, 100, 30);
 		Next.setBackground(new Color(188, 205, 227));
 		Next.addActionListener(this);
+		Next.setEnabled(false);
 
 		Befor = new Button("이 전");
 		Befor.setBounds(140, 625, 100, 30);
@@ -130,6 +131,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
 		Movienamelist.add(selectMovie11);
 		Movienamelist.add(selectMovie12);
 
+		f.add(Next);
 		f.add(Befor);
 		f.add(Movienamelist);
 		f.add(Title);
@@ -180,7 +182,7 @@ public class MovieList implements ActionListener, ItemListener, WindowListener {
 				|| e.getItem().equals("30일") || e.getItem().equals("소년들") || e.getItem().equals("용감한시민")
 				|| e.getItem().equals("바람 따라 만나리") || e.getItem().equals("오픈 더 도어") || e.getItem().equals("시수")
 				|| e.getItem().equals("두사람을 위한 식탁") || e.getItem().equals("톡투미") || e.getItem().equals("더 킬러")) {
-			f.add(Next);
+			Next.setEnabled(true);
 		}
 
 	}

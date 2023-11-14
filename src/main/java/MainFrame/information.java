@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Toolkit;
@@ -53,7 +54,7 @@ public class information extends WindowAdapter implements ActionListener {
 		Background.setBounds(50, 150, 500, 550);
 		Background.setBackground(Color.lightGray);
 
-//버튼으로 변경 -> 홈화면이동 계획이있음 차후에
+		//버튼으로 변경 -> 홈화면이동 계획이있음 차후에
 		Title = new Label("GreenHouse", Label.CENTER);
 		Title.setBounds(120, 50, 360, 80);
 		Title.setFont(greenFont);
@@ -83,17 +84,20 @@ public class information extends WindowAdapter implements ActionListener {
 		email1.setBackground(Color.lightGray);
 
 		// 사진넣을 칸
-		searchURL = getClass().getResource("/img/my.png");
+		searchURL = getClass().getResource("/img/Logo1.png");
 		imageicon = new ImageIcon(searchURL);
-		b1 = new JButton(imageicon);
-		b1.setBounds(10, 10, 250, 250);
+		Image image = imageicon.getImage();
+		Image scaledImage = image.getScaledInstance(240, 240, Image.SCALE_SMOOTH);
+		ImageIcon scaledIcon = new ImageIcon(scaledImage);
+		b1 = new JButton(scaledIcon);
+		b1.setBounds(10, 10, 240, 240);
 		b1.setBackground(Color.RED);
 		b1.setBorderPainted(false);
 		b1.setFocusPainted(false);
 		b1.setContentAreaFilled(false);
 
 		// 히스토리 라벨
-		history = new Label("오늘도 빛나는 너에게 해주고싶은 말",Label.CENTER);
+		history = new Label("오늘도 빛나는 너에게 해주고싶은 말", Label.CENTER);
 		history.setBounds(50, 250, 400, 50);
 		history.setFont(TitleFont);
 		history.setBackground(Color.lightGray);
@@ -139,9 +143,9 @@ public class information extends WindowAdapter implements ActionListener {
 		b2.setBounds(250, 710, 100, 50);
 		b2.setBackground(Color.lightGray);
 		b2.addActionListener(this);
-		
+
 		num = (int) (Math.random() * 46);
-		
+
 		switch (num) {
 		case 0: {
 			Talk.setText("");
@@ -152,7 +156,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 1: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -322,7 +326,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 18: {
 			Talk.setText("");
 			Talk2.setText("동기부여를 너무 믿지 말아요.");
@@ -332,7 +336,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 19: {
 			Talk.setText("");
 			Talk2.setText("소심해도 괜찬다.");
@@ -342,7 +346,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 20: {
 			Talk.setText("");
 			Talk2.setText("날이 좋아서, 날이 좋지않아서, 날이 적당해서");
@@ -352,7 +356,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 21: {
 			Talk.setText("");
 			Talk2.setText("앞에 한눈을 팔면서 걸어오는 사람이 있다면");
@@ -362,7 +366,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 22: {
 			Talk.setText("");
 			Talk2.setText("애용은 하더라도");
@@ -372,7 +376,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 23: {
 			Talk.setText("");
 			Talk2.setText("기대하지 않아요.");
@@ -382,7 +386,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 24: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -392,7 +396,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 25: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -402,7 +406,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 26: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -412,7 +416,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 27: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -422,7 +426,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 28: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -432,7 +436,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 29: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -442,7 +446,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 30: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -452,7 +456,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 31: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -462,7 +466,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 32: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -472,7 +476,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 33: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -482,7 +486,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 34: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -492,7 +496,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 35: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -502,7 +506,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 36: {
 			Talk.setText("");
 			Talk2.setText("자신 자신에게 여유가 없다면");
@@ -512,7 +516,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 37: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -522,7 +526,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 38: {
 			Talk.setText("아아, 순서가 중요한데요.");
 			Talk2.setText("이익을 얻으려다가 실패하는 건 당연합니다.");
@@ -532,7 +536,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 39: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -542,7 +546,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 40: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -552,7 +556,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 41: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -562,7 +566,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 42: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -572,7 +576,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 43: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -582,7 +586,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 44: {
 			Talk.setText("");
 			Talk2.setText("");
@@ -592,7 +596,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 45: {
 			Talk.setText("");
 			Talk2.setText("센스가 뭐냐고 붇는다면");
@@ -602,7 +606,7 @@ public class information extends WindowAdapter implements ActionListener {
 			Talk6.setText("");
 			break;
 		}
-		
+
 		case 46: {
 			Talk.setText("");
 			Talk2.setText("스스로 '어떤 사람' 이라고 정해놓지 마세요");
@@ -613,14 +617,14 @@ public class information extends WindowAdapter implements ActionListener {
 			break;
 		}
 		}
-		
+
 		historys.add(Talk);
 		historys.add(Talk2);
 		historys.add(Talk3);
 		historys.add(Talk4);
 		historys.add(Talk5);
 		historys.add(Talk6);
-		
+
 		Background.add(historys);
 		Background.add(history);
 		Background.add(name1);
@@ -628,8 +632,7 @@ public class information extends WindowAdapter implements ActionListener {
 		Background.add(name);
 		Background.add(email);
 		Background.add(b1);
-		
-		
+
 		f.add(b2);
 		f.add(Title);
 		f.add(Background);

@@ -102,22 +102,22 @@ public class Cancellation extends WindowAdapter implements ActionListener {
 		Date.setFont(Movieposter);
 		Date.setText("일        시 : " + TicketDao.selectList(Id).get(0).getDday()+" / "+TicketDao.selectList(Id).get(0).getTime());
 
-		MovieRoom = new Label("상  영  관 :" + TicketDao.selectList(Id).get(0).getRoomNumber());
-		MovieRoom.setBounds(52, 480, 350, 25);
+		MovieRoom = new Label("상  영  관 : " + TicketDao.selectList(Id).get(0).getRoomNumber());
+		MovieRoom.setBounds(50, 480, 350, 25);
 		MovieRoom.setBackground(Color.lightGray);
 		MovieRoom.setFont(Movieposter);
 
 		Person = new Label();
-		Person.setBounds(52, 515, 350, 25);
+		Person.setBounds(50, 510, 350, 25);
 		Person.setBackground(Color.lightGray);
 		Person.setFont(Movieposter);
-		Person.setText("인        원 :" + TicketDao.selectList(Id).get(0).getPerson());
+		Person.setText("인        원 : " + TicketDao.selectList(Id).get(0).getPerson() + "명");
 
 		Seat = new Label();
-		Seat.setBounds(52, 550, 350, 25);
+		Seat.setBounds(50, 540, 350, 25);
 		Seat.setBackground(Color.lightGray);
-		Seat.setFont(Movieposter1);
-		Seat.setText("좌          석 :" + TicketDao.selectList(Id).get(0).getSeatNumber());
+		Seat.setFont(Movieposter);
+		Seat.setText("좌        석 : " + TicketDao.selectList(Id).get(0).getSeatNumber());
 
 		TotalPay = new Label("총금액 : 0원");
 		TotalPay.setBounds(50, 600, 350, 29);

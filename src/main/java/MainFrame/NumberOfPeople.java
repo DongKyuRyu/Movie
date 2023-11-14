@@ -21,7 +21,6 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	private String SeatNumber[];
 	private Button[] seletedButton;
 	private Label adult, Teenager, price, adultpeople, teenagerpeople, totalpeople;
-	private int HumanCount;
 	
 	private MovieData moviedata = MovieData.getInstance();
 
@@ -144,13 +143,15 @@ public class NumberOfPeople extends WindowAdapter implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			MovieTime movie = new MovieTime(CalendarEx.this);
+			MovieTime movie = new MovieTime();
 		}
 		
 		if(e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
 			int adultCount = Integer.parseInt(adultpeople.getText().replaceAll("[^0-9]", ""));
 		    int teenagerCount = Integer.parseInt(teenagerpeople.getText().replaceAll("[^0-9]", ""));
+		    moviedata.setAdultCount(adultCount);
+		    moviedata.setTeenagerCount(teenagerCount);
 		   
 		    int HumanCount = moviedata.getMoviePeople();
 		    

@@ -175,20 +175,25 @@ public class Login extends WindowAdapter implements ActionListener {
 	public void login(String pid, String password) {
 		customerDao.connect();
 		int checkIndex = customerDao.login(pid, password);
-		switch (checkIndex) {
-		case 0: // 성공
-			moviedata.setMovieID(pid);
-			loginSuccess();
-			break;
-		case -1:
-			passwordError();
-			break;
-		case -2:
-			loginFail();
-			break;
-		default:
-			System.out.println("시스템 오류입니다.");
-			break;
+		
+		if (id.getText().equals("") || pwd.getText().equals("")) {
+			NullInfo();
+		} else {
+			switch (checkIndex) {
+			case 0: // 성공
+				moviedata.setMovieID(pid);
+				loginSuccess();
+				break;
+			case -1:
+				passwordError();
+				break;
+			case -2:
+				loginFail();
+				break;
+			default:
+				System.out.println("시스템 오류입니다.");
+				break;
+			}
 		}
 	}
 
@@ -210,9 +215,8 @@ public class Login extends WindowAdapter implements ActionListener {
 		Lab_1.setText("회원 정보가 존재하지 않습니다.");
 	}
 
-	private void clear() {
-		id.setText("");
-		pwd.setText("");
+	private void NullInfo() {
+		Lab_1.setText("ID 와 PASSWORD 를 입력해주세요.");
 	}
 
 	public static void main(String[] args) {

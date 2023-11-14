@@ -80,6 +80,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	Next.setBounds(260, 625, 100, 30);
 	Next.setBackground(new Color(188, 205, 227));
 	Next.addActionListener(this);
+	Next.setEnabled(false);
 	
 	Befor = new Button("이 전");
 	Befor.setBounds(140, 625, 100, 30);
@@ -92,6 +93,7 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 	MovieTimelist.add(selectMovie3);
 	
 //	calendarex.setVisible(false);
+	f.add(Next);
 	f.add(MovieTimelist);
 	f.add(Befor);
 	f.add(Title);
@@ -113,14 +115,14 @@ public class MovieTime extends WindowAdapter implements ActionListener, ItemList
 		
 		if (e.getItem().equals("12:00 ~ 14:20") || e.getItem().equals("14:30 ~ 16:50") || e.getItem().equals("17:00 ~ 19:20")) {
 			System.out.println(moviedata.getMovieList() + " " + moviedata.getMovieDate() + " " + moviedata.getMovieTime());
-			f.add(Next);
+			Next.setEnabled(true);;
 		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("이 전")) {
 			f.setVisible(false);
-//			CalendarEx calendarex = new CalendarEx("이 전", this);
+			CalendarEx calendarex = new CalendarEx("이 전");
 		}
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);

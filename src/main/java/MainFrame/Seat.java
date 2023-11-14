@@ -35,10 +35,6 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 	private MovieData moviedata = MovieData.getInstance();
 
-	// VO
-	private TicketVO ticket;
-	private MovieVO movie;
-
 	// DAO
 	private MovieDAO movieDao = MovieDAO.getInstance();
 	private TicketDAO ticketDao = TicketDAO.getInstance(); // 등록 용도

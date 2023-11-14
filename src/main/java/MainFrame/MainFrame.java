@@ -129,6 +129,7 @@ public class MainFrame extends WindowAdapter implements ActionListener {
 			MovieList movielist = new MovieList();
 		}
 
+
 		if (e.getActionCommand().equals("내 정보")) {
 			f.setVisible(false);
 			information Information = new information();

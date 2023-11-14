@@ -26,7 +26,7 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 
 	private CustomerDAO customerDao = CustomerDAO.getInstance();
 	private String name = "";
-	private String email = "";    
+	private String email = "";
 
 	public IdSearch() {
 		Font IdSearchFont = new Font("고딕", Font.BOLD, 50);
@@ -155,9 +155,14 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 			} else {
 				name = Name.getText().trim();
 				email = Email.getText().trim();
-				Info.setText("ID : " + searchID(name, email));
-				f.add(PwdSearch);
-				f.add(IDCopy);
+				String viewID = searchID(name, email);
+				if (viewID == null)
+					NonSearchID();
+				else {
+					Info.setText("ID : " + searchID(name, email));
+					f.add(PwdSearch);
+					f.add(IDCopy);
+				}
 			}
 		}
 
@@ -167,7 +172,7 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 			clipboard.setContents(data, data);
 			IDCopyCheck.setVisible(true);
 		}
-		
+
 		if (e.getActionCommand().equals("확인")) {
 			IDCopyCheck.setVisible(false);
 		}
@@ -179,12 +184,8 @@ public class IdSearch extends WindowAdapter implements ActionListener {
 		return checkName;
 	}
 
-	private void SearchID() {
-		Info.setText("가입하신 아이디가 존재합니다.");
-	}
-
 	private void NonSearchID() {
-		Info.setText("입력하신 정보로 가입한 아이디가 없습니다.");
+		Info.setText("존재하지 않습니다.");
 	}
 
 	public static void main(String[] args) {

@@ -125,12 +125,12 @@ public class CustomerDAO {
 			}
 			else {
 				System.out.println("회원 정보가 존재하지 않습니다.");
-				return "NonExist";
+				return null;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		return "Error";
+		return null;
 	}
 	
 	// 비밀번호 찾기

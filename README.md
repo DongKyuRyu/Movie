@@ -7,13 +7,15 @@
 
 <hr>
 
-#시연 영상
+## 영화 예매 프로그램
+
+### 시연 영상
 
 https://github.com/DongKyuRyu/Movie/assets/103491329/f523e3bf-9ca4-4e5d-b35c-81c12530b21a
 
 <hr>
 
-#영화 예매 프로그램
+
 
 ### 클래스 다이어그램
 ![클래스 다이어그램](https://github.com/DongKyuRyu/Movie/assets/139706868/47a7cf9a-1a7e-4f69-9c75-840c6d47372c)

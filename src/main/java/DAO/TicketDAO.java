@@ -44,8 +44,6 @@ public class TicketDAO {
 	public ArrayList<TicketVO> selectList(String Id) {
 		String sql = "select * from ticket where Id = ? "; // 이 아이디가 예매한 내역을 모조리 뽑아주세요!
 
-
-
 		ArrayList<TicketVO> list = new ArrayList<>();
 		try {
 			connect();

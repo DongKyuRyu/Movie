@@ -14,12 +14,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Stack;
 
 import DAO.MovieDAO;
 import DAO.TicketDAO;
 import VO.MovieVO;
-import VO.SeatVO;
 import VO.TicketVO;
 
 public class Seat extends WindowAdapter implements ActionListener {
@@ -27,7 +27,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 	private Label Screen;
 	private Panel SeatPanel;
 	private Button Seat[][], Befor, Next, Cancel, AllCancel;
-	private String SeatNumber[][], TestSeatsNumber, SEATDATA;
+	private String SeatNumber[][], TestSeatsNumber, SEATDATA, TestSeatsNumber2;
 	private int adultCount, teenagerCount, totalSelected = 0;
 	private Stack<Button> selectSeats = new Stack<>(); // 선택한 좌석을 저장할 스택
 
@@ -92,7 +92,7 @@ public class Seat extends WindowAdapter implements ActionListener {
 				SEATDATA += ", " + seatdata;
 			}
 		}
-		
+
 		if (SEATDATA == null) {
 			// 좌석 생성
 			for (int i = 0; i < 5; i++) {
@@ -126,7 +126,17 @@ public class Seat extends WindowAdapter implements ActionListener {
 								} else if (totalSelected > 1) {
 									TestSeatsNumber += ", " + seatNumber;
 								}
-								moviedata.setMovieSeat(TestSeatsNumber);
+								
+								String TSN[] = TestSeatsNumber.split(", ");
+								Arrays.sort(TSN);
+								for (int i = 0; i < TSN.length; i++) {
+									if (i == 0) {
+										TestSeatsNumber2 = TSN[i];
+									} else {
+										TestSeatsNumber2 += ", " + TSN[i];
+									}
+								}
+								moviedata.setMovieSeat(TestSeatsNumber2);
 
 								if (totalSelected == adultCount + teenagerCount) {
 //											System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
@@ -230,8 +240,10 @@ public class Seat extends WindowAdapter implements ActionListener {
 
 		if (e.getActionCommand().equals("다 음")) {
 			f.setVisible(false);
-			System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate() + "/"
-					+ moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" + moviedata.getMovieSeat());
+			 System.out.println(moviedata.getMovieList() + "/" + moviedata.getMovieDate()
+			 + "/"
+			 + moviedata.getMovieTime() + "/" + moviedata.getMoviePeople() + "/" +
+			 moviedata.getMovieSeat());
 			Pay pay = new Pay(adultCount, teenagerCount);
 		}
 
